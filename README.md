@@ -20,6 +20,6 @@ O projeto engloba três matérias do nosso curso, sendo elas:
 ### Membros do projeto
 - Vitor Eduardo B. Marciano
 - Adinam Conte Cardozo
-- Rayanne Gabriela da Silva Sebastiao
+- Rayanne Gabriela da Silva Sebastiao Nunes
 - Raphael Reis Rodrigues da Silva
 - Izabely do Nascimento Rodrigues de Campos
