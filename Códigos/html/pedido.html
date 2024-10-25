@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\css\pedido.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="esquerda">
+        <!-- <img src="../img/Marmitaria.png" alt=""> -->
+        <form action="" method="post">
+            <div class="estrutura"></div>
+            <h2>PONTO DE PEDIDO</h2>
+            <label for="opcoes">Escolha o prato</label>
+            <select id="opcoes" name="nomeMarmita">
+              <option value="marmita 1">Marmita 1</option>
+              <option value="marmita2">Marmita 2</option>
+              <option value="marmita3">Marmita 3</option>
+              <option value="marmita4">Marmita 4</option>
+              <option value="marmita5">Marmita 4</option>
+            </select>      
+            
+            <label for="">Nome do Clinete</label>
+            <input type="text" placeholder="Nome" name="NomeCliente">
+
+            <label for="quantidade">Quantidade comprada:</label>
+            <input type="number"  name="quantidade" min="1" max="10" step="1">
+
+            <label for="DataEntrega">Data Entrega</label>
+            <input type="datetime-local" name="" id="">
+
+            <button>ENVIAR</button>
+        </form>
+    </div>
+    <div class="direita">
+        <table>
+            <thead>
+                <tr id="titulo">
+                    <td>Marmita</td>
+                    <td>Nome Cliente</td>
+                    <td>Quantidade</td>
+                    <td>Data Entrega</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="dados">
+                    <td>marmita1</td>
+                    <td>Maria</td>
+                    <td>3</td>
+                    <td>03/05/2001</td>
+                    <td class="botoes"><a href="">Editar</a> <a href="" class="excluir">Excluir</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

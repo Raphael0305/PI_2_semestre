@@ -65,7 +65,7 @@ $login = new Login('marmitaria', 'localhost', 'root', '');
                         }
                     }
                     ?>
-                    <!-- FIM CÓDIGO PHP -->
+                    <!-- FIM CÓDIGO PHP  XD -->
                 </form>
             </div>
         </div>

@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins", serif;
+}
+
+img{
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+label{
+    display: block;
+}
+input{
+    display: block;
+    line-height: 30px;
+    height: 30px;
+    outline: none;
+    font-size: 13pt;
+    width: 100%;
+    border-radius: 10px;
+    color: black;
+    padding: 0px 5px;
+    background-color: rgb(119, 218, 185);
+    border: 3px solid rgb(136, 207, 218);
+}
+
+button{
+    width: 50%;
+    height:40px;
+    border-radius: 5px;
+    margin: 30px auto;
+    cursor: pointer;
+    background-color: rgb(170, 213, 213);
+    letter-spacing: 2px;
+    transition: background-color 0.3s ease; 
+    border: 3px solid rgb(143, 161, 164);
+}
+
+button:hover {
+    background-color: rgb(71, 155, 155);
+    transition-delay: 3ms; 
+}
+
+select{
+    width: 45%;
+    height: 30px;
+    border-radius: 10px;
+    background-color: rgba(28, 186, 176, 0.2);
+    border: 3px solid rgb(136, 207, 218);
+}
+
+h2{
+    text-align: center;
+    font-size: 2rem;
+    color: rgb(12, 165, 114);
+    font-weight: 900;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 330px;
+    background-color: rgba(61, 199, 187, 0.2);
+    padding: 20px;
+    margin: 30px auto;
+    height: auto;
+    gap: 5px;
+    border-radius: 10px;
+    border: 3px solid rgb(11, 71, 80);
+}
+
+.esquerda{
+    width: 35%;
+    float: left;
+    height: 500px;
+}
+
+
+.direita{
+    float: left;
+    width: 65%;
+
+}
+
+.dados{
+
+    height: 50px;
+}
+a{
+    background-color: rgb(104, 166, 220);
+    border: 2px solid rgb(224, 179, 179);
+    color: white; /* Torna o texto legível */
+    padding: 5px 10px; /* Adiciona preenchimento dentro dos botões */
+    text-decoration: none; /* Remove o sublinhado */
+    border-radius: 4px; /* Bordas arredondadas */
+    margin-right: 5px; /* Espaçamento entre os botões */
+    cursor: pointer;
+}
+
+.botoes .excluir{
+    background-color: rgb(123, 54, 54);
+}
+
+.botoes {
+    text-align: center; 
+}
+
+.botoes a {
+    display: inline-block; 
+}
+
+table{
+    background-color: rgba(74, 114, 194, 0.2);
+    width: 94%;
+    margin: auto;
+    margin: 30px auto;
+    padding: 3px 8px 0px 10px;
+    border-collapse: separate; 
+    border-spacing: 0 10px; 
+    border-radius: 10px;
+}
+
+thead{
+    background-color: rgb(53, 84, 114);
+    text-align: center;
+    gap: 3px;
+}
+
+tbody{
+    text-align: center;
+    border: 2px solid blueviolet;
+}
+
+
+tr{
+    line-height: 30px;
+}
+
+tr#titulo{
+    font-weight: 900;
+    background-color: rgba(62, 61, 61, 0.6);
+    color: white;
+}
+
+td{
+    margin: 15px;
+    font-size: 1.2rem;
+    border: 1px solid rgb(153, 172, 172);
+}
+
+.msgErro {
+    font-size: 1.5rem; 
+    color: red; 
+}

@@ -84,7 +84,7 @@ h2{
 
 
 button{
-    background-color: rgb(83, 153, 69);
+    background-color: rgb(112, 198, 95);
     display: flex;
     align-items: center;
     border-radius: 10px;
@@ -97,8 +97,8 @@ button{
     padding: 20px;
 }
 button:hover{
-    width: 235px;
-    height: 55px;
+    width: 220px;
+    height: 110px;
 }
 
 
