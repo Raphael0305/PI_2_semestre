@@ -1,21 +1,20 @@
 <?php
-class Login {
-    private $pdo; 
+require_once '/xampp/htdocs/MarmitariaProj/classes/classe-conexao.php';
 
-    public function __construct($dbname, $host, $user, $senha) {
-        try {
-            $this->pdo = new PDO("mysql:dbname=".$dbname.";host=".$host, $user, $senha);
-        } catch (PDOException $e) {
-            echo "Erro com banco de dados: " . $e->getMessage();
-            exit();
-        }
+class Login extends ConexaoBanco{
+    private $conectar;
+
+    public function __construct($dbname,$host,$user,$senha) {
+        parent::__construct($dbname,$host,$user,$senha);
+        $this->conectar = $this->getConexao();
     }
 
     public function logar($user, $senha) {
-        $sql = $this->pdo->prepare("SELECT id_usuario FROM usuarios WHERE usuario = :u AND senha = :s");
+        $sql = $this->conectar->prepare("SELECT id_usuario FROM usuarios WHERE usuario = :u AND senha = :s");
         $sql->bindValue(":u", $user);
         $sql->bindValue(":s", $senha);
         $sql->execute();
+
         if($sql->rowCount() > 0) {
             $dado = $sql->fetch();
             session_start();
@@ -27,8 +26,10 @@ class Login {
     }
 
     public function verifLogin(){
+        session_start();
         if(!isset($_SESSION['id_usuario'])){
             header("Location: paginaLogin.php");
+            exit;
         }
     }
 
@@ -36,6 +37,11 @@ class Login {
         session_start();
         unset($_SESSION['id_usuario']);
         header("Location: paginaLogin.php");
+        exit;
+    }
+
+    public function getConexaLogin() {
+        return $this->conectar;
     }
 }
 
