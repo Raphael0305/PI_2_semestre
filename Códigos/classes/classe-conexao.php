@@ -1,12 +1,11 @@
 <?php
 
 class ConexaoBanco{
-    private $conexao, $host, $user,$senha,$dbname;
+    private $conexao;
 
     public function __construct($dbname,$host,$user,$senha){
         $this->conectarBanco($dbname,$host,$user,$senha);
     }
-
 
     public function conectarBanco($dbname,$host,$user,$senha){
         try {

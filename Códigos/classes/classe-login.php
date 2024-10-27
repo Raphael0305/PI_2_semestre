@@ -1,12 +1,11 @@
 <?php
 require_once '/xampp/htdocs/MarmitariaProj/classes/classe-conexao.php';
 
-class Login extends ConexaoBanco{
+class Login {
     private $conectar;
 
-    public function __construct($dbname,$host,$user,$senha) {
-        parent::__construct($dbname,$host,$user,$senha);
-        $this->conectar = $this->getConexao();
+    public function __construct(ConexaoBanco $conexao) {
+        $this->conectar = $conexao->getConexao();
     }
 
     public function logar($user, $senha) {
@@ -38,10 +37,6 @@ class Login extends ConexaoBanco{
         unset($_SESSION['id_usuario']);
         header("Location: paginaLogin.php");
         exit;
-    }
-
-    public function getConexaLogin() {
-        return $this->conectar;
     }
 }
 

@@ -1,12 +1,11 @@
 <?php
 require_once '/xampp/htdocs/MarmitariaProj/classes/classe-login.php';
-$login = new Login('marmitaria', 'localhost', 'root', '');
+$conexao = new ConexaoBanco('marmitaria', 'localhost', 'root', ''); 
+$login = new Login($conexao); 
 $login->verifLogin();
 
 require_once 'classes\classe-pedido.php';
-$pedido = new Pedido($login->getConexaLogin());
-
-
+$pedido = new Pedido($conexao);
 
 // LIDANDO COM GETS DE TROCA DE PAGINA 
 $pagina = 0;
@@ -36,49 +35,73 @@ if (isset($_GET['sair'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css\pedido.css??v=1.2">
+    <link rel="stylesheet" href="css\pedido.css??v=1.3">
     <title>Pedidos</title>
 </head>
 
 <body>
     
     <!-- INICIO -->
+     <?php
+        if(isset($_GET['id_ed'])){
+            $id_editar = addslashes($_GET['id_ed']);
+            $res = $pedido->buscarDadosPessoa($id_editar);
+        }
 
+    ?>
     <div class="estrutura">
         <div class="esquerda">
             <!-- <img src="../img/Marmitaria.png" alt=""> -->
             <form action="" method="post">
                 <h2>PONTO DE PEDIDO</h2>
-                <label for="opcoes">Escolha o prato</label>
 
+                <label for="opcoes">Escolha o prato</label>
                 <select id="opcoes" name="nomeMarmita" required>
-                    <option value="marmita 1">Marmita 1</option>
-                    <option value="marmita2">Marmita 2</option>
-                    <option value="marmita3">Marmita 3</option>
-                    <option value="marmita4">Marmita 4</option>
-                    <option value="marmita5">Marmita 4</option>
+                    <option value="marmita 1" <?php if(isset($res) && $res['Nome_Marmita'] == 'marmita 1') echo 'selected'; ?>>Marmita 1</option>
+                    <option value="marmita 2" <?php if(isset($res) && $res['Nome_Marmita'] == 'marmita 2') echo 'selected'; ?>>Marmita 2</option>
+                    <option value="marmita 3" <?php if(isset($res) && $res['Nome_Marmita'] == 'marmita 3') echo 'selected'; ?>>Marmita 3</option>
+                    <option value="marmita 4" <?php if(isset($res) && $res['Nome_Marmita'] == 'marmita 4') echo 'selected'; ?>>Marmita 4</option>
+                    <option value="marmita 5" <?php if(isset($res) && $res['Nome_Marmita'] == 'marmita 5') echo 'selected'; ?>>Marmita 5</option>
                 </select>
 
-                <label for="">Nome do Clinete</label>
-                <input type="text" placeholder="Nome" name="NomeCliente" required>
+                <label for="">Nome do Cliente</label>
+                <input type="text" class="inpute" placeholder="Nome" name="NomeCliente" required   
+                value="<?php if(isset($res)){echo $res['Nome_Cliente'];}?>"> 
 
                 <label for="quantidade">Quantidade comprada:</label>
-                <input type="number" name="quantidade" required>
+                <input type="number" class="inpute" name="quantidade" required
+                value="<?php if(isset($res)){echo $res['quantidade'];}?>">
 
                 <label for="DataEntrega">Data Entrega</label>
-                <input type="datetime-local" name="dataEntrega" id="">
+                <input type="datetime-local" class="inpute" name="dataEntrega" id=""
+                value="<?php if(isset($res)){echo date('Y-m-d\TH:i', strtotime($res['dataEntrega']));}?>">
 
-                <button type="submit">ENVIAR</button>
+                <input type="submit" value="<?php if(isset($res)){echo "Atualizar";}else{echo "Cadastrar";}?>" class="butEnviar">
                 <!-- INICIO PHP -->
                 <?php
                 
-                if (isset($_POST['nomeMarmita'])) {   
-                    $marmita = addslashes($_POST['nomeMarmita']);
-                    $nomeCliente = addslashes($_POST['NomeCliente']);
-                    $qtde = addslashes($_POST['quantidade']);
-                    $dataEntrega = addslashes($_POST['dataEntrega']);
-                    if (!$pedido->cadastrarPedido($marmita, $nomeCliente, $qtde, $dataEntrega)) {
-                        echo "Erro ao enviar os dados.";
+                if (isset($_POST['nomeMarmita'])) { 
+                    // CLICOU NO BOTÃO CADASTRAR OU EDITAR  
+                    //---------------- EDITAR ---------------------------
+                    if(isset($_GET['id_ed']) && !empty($_GET['id_ed'])) {
+                        $id_edita = addslashes($_GET['id_ed']); // Corrigido aqui
+                        $marmita = addslashes($_POST['nomeMarmita']);
+                        $nomeCliente = addslashes($_POST['NomeCliente']);
+                        $qtde = addslashes($_POST['quantidade']);
+                        $dataEntrega = addslashes($_POST['dataEntrega']);
+                
+                        $pedido->EditarPedido($id_edita, $marmita, $nomeCliente, $qtde, $dataEntrega);
+                        header("Location: pedido.php");
+                        exit; 
+                    } else {
+                        $marmita = addslashes($_POST['nomeMarmita']);
+                        $nomeCliente = addslashes($_POST['NomeCliente']);
+                        $qtde = addslashes($_POST['quantidade']);
+                        $dataEntrega = addslashes($_POST['dataEntrega']);
+                
+                        if (!$pedido->cadastrarPedido($marmita, $nomeCliente, $qtde, $dataEntrega)) {
+                            echo "Erro ao enviar os dados.";
+                        }
                     }
                 }
 
@@ -128,8 +151,8 @@ if (isset($_GET['sair'])) {
                             <td><?php echo $pedido['quantidade']; ?></td>
                             <td><?php echo $pedido['dataEntregaFormatada']; ?></td> 
                             <td class="botoes">
-                                <a href="">Editar</a> 
-                                <a href="pedido.php?id=<?php echo $pedido['id_pedido']; ?>" class="excluir">Excluir</a>
+                                <a href="pedido.php?id_ed=<?= $pedido['id_pedido']; ?>" >Editar</a>
+                                <a href="pedido.php?id=<?= $pedido['id_pedido']; ?>" class="excluir">Excluir</a>
                             </td>
                         </tr>
                     <?php         

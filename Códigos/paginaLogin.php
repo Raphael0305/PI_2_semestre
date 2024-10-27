@@ -2,8 +2,8 @@
 
 require_once '/xampp/htdocs/MarmitariaProj/classes/classe-conexao.php';
 require_once '/xampp/htdocs/MarmitariaProj/classes/classe-login.php';
-
-$login = new Login('marmitaria', 'localhost', 'root', '');
+$conexao = new ConexaoBanco('marmitaria', 'localhost', 'root', '');
+$login = new Login($conexao);
 
 ?>
 

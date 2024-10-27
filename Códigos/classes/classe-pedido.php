@@ -1,11 +1,11 @@
 <?php
  require_once '/xampp/htdocs/MarmitariaProj/classes/classe-conexao.php';
  
-class Pedido extends ConexaoBanco{
+class Pedido {
     private $conectar;
  
-    public function __construct($conexaoLogin)  {
-        $this->conectar = $conexaoLogin;
+    public function __construct(ConexaoBanco $conexao)  {
+        $this->conectar = $conexao->getConexao();
     }
 //************************************************************************************************************************************************************* */ 
     public function buscarDados($pagina, $limite) {
@@ -39,9 +39,26 @@ class Pedido extends ConexaoBanco{
         header("Location: pedido.php"); 
         return true;
     }
-//************************************************************************************************************************************************************* */ 
-    public function EditarPedid(){
 
+    public function buscarDadosPessoa($id){
+        $cmd = $this->conectar->prepare("SELECT * FROM pedidos WHERE id_pedido = :id");
+        $cmd->bindValue(":id", $id);
+        $cmd->execute();
+        $res = $cmd->fetch(PDO::FETCH_ASSOC);
+        return $res;
+    }
+//************************************************************************************************************************************************************* */ 
+    public function EditarPedido($id, $nomeMarmita, $nomeCliente,$qtde,$data){
+        $cmd = $this->conectar->prepare("UPDATE pedidos SET Nome_Marmita = :m, 
+                                        Nome_Cliente = :c,
+                                        quantidade = :q, dataEntrega = :d
+                                        WHERE id_pedido = :id");
+        $cmd->bindValue(":m", $nomeMarmita);
+        $cmd->bindValue(":c", $nomeCliente);
+        $cmd->bindValue(":q", $qtde);
+        $cmd->bindValue(":d", $data);
+        $cmd->bindValue(":id", $id);;
+        $cmd->execute();
     }
 //************************************************************************************************************************************************************* */ 
     public function excluirPessoa ($id){

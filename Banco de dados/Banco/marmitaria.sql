@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 25/10/2024 às 06:05
+-- Tempo de geração: 27/10/2024 às 21:46
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -70,13 +70,7 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`id_pedido`, `Nome_Marmita`, `quantidade`, `dataEntrega`, `Nome_Cliente`) VALUES
-(29, 'marmita4', 3, '2024-11-13 00:35:00', 'teste '),
-(30, 'marmita 1', 6, '2024-10-05 00:36:00', 'lagolas'),
-(31, 'marmita 1', 0, '0000-00-00 00:00:00', ''),
-(32, 'marmita 1', 0, '0000-00-00 00:00:00', ''),
-(33, 'marmita 1', 0, '0000-00-00 00:00:00', ''),
-(34, 'marmita 1', 0, '0000-00-00 00:00:00', ''),
-(35, 'marmita2', 2, '2024-10-04 01:58:00', 'Raphael Reis');
+(116, 'marmita 4', 2, '2024-10-18 17:37:00', 'Julia');
 
 -- --------------------------------------------------------
 
@@ -168,7 +162,7 @@ ALTER TABLE `marmitas`
 -- AUTO_INCREMENT de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT de tabela `produto`

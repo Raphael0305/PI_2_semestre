@@ -204,3 +204,10 @@ td{
 .numero{
     font-size: 25px;
 }
+
+.butEnviar{
+    text-align: center;
+    margin-top: 20px;
+    width: 190px;
+    margin: 30px auto;
+}
