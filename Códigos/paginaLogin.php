@@ -1,6 +1,10 @@
 <?php
-require_once 'classes\classe-login.php';
-$login = new Login('marmitaria', 'localhost', 'root', '');
+
+require_once '/xampp/htdocs/MarmitariaProj/classes/classe-conexao.php';
+require_once '/xampp/htdocs/MarmitariaProj/classes/classe-login.php';
+$conexao = new ConexaoBanco('marmitaria', 'localhost', 'root', '');
+$login = new Login($conexao);
+
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +13,7 @@ $login = new Login('marmitaria', 'localhost', 'root', '');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="\MarmitariaProj\css\login.css">
+    <link rel="stylesheet" href="\MarmitariaProj\css\login.css??v=1.2">
     <title>Document</title>
 </head>
 
@@ -45,9 +49,7 @@ $login = new Login('marmitaria', 'localhost', 'root', '');
 
                         if (!empty($usuario) && !empty($senha)) {
                             if ($login->logar($usuario, $senha)) {
-                                session_start();
-                                $_SESSION['logado'];
-                                header("Location: pagina.php");
+                                header("Location: pedido.php");
                                 exit(); 
                             } else {
                                 ?>
@@ -65,7 +67,7 @@ $login = new Login('marmitaria', 'localhost', 'root', '');
                         }
                     }
                     ?>
-                    <!-- FIM CÓDIGO PHP -->
+                    <!-- FIM CÓDIGO PHP  XD -->
                 </form>
             </div>
         </div>

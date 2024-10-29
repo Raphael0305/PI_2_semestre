@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 23/10/2024 às 12:24
+-- Tempo de geração: 27/10/2024 às 21:46
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -61,8 +61,16 @@ CREATE TABLE `pedidos` (
   `id_pedido` int(11) NOT NULL,
   `Nome_Marmita` varchar(50) NOT NULL,
   `quantidade` int(11) NOT NULL,
-  `dataEntrega` date NOT NULL
+  `dataEntrega` datetime NOT NULL,
+  `Nome_Cliente` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `pedidos`
+--
+
+INSERT INTO `pedidos` (`id_pedido`, `Nome_Marmita`, `quantidade`, `dataEntrega`, `Nome_Cliente`) VALUES
+(116, 'marmita 4', 2, '2024-10-18 17:37:00', 'Julia');
 
 -- --------------------------------------------------------
 
@@ -154,7 +162,7 @@ ALTER TABLE `marmitas`
 -- AUTO_INCREMENT de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
