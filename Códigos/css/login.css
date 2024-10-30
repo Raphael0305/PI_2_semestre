@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    font-family: "Poppins", serif;
+    margin: 0;
+    padding: 0;
+}
+
+h2{
+    color: rgb(13, 35, 3);
+    
+}
+.fundo{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background-color: rgb(187, 202, 158);
+    align-items: center;
+    justify-content: center;
+}
+
+.esquerdaLogin{
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.esquerdaLogin img{
+    margin-left: 300px;
+    height: 600px;
+}
+
+.DireitaLogin{
+    
+    width: 50%;
+    height: 100vh;
+    margin-right: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.estrutura{
+    background-color: rgb(142, 203, 142);
+    border: 1px solid rgb(16, 27, 0);
+    width: 54%;
+    height: 580px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;;
+}
+
+.titulo{
+    text-align: center;
+    font-size: 2rem;
+}
+
+.user{
+    width: 100%;
+    display: flex;
+    gap: 2px;
+    flex-direction: column;
+    margin-top: 10%
+}
+
+.senha{
+    display: flex;
+    gap: 2px;
+    flex-direction: column;
+    margin-top: 10%;
+}
+
+.botao{
+    margin-top: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    width: 100%;
+}
+
+
+button{
+    background-color: rgb(112, 198, 95);
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    justify-content: center;
+    width: 230px;
+    height: 50px;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    cursor: pointer;
+    padding: 20px;
+}
+button:hover{
+    background-color: rgb(103, 183, 86);
+    width: 235px;
+    height: 60px;
+}
+
+
+label{
+    font-size: 1.5rem;
+}
+input{
+    height:50px;
+    border-radius: 14px;
+    width: 300px;
+    font-size: 1.3rem;
+    padding: 0px 10px;
+    background-color: rgb(176, 212, 100);;
+}
+
+.msgErro{
+    margin-top: 10px;
+    background-color: brown ;
+    opacity: 80%;
+    border-radius: 3px;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
