@@ -39,12 +39,12 @@
                 </a>
             </li>
             <li>
-                <a href="../../comanda/comanda.php" >
+                <a href="../comanda/comanda.php" >
                     <img src="../../icons/comanda.svg" alt="" width="50px">
                 </a>
             </li>
             <li>
-                <a href="../../estoque/estoque.php">
+                <a href="../estoque/estoque.php">
                     <img src="../../icons/estoque.svg" alt="" width="50px">
                 </a>
             </li>
