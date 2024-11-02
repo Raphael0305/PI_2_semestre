@@ -1,7 +1,7 @@
 <?php
 
-require_once '/xampp/htdocs/MarmitariaProj/classes/classe-conexao.php';
-require_once '/xampp/htdocs/MarmitariaProj/classes/classe-login.php';
+require_once 'Códigos/classes/classe-conexao.php';
+require_once 'Códigos/classes/classe-login.php';
 $conexao = new ConexaoBanco('marmitaria', 'localhost', 'root', '');
 $login = new Login($conexao);
 
