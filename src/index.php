@@ -25,11 +25,14 @@
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="password" name="passwd" placeholder="Digite sua Senha">
+                <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Digite sua Senha">
+                <ul id="passwd_error">
+                    <li id="erro-1"> </li>
+                </ul>
             </div>
             <button id="entrarBtn" style="margin-top: 15px;" type="submit" class="btn btn-success" disabled>Entrar</button>
         </form>
     </div>
 </body>
-<script src="paginas/login/scripts/controle.js"></script>
+<script src="paginas/login/scripts/login_validation.js"></script>
 </html>
