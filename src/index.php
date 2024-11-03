@@ -19,14 +19,20 @@
             <div class="mb-3">
                 <label for="email" class="form-label">E-mail</label>
                 <input type="text" class="form-control" id="email" name="email" placeholder="Digite seu E-mail">
+                <ul class="email_error">
+                    <li id="email_error_display"> </li>
+                </ul>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="password" name="passwd" placeholder="Digite sua Senha">
+                <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Digite sua Senha">
+                <ul class="passwd_error">
+                    <li id="password_error_display"></li>
+                </ul>
             </div>
-            <button style="margin-top: 15px;" type="submit" class="btn btn-success">Entrar</button>
+            <button id="entrarBtn" style="margin-top: 15px;" type="submit" class="btn btn-success" disabled>Entrar</button>
         </form>
     </div>
 </body>
-
+<script src="paginas/login/scripts/login_validation.js"></script>
 </html>

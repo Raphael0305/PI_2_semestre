@@ -5,7 +5,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $passwd = $_POST["passwd"];
 
     $correctEmail = "marmitaria.fit@contato.com";
-    $correctPassword = "Marmita123";
+    $correctPassword = "Marmita@123";
 
     if($email == $correctEmail && $correctPassword == $passwd){
         header("Location: ../paginas/homepage/home_page.php");
