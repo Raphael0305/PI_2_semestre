@@ -19,14 +19,17 @@
             <div class="mb-3">
                 <label for="email" class="form-label">E-mail</label>
                 <input type="text" class="form-control" id="email" name="email" placeholder="Digite seu E-mail">
+                <ul id="err">
+                    <li id="erro-1"> </li>
+                </ul>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Senha</label>
                 <input type="password" class="form-control" id="password" name="passwd" placeholder="Digite sua Senha">
             </div>
-            <button style="margin-top: 15px;" type="submit" class="btn btn-success">Entrar</button>
+            <button id="entrarBtn" style="margin-top: 15px;" type="submit" class="btn btn-success" disabled>Entrar</button>
         </form>
     </div>
 </body>
-
+<script src="paginas/login/scripts/controle.js"></script>
 </html>
