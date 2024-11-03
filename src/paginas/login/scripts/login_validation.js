@@ -1,24 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
-const input = document.getElementById("email")
+const email = document.getElementById("email")
 const passwd = document.getElementById("passwd")
-const passwdError = document.getElementById("passwd_error")
-const err = document.getElementById("erro-1")
+const email_error = document.getElementById("email_error_display")
+const passwdError = document.getElementById("password_error_display")
 const entrarBtn = document.getElementById("entrarBtn")
 isEmailValid = false
 isPasswdValid = false
 
 
 
-input.addEventListener("keyup", (event) => {
-    inputValue = event.target.value
-    if (validateEmail(inputValue) && inputValue.length > 1){
-        err.innerHTML = `<li id="erro-1"></li>`
+email.addEventListener("keyup", (event) => {
+    const key = event.key;
+    const alfanumericRegex = /^[a-zA-Z0-9!@#$%^&*()_+={}\[\]:;"'<>,.?\/-]*$/
+    if (key === "Backspace"){
+        updateButtonState()
+    }
+    if (!alfanumericRegex.test(key)) {
+        return
+    }
+
+    let localEmail = email.value
+    if (validateEmail(localEmail) && localEmail.length > 1){
+        email_error.innerHTML = `<li></li>`
         isEmailValid = true
-    }else if (inputValue.length == 0){
+    }else if (localEmail.length == 0){
         isEmailValid = false
     }
     else{
-        err.innerHTML = `<li id="erro-1">E-mail inválido</li>`
+        email_error.innerHTML = `<li>E-mail inválido</li>`
         isEmailValid = false
     }
     updateButtonState()
@@ -36,7 +45,7 @@ passwd.addEventListener("keyup", (event) => {
 
     let localPasswd = passwd.value
     if (validatePassword(localPasswd.trim()) && localPasswd.length > 1){
-        passwdError.innerHTML = `<li>Senha validada</li>`
+        passwdError.innerHTML = `<li></li>`
         isPasswdValid = true
     }
     else if (localPasswd.length == 0){
@@ -49,9 +58,6 @@ passwd.addEventListener("keyup", (event) => {
     updateButtonState()
 })
 
-console.log(`E-mail valido? ${isEmailValid}`)
-console.log(`Senha valida? ${isPasswdValid}`)
-
 
 function updateButtonState() {
     entrarBtn.disabled = !(isEmailValid && isPasswdValid);
@@ -62,10 +68,8 @@ function updateButtonState() {
 function validateEmail(email){
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (emailRegex.test(email)){
-        console.log(emailRegex.test(email))
         return true
     }else{
-        console.log(emailRegex.test(email))
         return false
     }
 }

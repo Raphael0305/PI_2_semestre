@@ -33,6 +33,11 @@ html, body{
     color: white
 }
 
+.email_error {
+    list-style: none;
+    padding: 3px;
+}
 .passwd_error {
     list-style: none;
+    padding: 3px;
 }
