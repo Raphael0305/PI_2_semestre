@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/home_page.css">
     <link rel="icon" type="image/x-icon" href="../../assets/img/logo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -20,13 +20,13 @@
 
 <body>
     <nav class="navbar navbar-light nav_style">
-        <div class="container-fluid align-items-center" style="height: 60px;">
+        <div class="container-fluid align-items-center" style="height: 45px;">
             <div >
-                <img src="../../assets/img/logo.png" alt="Marmitaria Fit Logo" width="60">
-                <a class="navbar-brand ms-2">Marmitaria Fit</a>
+                <img src="../../assets/img/logo.png" alt="Marmitaria Fit Logo" width="45">
+                <a  class="navbar-brand ms-2 fs-6 fst-italic">Marmitaria Fit</a>
             </div>
             <div>
-                <a href="../../controle/logout.php" class="btn btn-danger">Sair</a>
+                <a style="height: 32px; font-size: 12px;" href="../../controle/logout.php" class="btn btn-danger">Sair</a>
             </div>
         </div>
     </nav>
@@ -35,24 +35,24 @@
         <ol class="menu_list">
             <li>
                 <a >
-                    <img class="menu" src="../../assets/icons/menu.svg" alt="" width="50px">
+                    <img class="menu" src="../../assets/icons/menu.svg" alt="" width="32px">
                 </a>
             </li>
             <li>
                 <a href="../comanda/comanda.php" >
-                    <img src="../../assets/icons/comanda.svg" alt="" width="50px">
+                    <img src="../../assets/icons/comanda.svg" alt="" width="32px">
                 </a>
             </li>
             <li>
                 <a href="../estoque/estoque.php">
-                    <img src="../../assets/icons/estoque.svg" alt="" width="50px">
+                    <img src="../../assets/icons/estoque.svg" alt="" width="32px">
                 </a>
             </li>
         </ol>
     </div>
 
     <div class="content">
-        <p style="text-align: center;">Seja Bem Vindo,<br>Vitor</p>
+        <p style="text-align: center;">Seja Bem Vindo,<br>Fulano</p>
     </div>
 </body>
 

@@ -4,7 +4,7 @@ html, body {
 }
 .nav_style {
     background-color: #B87F60; 
-    margin-left: 60px;
+    margin-left: 50px;
     position: fixed;
 }
 
@@ -12,7 +12,7 @@ html, body {
     display: flex;
     justify-content: center;
     background-color:#526C3F;
-    width: 60px;
+    width: 50px;
     position: fixed;
     height: 100%;
     top: 0;
@@ -26,11 +26,12 @@ html, body {
 
 .menu_list li {
     border: 1px solid #526C3F;
-    border-radius: 10px;
-    margin-top: 15px;
+    padding: 7px;
+    margin-top: 13px;
 
 }
 .menu_list li:hover {
+    border: 1px solid black;
     border-radius: 10px;
     background-color: aliceblue;
 }
@@ -41,7 +42,7 @@ html, body {
     align-items: center;
     height: 87.7%;
     overflow-y: auto;
-    padding-left: 60px;
+    padding-left: 50px;
     padding-top: 60px;
     padding-bottom: 0px;
 }
