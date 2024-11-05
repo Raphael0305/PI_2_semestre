@@ -1,22 +1,44 @@
+/* Definindo tamanho da tela em 100% do visível e retirando qualquer margin */
 html, body {
     height: 100%;
     margin: 0px;
 }
-.nav_style {
-    background-color: #B87F60; 
-    margin-left: 60px;
-    position: fixed;
+/* Screen, left-side e right-side fazem parte do 
+dimensionamento do menu lateral esquerdo e conteúdo
+do lado direito */
+.screen {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
 }
 
-.menu_lateral {
+
+.left-side {
+    flex: 0 0 40px;
     display: flex;
     justify-content: center;
     background-color:#526C3F;
-    width: 60px;
-    position: fixed;
-    height: 100%;
-    top: 0;
-    left: 0;
+}
+
+.right-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.navbar-position {
+    flex: 0 60px;
+    background-color: #B87F60;
+    
+}
+
+.page-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
 }
 
 .menu_list {
@@ -26,26 +48,12 @@ html, body {
 
 .menu_list li {
     border: 1px solid #526C3F;
-    border-radius: 10px;
-    margin-top: 15px;
+    padding: 4px;
+    margin-top: 13px;
 
 }
 .menu_list li:hover {
+    border: 1px solid black;
     border-radius: 10px;
-    background-color: aliceblue;
-}
-
-.content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 87.7%;
-    overflow-y: auto;
-    padding-left: 60px;
-    padding-top: 60px;
-    padding-bottom: 0px;
-}
-
-.content p {
-    font-size: 30px;
+    background-color: #5A853B;
 }
