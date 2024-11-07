@@ -33,5 +33,13 @@
 
 .btn_side {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 63.6px;
+    padding-bottom: 20px;
+    align-items: center;
+    height: 100%;
+    margin-right: 30px;
 }
 

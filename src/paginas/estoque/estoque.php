@@ -102,13 +102,17 @@
 
 
 
-               
-               
-               
-               
-               
-                <div style="background-color: blue;" class="btn_side">
-                    <h1>blablabla1</h1>
+
+
+
+
+
+                <div class="btn_side">
+                    <button class="cadastrar" onclick="cadastrarProduto">Cadastrar ingrediente</button>
+                    <button class="cadastrar" onclick="cadastrarProduto">Adicionar item</button>
+                    <button class="cadastrar" onclick="cadastrarProduto">Retirar item do estoque</button>
+                    <button class="cadastrar" onclick="cadastrarProduto">Retirada de Estoque</button>
+                    <button class="cadastrar" onclick="cadastrarProduto">Criar alerta de baixo nível</button>
 
                 </div>
             </div>
