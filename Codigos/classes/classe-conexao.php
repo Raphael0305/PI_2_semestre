@@ -3,8 +3,8 @@
 class ConexaoBanco{
     private $conexao;
 
-    public function __construct($dbname,$host,$user,$senha){
-        $this->conectarBanco($dbname,$host,$user,$senha);
+    public function __construct(){
+        $this->conectarBanco('marmitaria', 'localhost', 'root', '');
     }
 
     public function conectarBanco($dbname,$host,$user,$senha){

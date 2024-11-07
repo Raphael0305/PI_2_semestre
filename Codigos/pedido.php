@@ -1,15 +1,13 @@
 <?php
-require_once '/xampp/htdocs/MarmitariaProj/classes/classe-login.php';
-$conexao = new ConexaoBanco('marmitaria', 'localhost', 'root', ''); 
-$login = new Login($conexao); 
-$login->verifLogin();
-
 require_once 'classes\classe-pedido.php';
-$pedido = new Pedido($conexao);
+require_once 'classes/classe-login.php';
+$login = NEW Login;
+$login->verifLogin();
+$pedido = new Pedido();
 
 // LIDANDO COM GETS DE TROCA DE PAGINA 
 $pagina = 0;
-$limite = 7;
+$limite = 5;
 $pagina = filter_input(INPUT_GET, 'pagina', FILTER_VALIDATE_INT) ?: 1;
 $totalPaginas = $pedido->totalPaginas($limite);
 $pagina = max(1, min($pagina, $totalPaginas));
@@ -57,16 +55,16 @@ if (isset($_GET['sair'])) {
 
                 <label for="opcoes">Escolha o prato</label>
                 <select id="opcoes" name="nomeMarmita" required>
-                    <option value="marmita 1" <?php if(isset($res) && $res['Nome_Marmita'] == 'marmita 1') echo 'selected'; ?>>Marmita 1</option>
-                    <option value="marmita 2" <?php if(isset($res) && $res['Nome_Marmita'] == 'marmita 2') echo 'selected'; ?>>Marmita 2</option>
-                    <option value="marmita 3" <?php if(isset($res) && $res['Nome_Marmita'] == 'marmita 3') echo 'selected'; ?>>Marmita 3</option>
-                    <option value="marmita 4" <?php if(isset($res) && $res['Nome_Marmita'] == 'marmita 4') echo 'selected'; ?>>Marmita 4</option>
-                    <option value="marmita 5" <?php if(isset($res) && $res['Nome_Marmita'] == 'marmita 5') echo 'selected'; ?>>Marmita 5</option>
+                    <option value="marmita 1" <?php if(isset($res) && $res['nome_marmita'] == 'marmita 1') echo 'selected'; ?>>Marmita 1</option>
+                    <option value="marmita 2" <?php if(isset($res) && $res['nome_marmita'] == 'marmita 2') echo 'selected'; ?>>Marmita 2</option>
+                    <option value="marmita 3" <?php if(isset($res) && $res['nome_marmita'] == 'marmita 3') echo 'selected'; ?>>Marmita 3</option>
+                    <option value="marmita 4" <?php if(isset($res) && $res['nome_marmita'] == 'marmita 4') echo 'selected'; ?>>Marmita 4</option>
+                    <option value="marmita 5" <?php if(isset($res) && $res['nome_marmita'] == 'marmita 5') echo 'selected'; ?>>Marmita 5</option>
                 </select>
 
                 <label for="">Nome do Cliente</label>
                 <input type="text" class="inpute" placeholder="Nome" name="NomeCliente" required   
-                value="<?php if(isset($res)){echo $res['Nome_Cliente'];}?>"> 
+                value="<?php if(isset($res)){echo $res['nome_cliente'];}?>"> 
 
                 <label for="quantidade">Quantidade comprada:</label>
                 <input type="number" class="inpute" name="quantidade" required
@@ -74,7 +72,7 @@ if (isset($_GET['sair'])) {
 
                 <label for="DataEntrega">Data Entrega</label>
                 <input type="datetime-local" class="inpute" name="dataEntrega" id=""
-                value="<?php if(isset($res)){echo date('Y-m-d\TH:i', strtotime($res['dataEntrega']));}?>">
+                value="<?php if(isset($res)){echo date('Y-m-d\TH:i', strtotime($res['data_entrega']));}?>">
 
                 <input type="submit" value="<?php if(isset($res)){echo "Atualizar";}else{echo "Cadastrar";}?>" class="butEnviar">
                 <!-- INICIO PHP -->
@@ -146,8 +144,8 @@ if (isset($_GET['sair'])) {
                         foreach ($dados as $pedido) {
                     ?>
                          <tr class="dados">
-                            <td><?php echo $pedido['Nome_Marmita']; ?></td>
-                            <td><?php echo $pedido['Nome_Cliente']; ?></td>
+                            <td><?php echo $pedido['nome_marmita']; ?></td>
+                            <td><?php echo $pedido['nome_cliente']; ?></td>
                             <td><?php echo $pedido['quantidade']; ?></td>
                             <td><?php echo $pedido['dataEntregaFormatada']; ?></td> 
                             <td class="botoes">
