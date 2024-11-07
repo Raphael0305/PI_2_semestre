@@ -25,17 +25,17 @@
             <ol class="menu_list">
                 <li>
                     <a>
-                        <img class="menu" src="../../icons/menu.svg" alt="" width="28">
+                        <img class="menu" src="../../assets/icons/menu.svg" alt="" width="28">
                     </a>
                 </li>
                 <li>
                     <a href="../comanda/comanda.php">
-                        <img src="../../icons/comanda.svg" alt="" width="28">
+                        <img src="../../assets/icons/comanda.svg" alt="" width="28">
                     </a>
                 </li>
                 <li>
                     <a href="../estoque/estoque.php">
-                        <img src="../../icons/estoque.svg" alt="" width="28">
+                        <img src="../../assets/icons/estoque.svg" alt="" width="28">
                     </a>
                 </li>
             </ol>
@@ -47,7 +47,7 @@
                 <nav class="navbar navbar-light">
                     <div class="container-fluid nav-content">
                         <div>
-                            <img src="../../img/logo.png" alt="Marmitaria Fit Logo" width="45">
+                            <img src="../../assets/img/logo.png" alt="Marmitaria Fit Logo" width="45">
                             <a class="navbar-brand ms-2 fs-6 fst-italic">Marmitaria Fit</a>
                         </div>
                         <div>
