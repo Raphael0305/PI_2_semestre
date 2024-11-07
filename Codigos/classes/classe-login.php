@@ -1,10 +1,11 @@
 <?php
-require_once '/xampp/htdocs/MarmitariaProj/classes/classe-conexao.php';
+require_once __DIR__ . '/classe-conexao.php';
 
 class Login {
     private $conectar;
 
-    public function __construct(ConexaoBanco $conexao) {
+    public function __construct() {
+        $conexao = NEW ConexaoBanco;
         $this->conectar = $conexao->getConexao();
     }
 

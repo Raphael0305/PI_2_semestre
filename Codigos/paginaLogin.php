@@ -1,19 +1,18 @@
 <?php
 
-require_once 'Códigos/classes/classe-conexao.php';
-require_once 'Códigos/classes/classe-login.php';
-$conexao = new ConexaoBanco('marmitaria', 'localhost', 'root', '');
-$login = new Login($conexao);
+require_once  __DIR__ .'/classes/classe-login.php';
+
+$login = NEW Login();
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="\MarmitariaProj\css\login.css??v=1.2">
+    <link rel="stylesheet" href="./css/login.css">
     <title>Document</title>
 </head>
 
