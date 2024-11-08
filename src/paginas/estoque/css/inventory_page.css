@@ -33,6 +33,87 @@ do lado direito */
     
 }
 
+.serach_input {
+    height: 46px;
+    width: 500px;
+    background-color: #A4BB94;
+    
+    border: 2px solid #526C3F;
+    border-radius: 10px;
+}
+
+.search_btn {
+    height: 46px;
+    width: 60px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 15px;
+    background-color: #5A853B;
+
+
+}
+.search_btn:hover {
+    background-color: #385C1D;
+}
+
+.table_box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 40px 0px;
+    overflow: auto;
+    max-height: 440px;
+}
+
+.tables {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: #C8E1B5;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-collapse: separate;
+}
+
+.tables th {
+    background-color: #B87F60;
+    table-layout: fixed;
+}
+tr {
+    text-align: center;
+    height: 60px;
+}
+
+tr:nth-child(even) {
+    background-color: #A4BB94;
+}
+
+.btn_side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 32.6px;
+    padding-bottom: 20px;
+    align-items: center;
+    height: 100%;
+    margin-right: 30px;
+}
+
+.btn_side button {
+    border: none;
+    border-radius: 10px;
+    background-color: #5A853B;
+    color: white;
+    height: 56px;
+    width: 180px;
+}
+
+.btn_side button:hover {
+    background-color: #385C1D;
+}
+
 .menu_list {
     padding: 0;
     list-style: none;
