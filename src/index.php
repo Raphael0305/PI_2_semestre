@@ -1,3 +1,10 @@
+<?php
+require_once __DIR__ . '/controle/autenticador.php';
+$login = NEW Autenticador();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +19,7 @@
 
 <body>
     <div class="wrapper">
-        <form action="controle/login_controle.php" method="POST" class="d-flex flex-column bd-highlight" style="width: 80%;">
+        <form method="POST" class="d-flex flex-column bd-highlight" style="width: 80%;">
             <div class="mb-3 welcome">
                 <h1>Seja bem Vindo!!</h1>
             </div>
@@ -31,6 +38,26 @@
                 </ul>
             </div>
             <button id="entrarBtn" style="margin-top: 15px;" type="submit" class="btn btn-success" disabled>Entrar</button>
+            <!-- -----------------------------------------         INICIO PHP           ---------------------------------------------------->
+            <?php
+               
+               if(isset($_POST['email'])){
+                $email = addslashes ($_POST['email']);
+                $senha = addslashes ($_POST['passwd']);
+
+                if($login->logarUsuario($email,$senha)){
+                    header("Location: ./paginas/homepage/home_page.php");
+                }else{
+                    ?>
+                    <div class="msgErro">
+                    <?php
+                       echo   'Usuário e/ou senha estão incorretos';
+                     ?>   
+                    </div>
+                    <?php
+                }
+               }
+            ?>
         </form>
     </div>
 </body>

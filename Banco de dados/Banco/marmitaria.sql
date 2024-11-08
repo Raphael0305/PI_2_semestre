@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/11/2024 às 04:28
+-- Tempo de geração: 08/11/2024 às 03:40
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -83,7 +83,7 @@ CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `sobrenome` varchar(50) NOT NULL,
-  `usuario` varchar(50) NOT NULL,
+  `email` varchar(60) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `nivel_acesso` int(11) NOT NULL,
   `data_cadastro` timestamp NOT NULL DEFAULT current_timestamp()
@@ -93,8 +93,9 @@ CREATE TABLE `usuarios` (
 -- Despejando dados para a tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nome`, `sobrenome`, `usuario`, `senha`, `nivel_acesso`, `data_cadastro`) VALUES
-(1, 'Raphael ', 'Reis', 'teste', 'teste', 1, '2024-11-05 03:26:13');
+INSERT INTO `usuarios` (`id_usuario`, `nome`, `sobrenome`, `email`, `senha`, `nivel_acesso`, `data_cadastro`) VALUES
+(2, 'Raphael ', 'Reis', 'raphael@teste.com', 'Teste123!', 1, '2024-11-06 10:28:43'),
+(3, 'Isabely', '', 'isa@teste.com', 'Teste123!', 2, '2024-11-06 23:21:15');
 
 --
 -- Índices para tabelas despejadas
@@ -124,7 +125,7 @@ ALTER TABLE `pedidos`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuario`),
-  ADD UNIQUE KEY `usuario` (`usuario`);
+  ADD UNIQUE KEY `usuario` (`email`);
 
 --
 -- AUTO_INCREMENT para tabelas despejadas
@@ -152,7 +153,7 @@ ALTER TABLE `pedidos`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restrições para tabelas despejadas
