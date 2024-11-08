@@ -19,40 +19,47 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light nav_style">
-        <div class="container-fluid align-items-center" style="height: 45px;">
-            <div >
-                <img src="../../assets/img/logo.png" alt="Marmitaria Fit Logo" width="45">
-                <a  class="navbar-brand ms-2 fs-6 fst-italic">Marmitaria Fit</a>
+    <div class="screen">
+        <!-- Barra lateral com botões -->
+        <div class="left-side">
+            <ol class="menu_list">
+                <li>
+                    <a>
+                        <img class="menu" src="../../assets/icons/menu.svg" alt="" width="28">
+                    </a>
+                </li>
+                <li>
+                    <a href="../comanda/comanda.php">
+                        <img src="../../assets/icons/comanda.svg" alt="" width="28">
+                    </a>
+                </li>
+                <li>
+                    <a href="../estoque/estoque.php">
+                        <img src="../../assets/icons/estoque.svg" alt="" width="28">
+                    </a>
+                </li>
+            </ol>
+        </div>
+
+        <!-- Conteúdo da navbar e área útil -->
+        <div class="right-side">
+            <div class="navbar-position ">
+                <nav class="navbar navbar-light">
+                    <div class="container-fluid nav-content">
+                        <div>
+                            <img src="../../assets/img/logo.png" alt="Marmitaria Fit Logo" width="45">
+                            <a class="navbar-brand ms-2 fs-6 fst-italic">Marmitaria Fit</a>
+                        </div>
+                        <div>
+                            <a style="height: 32px; font-size: 12px;" href="../../controle/logout.php" class="btn btn-danger">Sair</a>
+                        </div>
+                    </div>
+                </nav>
             </div>
-            <div>
-                <a style="height: 32px; font-size: 12px;" href="../../controle/logout.php" class="btn btn-danger">Sair</a>
+            <div class="page-content">
+            <p style="text-align: center;">Seja Bem Vindo,<br>Fulano</p>
             </div>
         </div>
-    </nav>
-
-    <div class="menu_lateral">
-        <ol class="menu_list">
-            <li>
-                <a >
-                    <img class="menu" src="../../assets/icons/menu.svg" alt="" width="32px">
-                </a>
-            </li>
-            <li>
-                <a href="../comanda/comanda.php" >
-                    <img src="../../assets/icons/comanda.svg" alt="" width="32px">
-                </a>
-            </li>
-            <li>
-                <a href="../estoque/estoque.php">
-                    <img src="../../assets/icons/estoque.svg" alt="" width="32px">
-                </a>
-            </li>
-        </ol>
-    </div>
-
-    <div class="content">
-        <p style="text-align: center;">Seja Bem Vindo,<br>Fulano</p>
     </div>
 </body>
 
