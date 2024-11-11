@@ -1,10 +1,33 @@
+<?php
+session_start();
+require_once __DIR__ . '/../../controle/query.php';
+require_once __DIR__ . '/../../controle/autenticador.php';
+$consulta = new Query;
+$autenticador = new Autenticador;
+$autenticador->autenticarUsuario(); 
+
+$pagina = 0;
+$limite = 5;
+$totalPaginas = $consulta->totalPaginas($limite);
+
+
+
+//caso clique no sair 
+if (isset($_POST['sair'])) { 
+    $autenticador->deslogar();
+    header("Location: ../../index.php");
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/inventory_page.css">
-    <link rel="stylesheet" href="css/content.css">
+    <link rel="stylesheet" href="css/inventory_page.css?v1.5">
+    <link rel="stylesheet" href="css/content.css?v1.1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="assets/img/logo.png">
     <script src="https://kit.fontawesome.com/e874ed8d35.js" crossorigin="anonymous"></script>
@@ -45,28 +68,54 @@
                             <a class="navbar-brand ms-2 fs-6 fst-italic">Marmitaria Fit</a>
                         </div>
                         <div>
-                            <a style="height: 32px; font-size: 12px;" href="../../controle/logout.php" class="btn btn-danger">Sair</a>
+                            <form method="post" style="display: inline;">
+                                <button style="height: 32px; font-size: 12px;" class="btn btn-danger" type="submit" name="sair">Sair</button>
+                            </form>
                         </div>
-                    </div>
                 </nav>
             </div>
             <div class="page_content">
-
-
-
-
-
-
-
                 <div class="table_side">
-                    <div class="search_box">
-                        <input class="serach_input" type="text" placeholder="Buscar Produto">
-                        <div>
-                            <button class="search_btn">
-                                <i class="fa-solid fa-magnifying-glass fa-beat" style="--fa-animation-duration: 2s; color:white;"></i>
-                            </button>
+                    <!------------------------------------------------------- PHP  PESQUISA -------------------------->
+                    <?php
+                        $pagina = filter_input(INPUT_GET, 'pagina', FILTER_VALIDATE_INT) ?: 1; // pegar dados para paginação
+                        $pagina = max(1, min($pagina, $totalPaginas)); //controle para não passar o total de paginas
+                        $pesquisa = isset($_GET['pesquisa']) ? addslashes($_GET['pesquisa']) : ''; // pega dados para pesquisa
+
+                        if(empty($pesquisa)){
+                            $dados = $consulta->buscarTodosIngredientes($pagina,$limite);
+                        } else {
+                            $dados = $consulta->buscarIngredientesPesquisa($pesquisa);
+                        }  
+                        var_dump($pagina);
+                    ?>
+                    <form method="get">
+                        <div class="search_box">
+                            <input class="serach_input" type="text" placeholder="Buscar Produto" name='pesquisa'>
+                            <div>
+                                <button class="search_btn">
+                                    <i class="fa-solid fa-magnifying-glass fa-beat" style="--fa-animation-duration: 2s; color:white;"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
+                        <!-------------------------------------------------- FIM PHP PESQUISA --------------------------->
+
+                        <!-- ----------------------------------------------- INICIO PAGINAÇÃO --------------------------->
+
+                   <div class="paginacao">
+                       <a href="?pagina=1" class="pagina">Primeira Página</a>
+           
+                       <a href="?pagina=<?= $pagina - 1 ?>" class="pagina"><</a>
+           
+                       <div class="numero" class="pagina"><?= $pagina ?></div>
+           
+                       <a href="?pagina=<?= $pagina + 1 ?>" class="pagina">></a>
+           
+                       <a href="?pagina=<?= $totalPaginas ?>" class="pagina">Última Página</a>
+                   </div>
+                   <!-- FIM PAGINAÇÃO -->
+
                     <div class="table_box">
                         <table class="tables">
                             <thead>
@@ -74,53 +123,30 @@
                                     <th>Nome</th>
                                     <th>Quantidade</th>
                                     <th>Valor Un.</th>
-                                    <th>Tipo Medida</th>
+                                    <th>Data Validade</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Arroz Joao</td>
-                                    <td>1.900</td>
-                                    <td>R$19,90</td>
-                                    <td>KG</td>
-                                </tr>
-                                <tr>
-                                    <td>Feijao Pretinho</td>
-                                    <td>4.560</td>
-                                    <td>R$23,90</td>
-                                    <td>KG</td>
-                                </tr>
-                                <tr>
-                                    <td>Feijao Pretinho</td>
-                                    <td>4.560</td>
-                                    <td>R$23,90</td>
-                                    <td>KG</td>
-                                </tr>
-                                <tr>
-                                    <td>Feijao Pretinho</td>
-                                    <td>4.560</td>
-                                    <td>R$23,90</td>
-                                    <td>KG</td>
-                                </tr>
-                                <tr>
-                                    <td>Macarrao macarronado</td>
-                                    <td>0.900</td>
-                                    <td>R$4.00</td>
-                                    <td>KG</td>
-                                </tr>
-                                <tr>
-                                    <td>Leite de pedra</td>
-                                    <td>6</td>
-                                    <td>R$7,90</td>
-                                    <td>LT</td>
-                                </tr>
+                                <!-------------- PHP CÓDIGOS ------- -->
+                                <?php
+                                foreach ($dados as $ingredi) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $ingredi['nome']; ?></td>
+                                        <td><?php echo $ingredi['quantidade']; ?></td>
+                                        <td><?php echo $ingredi['preco_compra'] . '$'; ?></td>
+                                        <td><?php echo $ingredi['data_validade']; ?></td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
 
-
+                <!-- quantidade,preço -->
 
 
 
@@ -141,3 +167,6 @@
 </body>
 
 </html>
+
+<?php
+

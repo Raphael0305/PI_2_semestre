@@ -11,7 +11,7 @@ $login = NEW Autenticador();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="paginas/login/css/style.css">
+    <link rel="stylesheet" href="paginas/login/css/style.css?v=1.0">
     <link rel="icon" type="image/x-icon" href="assets/img/logo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Marmitaria Fit</title>
@@ -40,14 +40,13 @@ $login = NEW Autenticador();
             <button id="entrarBtn" style="margin-top: 15px;" type="submit" class="btn btn-success" disabled>Entrar</button>
             <!-- -----------------------------------------         INICIO PHP           ---------------------------------------------------->
             <?php
-               
                if(isset($_POST['email'])){
-                $email = addslashes ($_POST['email']);
-                $senha = addslashes ($_POST['passwd']);
+                    $email = addslashes ($_POST['email']);
+                    $senha = addslashes ($_POST['passwd']);
 
-                if($login->logarUsuario($email,$senha)){
-                    header("Location: ./paginas/homepage/home_page.php");
-                }else{
+                    if($login->logarUsuario($email,$senha)){
+                        header("Location: ./paginas/homepage/home_page.php");
+                    }else{
                     ?>
                     <div class="msgErro">
                     <?php
@@ -55,7 +54,7 @@ $login = NEW Autenticador();
                      ?>   
                     </div>
                     <?php
-                }
+                    }
                }
             ?>
         </form>

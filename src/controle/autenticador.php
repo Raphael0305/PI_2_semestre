@@ -25,7 +25,6 @@ class Autenticador{
     }
 
     public function deslogar(){
-        session_start();
         session_unset(); 
         session_destroy();
     }

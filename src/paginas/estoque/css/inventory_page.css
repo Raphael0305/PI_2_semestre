@@ -61,7 +61,7 @@ do lado direito */
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px 40px 0px;
+    margin: -8px 40px 0px;
     overflow: auto;
     max-height: 440px;
 }
@@ -83,6 +83,7 @@ do lado direito */
 tr {
     text-align: center;
     height: 60px;
+    font-size: 1.3rem;
 }
 
 tr:nth-child(even) {
@@ -129,4 +130,34 @@ tr:nth-child(even) {
     border: 1px solid black;
     border-radius: 10px;
     background-color: #5A853B;
+}
+
+td{
+    font-size: 1.3rem;
+    font-weight:700;
+}
+
+.paginacao{
+    gap: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 33px auto;
+    width: 60%;
+}
+
+.pagina{
+    background-color: #5A853B;
+    border: 2px solid #526C3F;
+    color: white; 
+    padding: 5px 10px; 
+    text-decoration: none; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    display: flex;
+    margin-right: 5px; 
+    cursor: pointer;
+    height: 30px;
 }
