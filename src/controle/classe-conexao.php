@@ -19,6 +19,12 @@ class ConexaoBanco{
     public function getConexao(){
         return $this->conexao;
     }
+
+    public function __destruct() {
+        if ($this->conexao) {
+            $this->conexao = null;
+        }
+    }
 }
 
 

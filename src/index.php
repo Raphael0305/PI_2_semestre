@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/controle/autenticador.php';
-$login = NEW Autenticador();
-
+$aute = NEW Autenticador;
 ?>
 
 
@@ -11,7 +10,7 @@ $login = NEW Autenticador();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="paginas/login/css/style.css?v=1.0">
+    <link rel="stylesheet" href="paginas/login/css/style.css?v=2.33">
     <link rel="icon" type="image/x-icon" href="assets/img/logo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Marmitaria Fit</title>
@@ -32,30 +31,26 @@ $login = NEW Autenticador();
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Digite sua Senha">
+                <input type="password" class="form-control" id="passwd" name="password" placeholder="Digite sua Senha">
                 <ul class="passwd_error">
                     <li id="password_error_display"></li>
                 </ul>
             </div>
             <button id="entrarBtn" style="margin-top: 15px;" type="submit" class="btn btn-success" disabled>Entrar</button>
-            <!-- -----------------------------------------         INICIO PHP           ---------------------------------------------------->
             <?php
-               if(isset($_POST['email'])){
-                    $email = addslashes ($_POST['email']);
-                    $senha = addslashes ($_POST['passwd']);
+            if(isset($_POST['email'])){
+                $email = $_POST['email'];
+                $senha = $_POST['password'];
 
-                    if($login->logarUsuario($email,$senha)){
-                        header("Location: ./paginas/homepage/home_page.php");
-                    }else{
+                if($aute->logarUsuario($email,$senha)){
+                    header("Location: paginas/homepage/home_page.php");
+                }else{
                     ?>
-                    <div class="msgErro">
+                    <div class="msgErro">Usuário e/ou senha estão incorretos</p></div>
                     <?php
-                       echo   'Usuário e/ou senha estão incorretos';
-                     ?>   
-                    </div>
-                    <?php
-                    }
-               }
+                }
+            }
+
             ?>
         </form>
     </div>
