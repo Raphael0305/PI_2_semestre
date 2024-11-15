@@ -1,4 +1,5 @@
 <?php
+$larapio;
 require_once 'classes\classe-pedido.php';
 require_once 'classes/classe-login.php';
 $login = NEW Login;
