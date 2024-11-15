@@ -1,5 +1,5 @@
 html, body{
-    background-image: url("../../../assets/img/logo.png");
+    background-image: url("../../../assets/img/login_img.svg");
     background-repeat: no-repeat;
     background-size: 41%;
     background-position: center;
@@ -19,7 +19,7 @@ html, body{
     z-index: 9999;
     border: 2px solid #ffffff;
     background-color: rgba(86, 90, 83, 0.5);
-    backdrop-filter: blur(1.5px);
+    backdrop-filter: blur(1.2px);
     border-radius: 30px;
     width: 43%; 
     height: 93%;

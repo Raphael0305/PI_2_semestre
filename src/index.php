@@ -1,10 +1,3 @@
-<?php
-require_once __DIR__ . '/controle/autenticador.php';
-$login = NEW Autenticador();
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,27 +30,7 @@ $login = NEW Autenticador();
                     <li id="password_error_display"></li>
                 </ul>
             </div>
-            <button id="entrarBtn" style="margin-top: 15px;" type="submit" class="btn btn-success" disabled>Entrar</button>
-            <!-- -----------------------------------------         INICIO PHP           ---------------------------------------------------->
-            <?php
-               if(isset($_POST['email'])){
-                    $email = addslashes ($_POST['email']);
-                    $senha = addslashes ($_POST['passwd']);
-
-                    if($login->logarUsuario($email,$senha)){
-                        header("Location: ./paginas/homepage/home_page.php");
-                    }else{
-                    ?>
-                    <div class="msgErro">
-                    <?php
-                       echo   'Usuário e/ou senha estão incorretos';
-                     ?>   
-                    </div>
-                    <?php
-                    }
-               }
-            ?>
-        </form>
+            <button id="entrarBtn" style="margin-top: 15px;" type="submit" class="btn btn-success" disabled>Entrar</button></form>
     </div>
 </body>
 <script src="paginas/login/scripts/login_validation.js"></script>
