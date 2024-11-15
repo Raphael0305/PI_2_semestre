@@ -1,38 +1,42 @@
 <?php
-require_once __DIR__ . 'query.php';
-
+require_once __DIR__ . '/query.php';
 $consulta = NEW Query;
 
 class Usuario{
 
+    private $idUsuario;
+    private $nivelAcesso;
+    private $query;
 
-    private int $id;
-    private string $email;
-    private string $senha;
-
-    private function setEmail(){
-
+    private function __construct()
+    {
+        $this->query = NEW Query;
     }
 
-
-    public function getId(int $id){
-
+    public function getId() {
+        if (isset($_SESSION['id_mestre'])) {
+            $this->idUsuario = $_SESSION['id_mestre'];
+            return $this->idUsuario;
+        } else if (isset($_SESSION['id_usuario'])) {
+            $this->idUsuario = $_SESSION['id_usuario'];
+            return $this->idUsuario;
+        } else {
+            return 'Erro ao pegar ID';
+        }
     }
 
-    public function getEmail(string $email){
-
+    public function getNivelAcesso(){
+        if($_SESSION = 'id_mestre'){
+            return 'Adimin';
+        }else{
+            return 'usuario';
+        }
     }
 
-    public function getSenha(string $senha){
-
-    }
-
-    public function validarEmail(){
-
-    }
-    
-    public function validarSenha(){
-
+    public function nomeUsuario(){
+        $dados = $this->query->buscarDadosUsuario($this->getId());
+        $nome = $dados['nome_completo'];
+        return $nome;
     }
 
 }
