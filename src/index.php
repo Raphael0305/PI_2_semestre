@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/controle/autenticador.php';
 $aute = NEW Autenticador;
+
 ?>
 
 
@@ -50,7 +51,6 @@ $aute = NEW Autenticador;
                     <?php
                 }
             }
-
             ?>
         </form>
     </div>

@@ -1,14 +1,12 @@
 <?php
-session_start();
-require_once __DIR__ . '/../../controle/autenticador.php';
 require_once __DIR__ . '/../../controle/query.php';
-$query = new Query;
-$aute = new Autenticador;
-
-if (!$aute->autenticarUsuario()) {
+require_once __DIR__ . '/../../controle/autenticador.php';
+session_start();
+$aute = NEW Autenticador;
+$query = NEW Query;
+if(!$aute->autenticarUsuario()){
     header("Location: ../../index.php");
 }
-
 ?>
 
 
@@ -75,8 +73,7 @@ if (!$aute->autenticarUsuario()) {
                     $dados = $query->buscarDadosUsuario($_SESSION['id_mestre']);
                 }
                 ?>
-
-                <p style="text-align: center;">Seja Bem Vindo,<br><?php echo $dados['nome'] . ' ' . $dados['sobrenome'];  ?></p>
+                <p style="text-align: center; font-size:2rem">Seja Bem Vindo(a),<br><?php echo $dados['nome_completo'];  ?></p>
             </div>
         </div>
     </div>
