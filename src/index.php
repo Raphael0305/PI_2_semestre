@@ -12,7 +12,7 @@
 
 <body>
     <div class="wrapper">
-        <form method="POST" class="d-flex flex-column bd-highlight" style="width: 80%;">
+        <form action="controle/login_controle.php" method="POST" class="d-flex flex-column bd-highlight" style="width: 80%;">
             <div class="mb-3 welcome">
                 <h1>Seja bem Vindo!!</h1>
             </div>
