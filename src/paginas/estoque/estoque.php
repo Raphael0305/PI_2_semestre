@@ -62,8 +62,9 @@
                             </button>
                         </div>
                     </div>
+
                     <div class="table_box">
-                        <table class="tables">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>Nome</th>
@@ -76,17 +77,66 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>dogao</td>
-                                    <td>
-                                    <td>
-                                    <td>
-                                    <td>
-                                    <td>
-                                    <td>
+                                    <td>Feijão</td>
+                                    <td>N. Perecível</td>
+                                    <td>Feijão Premium</td>
+                                    <td>5 KG</td>
+                                    <td>3,45</td>
+                                    <td>15/03/26</td>
                                 </tr>
+                                <tr>
+                                    <td>Feijão</td>
+                                    <td>N. Perecível</td>
+                                    <td>Feijão Premium</td>
+                                    <td>5 KG</td>
+                                    <td>3,45</td>
+                                    <td>15/03/26</td>
+                                </tr>
+                                <tr>
+                                    <td>Macarrão</td>
+                                    <td>Perecível</td>
+                                    <td>Macarrão Italiano</td>
+                                    <td>1 KG</td>
+                                    <td>2,10</td>
+                                    <td>30/12/24</td>
+                                </tr>
+                                <tr>
+                                    <td>Açúcar</td>
+                                    <td>N. Perecível</td>
+                                    <td>Açúcar Cristal</td>
+                                    <td>2 KG</td>
+                                    <td>1,75</td>
+                                    <td>20/08/25</td>
+                                </tr>
+                                <tr>
+                                    <td>Óleo</td>
+                                    <td>Perecível</td>
+                                    <td>Óleo Vegetal</td>
+                                    <td>900 ML</td>
+                                    <td>6,50</td>
+                                    <td>05/10/24</td>
+                                </tr>
+                                <tr>
+                                    <td>Sal</td>
+                                    <td>N. Perecível</td>
+                                    <td>Sal Refinado</td>
+                                    <td>1 KG</td>
+                                    <td>1,20</td>
+                                    <td>01/02/27</td>
+                                </tr>
+                                <tr>
+                                    <td>Leite</td>
+                                    <td>Perecível</td>
+                                    <td>Leite Integral</td>
+                                    <td>1 L</td>
+                                    <td>4,30</td>
+                                    <td>12/06/24</td>
+                                </tr>
+
                             </tbody>
                         </table>
                     </div>
+
                 </div>
 
                 <div class="btn_side">
