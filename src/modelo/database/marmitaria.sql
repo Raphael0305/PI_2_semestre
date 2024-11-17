@@ -80,7 +80,7 @@ INSERT INTO `pedidos` (`id_pedido`, `nome_cliente`, `nome_marmita`, `data_entreg
 --
 
 CREATE TABLE `usuarios` (
-  `id_usuario` int(11) NOT NULL,
+  `id_usuario` int(11) PRIMARY KEY AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   `sobrenome` varchar(50) NOT NULL,
   `email` varchar(60) NOT NULL,
@@ -93,9 +93,11 @@ CREATE TABLE `usuarios` (
 -- Despejando dados para a tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nome`, `sobrenome`, `email`, `senha`, `nivel_acesso`, `data_cadastro`) VALUES
-(2, 'Raphael ', 'Reis', 'raphael@teste.com', 'Teste123!', 1, '2024-11-06 10:28:43'),
-(3, 'Isabely', '', 'isa@teste.com', 'Teste123!', 2, '2024-11-06 23:21:15');
+INSERT INTO `usuarios` (`nome`, `sobrenome`, `email`, `senha`, `nivel_acesso`, `data_cadastro`) VALUES
+('Isabely ', 'Nascimento', 'Isabely@marmita.com', '$2y$10$TkJI3TOgF0aJ0PPSuwszv.7349VQ5X0HhjOE7SfZQRn78qdaM1Kuu', 1, '2024-11-06 10:28:43'),
+('Raphael ', 'Reis', 'Raphael@marmita.com', '$2y$10$dhH3mKwHk1YKGCEDUljm/uRTRME2DWagKLMSkbfw4jX6pczHAVKN6', 2, '2024-11-06 10:28:43'),
+('Rayanne ', 'Gabriela', 'Rayanne@marmita.com', '$2y$10$LwccwhU6rfewWUglmGKoveZ3hcX5/0A9ZQKLlgWOEuzzRvuWupT7q', 1, '2024-11-06 10:28:43'),
+('Vitor', 'Eduardo', 'Vitor@marmita.com', '$2y$10$CTml5izmvunVQFviH.KLsu8cYgk.AtwI3hfcOJ99FO/yzaBy0XX4S', 2, '2024-11-06 23:21:15');
 
 --
 -- Índices para tabelas despejadas

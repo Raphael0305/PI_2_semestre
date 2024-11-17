@@ -1,26 +1,3 @@
-<?php
-session_start();
-require_once __DIR__ . '/../../controle/query.php';
-require_once __DIR__ . '/../../controle/autenticador.php';
-$consulta = new Query;
-$autenticador = new Autenticador;
-$autenticador->autenticarUsuario(); 
-
-$pagina = 0;
-$limite = 5;
-$totalPaginas = $consulta->totalPaginas($limite);
-
-
-
-//caso clique no sair 
-if (isset($_POST['sair'])) { 
-    $autenticador->deslogar();
-    header("Location: ../../index.php");
-    exit();
-}
-?>
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -29,7 +6,7 @@ if (isset($_POST['sair'])) {
     <link rel="stylesheet" href="css/inventory_page.css?v1.5">
     <link rel="stylesheet" href="css/content.css?v1.1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="assets/img/logo.png">
+    <link rel="icon" type="image/x-icon" href="../../assets/img/logo.png">
     <script src="https://kit.fontawesome.com/e874ed8d35.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Estoque Fit</title>
@@ -75,83 +52,42 @@ if (isset($_POST['sair'])) {
                 </nav>
             </div>
             <div class="page_content">
+
                 <div class="table_side">
-                    <!------------------------------------------------------- PHP  PESQUISA -------------------------->
-                    <?php
-                        $pagina = filter_input(INPUT_GET, 'pagina', FILTER_VALIDATE_INT) ?: 1; // pegar dados para paginação
-                        $pagina = max(1, min($pagina, $totalPaginas)); //controle para não passar o total de paginas
-                        $pesquisa = isset($_GET['pesquisa']) ? addslashes($_GET['pesquisa']) : ''; // pega dados para pesquisa
-
-                        if(empty($pesquisa)){
-                            $dados = $consulta->buscarTodosIngredientes($pagina,$limite);
-                        } else {
-                            $dados = $consulta->buscarIngredientesPesquisa($pesquisa);
-                        }  
-                        var_dump($pagina);
-                    ?>
-                    <form method="get">
-                        <div class="search_box">
-                            <input class="serach_input" type="text" placeholder="Buscar Produto" name='pesquisa'>
-                            <div>
-                                <button class="search_btn">
-                                    <i class="fa-solid fa-magnifying-glass fa-beat" style="--fa-animation-duration: 2s; color:white;"></i>
-                                </button>
-                            </div>
+                    <div class="search_box">
+                        <input class="search_input" type="text" placeholder="Buscar Produto" name='pesquisa'>
+                        <div>
+                            <button class="search_btn">
+                                <i class="fa-solid fa-magnifying-glass fa-beat" style="--fa-animation-duration: 2s; color:white;"></i>
+                            </button>
                         </div>
-                    </form>
-                        <!-------------------------------------------------- FIM PHP PESQUISA --------------------------->
-
-                        <!-- ----------------------------------------------- INICIO PAGINAÇÃO --------------------------->
-
-                   <div class="paginacao">
-                       <a href="?pagina=1" class="pagina">Primeira Página</a>
-           
-                       <a href="?pagina=<?= $pagina - 1 ?>" class="pagina"><</a>
-           
-                       <div class="numero" class="pagina"><?= $pagina ?></div>
-           
-                       <a href="?pagina=<?= $pagina + 1 ?>" class="pagina">></a>
-           
-                       <a href="?pagina=<?= $totalPaginas ?>" class="pagina">Última Página</a>
-                   </div>
-                   <!-- FIM PAGINAÇÃO -->
-
+                    </div>
                     <div class="table_box">
                         <table class="tables">
                             <thead>
                                 <tr>
                                     <th>Nome</th>
+                                    <th>Categoria</th>
+                                    <th>Fornecedor</th>
                                     <th>Quantidade</th>
                                     <th>Valor Un.</th>
                                     <th>Data Validade</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-------------- PHP CÓDIGOS ------- -->
-                                <?php
-                                foreach ($dados as $ingredi) {
-                                ?>
-                                    <tr>
-                                        <td><?php echo $ingredi['nome']; ?></td>
-                                        <td><?php echo $ingredi['quantidade']; ?></td>
-                                        <td><?php echo $ingredi['preco_compra'] . '$'; ?></td>
-                                        <td><?php echo $ingredi['data_validade']; ?></td>
-                                    </tr>
-                                <?php
-                                }
-                                ?>
+                                <tr>
+                                    <td>dogao</td>
+                                    <td>
+                                    <td>
+                                    <td>
+                                    <td>
+                                    <td>
+                                    <td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-
-
-                <!-- quantidade,preço -->
-
-
-
-
-
 
                 <div class="btn_side">
                     <button class="cadastrar">Cadastrar ingrediente</button>
@@ -167,6 +103,3 @@ if (isset($_POST['sair'])) {
 </body>
 
 </html>
-
-<?php
-

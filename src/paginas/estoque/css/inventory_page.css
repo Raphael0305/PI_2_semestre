@@ -24,7 +24,6 @@ do lado direito */
     flex: 1;
     display: flex;
     flex-direction: column;
-    height: 100vh;
 }
 
 .navbar-position {
@@ -32,8 +31,11 @@ do lado direito */
     background-color: #B87F60;
     
 }
+.search_box {
+    flex: 1;
+}
 
-.serach_input {
+.search_input {
     height: 46px;
     width: 500px;
     background-color: #A4BB94;
@@ -57,13 +59,12 @@ do lado direito */
 }
 
 .table_box {
-    flex: 1;
+    flex: 0 0 80%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: -8px 40px 0px;
+    padding: 8px 40px 0px;
     overflow: auto;
-    max-height: 440px;
 }
 
 .tables {
@@ -78,7 +79,6 @@ do lado direito */
 
 .tables th {
     background-color: #B87F60;
-    table-layout: fixed;
 }
 tr {
     text-align: center;
@@ -94,12 +94,13 @@ tr:nth-child(even) {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: center;
     gap: 32.6px;
-    padding-bottom: 20px;
+    padding-top: 20px;
     align-items: center;
+    padding-right: 30px;
     height: 100%;
-    margin-right: 30px;
+    width: 100%;
 }
 
 .btn_side button {
