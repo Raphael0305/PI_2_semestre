@@ -14,7 +14,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Estoque Fit</title>
 </head>
-
 <body>
     <div class="screen">
         <!-- Barra lateral com botões -->
@@ -67,8 +66,8 @@
                         </div>
                     </div>
 
-                    <div class="table_box">
-                        <table class="table">
+                    <div class="table_box" >
+                        <table class="table" id="table">
                             <thead>
                                 <tr>
                                     <th>Nome</th>
@@ -80,67 +79,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Feijão</td>
-                                    <td>N. Perecível</td>
-                                    <td>Feijão Premium</td>
-                                    <td>5 KG</td>
-                                    <td>3,45</td>
-                                    <td>15/03/26</td>
-                                </tr>
-                                <tr>
-                                    <td>Feijão</td>
-                                    <td>N. Perecível</td>
-                                    <td>Feijão Premium</td>
-                                    <td>5 KG</td>
-                                    <td>3,45</td>
-                                    <td>15/03/26</td>
-                                </tr>
-                                <tr>
-                                    <td>Macarrão</td>
-                                    <td>Perecível</td>
-                                    <td>Macarrão Italiano</td>
-                                    <td>1 KG</td>
-                                    <td>2,10</td>
-                                    <td>30/12/24</td>
-                                </tr>
-                                <tr>
-                                    <td>Açúcar</td>
-                                    <td>N. Perecível</td>
-                                    <td>Açúcar Cristal</td>
-                                    <td>2 KG</td>
-                                    <td>1,75</td>
-                                    <td>20/08/25</td>
-                                </tr>
-                                <tr>
-                                    <td>Óleo</td>
-                                    <td>Perecível</td>
-                                    <td>Óleo Vegetal</td>
-                                    <td>900 ML</td>
-                                    <td>6,50</td>
-                                    <td>05/10/24</td>
-                                </tr>
-                                <tr>
-                                    <td>Sal</td>
-                                    <td>N. Perecível</td>
-                                    <td>Sal Refinado</td>
-                                    <td>1 KG</td>
-                                    <td>1,20</td>
-                                    <td>01/02/27</td>
-                                </tr>
-                                <tr>
-                                    <td>Leite</td>
-                                    <td>Perecível</td>
-                                    <td>Leite Integral</td>
-                                    <td>1 L</td>
-                                    <td>4,30</td>
-                                    <td>12/06/24</td>
-                                </tr>
 
                             </tbody>
                         </table>
                         <div style="display: flex; flex-direction: row; gap: 20px; justify-content: center; align-items:center; text-align: center;">
-                            <button>><button>
+                            <button><<button>
                                     <div>
                                         <h5>1</h5>
                                     </div>
@@ -282,6 +225,7 @@
         </div>
     </div>
 </div>
+<script src="script/load_table_items.js"></script>
 <script src="script/cadastrar_popup.js"></script>
 <script src="script/atualiza_modal.js"></script>
 <script src="script/excluir_modal.js"></script>
