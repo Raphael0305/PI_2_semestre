@@ -98,6 +98,45 @@ class Query {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function buscarItemPorId(String $id){
+        $query = "SELECT * FROM ingredientes WHERE id_ingrediente = :id";
+        $stmt = $this->conectar->prepare($query);
+        $stmt->bindValue(":id", (String)$id);
+
+        try {
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return [
+                "Item nao encontrado"=> $e->getMessage(),
+            ];
+        }
+    }
+
+    public function atualizarItemPorId(array $payload){
+        $id = $payload["id_ingrediente"];
+        unset($payload["id_ingrediente"]);
+        $setParts = [];
+        foreach ($payload as $key => $value) {
+        $setParts[] = "$key = :$key";
+        }
+        $setClause = implode(', ', $setParts);
+        $query = "UPDATE ingredientes SET {$setClause} WHERE id_ingrediente = :id";
+        $stmt = $this->conectar->prepare($query);
+        $stmt->bindValue(":id", $id);
+        foreach ($payload as $key => $value) {
+            $stmt->bindValue(":$key", $value);
+        }
+        
+        try {
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Erro ao atualizar item: ". $e;
+            return false;
+        }
+    }
+
     public function excluirItem($payload) {
         $query = "DELETE FROM ingredientes WHERE id_ingrediente = :id_ingrediente";
         $stmt = $this->conectar->prepare($query);

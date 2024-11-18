@@ -128,6 +128,12 @@ do lado direito */
 .btn_side .excluir_item:hover {
     background-color: #964141;
 }
+.btn_side .atualizar_item {
+    background-color: #c2c458;
+}
+.btn_side .atualizar_item:hover {
+    background-color: #959641;
+}
 
 .menu_list {
     padding: 0;

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/inventory_page.css?v1.5">
     <link rel="stylesheet" href="css/content.css?v1.1">
     <link rel="stylesheet" href="css/cadastrar_popup.css">
+    <link rel="stylesheet" href="css/atualizar_item_modal.css">
     <link rel="stylesheet" href="css/excluir_modal.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../../assets/img/logo.png">
@@ -162,6 +163,8 @@
     </div>
 
 </body>
+
+<!-- Modais -->
 <div id="cadastrar_item_modal" class="cadastrar_item_modal">
     <div class="cadastro">
         <div class="header">
@@ -209,11 +212,54 @@
     </div>
 </div>
 
-<!-- <div class="atualizar_item_modal">
+<div class="atualizar_item_modal" id="atualizar_item_modal">
     <div class="header">Atualizar Item</div>
-    <div class="content"></div>
-    <div class="footer"></div>
-</div> -->
+    <div class="content">
+        <div class="select_item">
+            <select name="item_selector" id="item_selector">
+                <option value="">Selecione um item</option>
+            </select>
+        </div>
+        <div class="fields">
+            <div class="left_field">
+                <div>
+                <label for="nome">Nome</label><br>
+                <input type="text" name="nome" id="nome_item">
+            </div>
+            <div>
+                    <label for="categoria">Categoria</label><br>
+                    <input type="text" name="categoria" id="categoria_item">
+                </div>
+                <div>
+                    <label for="fornecedor">Forncedor</label><br>
+                    <input type="text" name="fornecedor" id="fornecedor_item">
+                </div>
+            </div>
+            <div class="right_field">
+            <div>
+                <label for="quantidade">Quantidade</label><br>
+                <input type="text" name="quantidade" id="quantidade_item">
+            </div>
+            <div>
+                    <label for="valorUn">ValorUn</label><br>
+                    <input type="text" name="valorUn" id="valorUn_item">
+                </div>
+                <div>
+                    <label for="data_validade">Data de Validade</label><br>
+                    <input type="date" name="data_validade" id="data_validade_item">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="fechar_atualizar">
+            <button onclick="closeAtualizarModal()">Fechar</button>
+        </div>
+        <div>
+            <button onclick="atualizarItemDatabase()">Atualizar</button>
+        </div>
+    </div>
+</div>
 
 <div id="excluir_item_modal" class="excluir_item_modal">
     <div class="exluir_modal">
@@ -237,6 +283,7 @@
     </div>
 </div>
 <script src="script/cadastrar_popup.js"></script>
+<script src="script/atualiza_modal.js"></script>
 <script src="script/excluir_modal.js"></script>
 
 </html>
