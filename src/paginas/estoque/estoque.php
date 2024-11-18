@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/inventory_page.css?v1.5">
     <link rel="stylesheet" href="css/content.css?v1.1">
+    <link rel="stylesheet" href="css/cadastrar_popup.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../../assets/img/logo.png">
     <script src="https://kit.fontawesome.com/e874ed8d35.js" crossorigin="anonymous"></script>
@@ -45,9 +46,10 @@
                             <a class="navbar-brand ms-2 fs-6 fst-italic">Marmitaria Fit</a>
                         </div>
                         <div>
-                            <form method="post" style="display: inline;">
+                            <a href="../../controle/logout.php">
                                 <button style="height: 32px; font-size: 12px;" class="btn btn-danger" type="submit" name="sair">Sair</button>
-                            </form>
+                            </a>
+                            
                         </div>
                 </nav>
             </div>
@@ -135,21 +137,78 @@
 
                             </tbody>
                         </table>
+                        <div style="display: flex; flex-direction: row; gap: 20px; justify-content: center; align-items:center; text-align: center;">
+                            <button><</button>
+                            <div>
+                                <h5>1</h5>
+                            </div>
+                            <button>></button>
+                        </div>
                     </div>
 
                 </div>
 
                 <div class="btn_side">
-                    <button class="cadastrar">Cadastrar ingrediente</button>
-                    <button class="cadastrar">Adicionar item</button>
-                    <button class="cadastrar">Retirar item do estoque</button>
-                    <button class="cadastrar">Retirada de Estoque</button>
-                    <button class="cadastrar">Criar alerta de baixo nível</button>
+                    <button class="cadastrar_item" onclick="openPopup()">Cadastrar Item</button>
+                    <button class="atualizar_item">Atualizar Item</button>
+                    <button class="excluir_item">Excluir Item</button>
+                    <button class="exportar_relatorio">Exportar Relatorio</button>
+                    <button class="criar_alerta">Criar alerta de baixo nível</button>
 
                 </div>
             </div>
         </div>
     </div>
+    
 </body>
+<div id="cadastrar_item_modal" class="cadastrar_item_modal">
+    <div class="cadastro">
+        <div class="header">
+            <h2>Cadastrar Ingredientes</h2>
+        </div>
+        
+        
+        <div class="content">
+            <form method="POST" class="my_form">
+                <div>
+                    <label for="nome">Nome do Produto</label><br>
+                    <input type="text" name="nome" id="nome" placeholder="Nome do Produto" required>
+                </div>
+                <div>
+                    <label for="categoria">Categoria Produto</label><br>
+                    <input type="text" name="categoria" id="categoria" placeholder="Categoria do Produto" required>
+                </div>
+                <div>
+                    <label for="fornecedor">Fornecedor</label><br>
+                    <input type="text" name="fornecedor" id="fornecedor" placeholder="Fornecedor" required>
+                </div>
+                <div>
+                    <label for="quantidade">Quantidade</label><br>
+                    <input type="select" name="quantidade" id="quantidade" placeholder="Quantidade" required>
+                </div>
+                <div>
+                    <label for="valorUn">Valor Unitario</label><br>
+                    <input type="select" name="valorUn" id="valorUn" placeholder="Valor Unitario" required>
+                </div>
+                <div>
+                    <label for="data_validade">Data de Validade</label><br>
+                    <input type="date" name="data_validade" id="data_validade" required>
+                </div>
+            </form>
+        </div>
+
+
+
+        <div class="footer">
+            <div class="buttons">
+                <button onclick="closeModal()">Fechar</button>
+                <button onclick="cadastraItem()">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="remover_ingrediente"></div>
+<script src="script/cadastrar_popup.js"></script>
 
 </html>

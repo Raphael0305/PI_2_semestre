@@ -55,6 +55,40 @@ class Query {
             return $query->fetchAll();
     }
 
+    public function cadastrarIngrediente(array $ingrediente): bool{
+        $query = "INSERT INTO ingredientes (
+                    nome, 
+                    categoria, 
+                    fornecedor, 
+                    quantidade, 
+                    valorUn, 
+                    data_validade
+                )
+                 VALUES (
+                    :nome,
+                    :categoria,
+                    :fornecedor, 
+                    :quantidade, 
+                    :valorUn, 
+                    :data_validade
+                )";
+
+        $stmt = $this->conectar->prepare($query);
+        $stmt->bindValue(":nome", $ingrediente["nome"]);
+        $stmt->bindValue(":categoria", $ingrediente["categoria"]);
+        $stmt->bindValue(":fornecedor", $ingrediente["fornecedor"]);
+        $stmt->bindValue(":quantidade", (float)$ingrediente["quantidade"]);
+        $stmt->bindValue(":valorUn", (float)$ingrediente["valorUn"]);
+        $stmt->bindValue(":data_validade", $ingrediente["data_validade"]);
+        try {
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Ocorreu um erro ao cadastrar item: " . $e;
+            return false;
+        }
+    }
+
     public function buscarTodosIngredientes($pagina, $limite){
         $query = $this->conectar->prepare("SELECT * FROM ingredientes LIMIT :pagina, :limite");
     
