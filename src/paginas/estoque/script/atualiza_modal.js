@@ -37,7 +37,7 @@ async function atualizarSelector(){
 
 async function atualizarItemDatabase(){
     let selector = getElementByID("item_selector")
-    let itemFromDb = await getItem(selector.value)
+    let itemFromDb = await getItemById(selector.value)
     let db = itemFromDb['item']
     let itemFromInput = getInputValues()
     let updateFields = {}
@@ -60,6 +60,7 @@ async function atualizarItemDatabase(){
     })
     limpaCampos()
     closeAtualizarModal()
+    showItemsAtTable()
 
 }
 
@@ -68,7 +69,7 @@ function getElementByID(elementId){
     return document.getElementById(elementId)
 }
 
-async function getItem(id){
+async function getItemById(id){
     const response = await fetch("../../../controle/buscar_item_id.php", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
@@ -116,7 +117,7 @@ let selector = getElementByID("item_selector")
 
 selector.addEventListener("change", async (event) => {
     let itemId = event.target.value
-    let item = await getItem(itemId)
+    let item = await getItemById(itemId)
     preencheCampos(item['item'])
 
 })
@@ -136,4 +137,21 @@ function getInputValues(){
         valorUn: valorUn.value,
         data_validade: data_validade.value
 }
+}
+
+
+async function showItemsAtTable(){
+    let table = getElementByID("table")
+    let items = await getItems()
+    table.querySelector("tbody").innerHTML = `<tr></tr>`
+    items.forEach(element =>{
+        table.querySelector("tbody").innerHTML += `<tr>
+                                    <td>${element['nome']}</td>
+                                    <td>${element['categoria']}</td>
+                                    <td>${element['fornecedor']}</td>
+                                    <td>${element['quantidade']}</td>
+                                    <td>${element['valorUn']}</td>
+                                    <td>${element['data_validade']}</td>
+                                </tr>`
+    })
 }
