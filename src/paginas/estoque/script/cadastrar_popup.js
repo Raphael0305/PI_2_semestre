@@ -6,11 +6,14 @@ function closeModal(){
     let modal = getElementByID("cadastrar_item_modal")
     modal.classList.remove("open-modal")
     clearInputs()
+    showItemsAtTable()
+    
 }
 
 
 async function cadastraItem() {
     payload = getInputsName()
+    console.log("cadastrou")
     const response = await fetch("../../../controle/cadastra_item.php", {
         method: "POST",
         headers: {
@@ -71,3 +74,36 @@ document.addEventListener("keyup", (event) => {
         closeModal()
     }
 })
+
+async function showItemsAtTable(){
+    let table = getElementByID("table")
+    let items = await getItems()
+    console.log("abri")
+    table.querySelector("tbody").innerHTML = `<tr></tr>`
+    items.forEach(element =>{
+        table.querySelector("tbody").innerHTML += `<tr>
+                                    <td>${element['nome']}</td>
+                                    <td>${element['categoria']}</td>
+                                    <td>${element['fornecedor']}</td>
+                                    <td>${element['quantidade']}</td>
+                                    <td>${element['valorUn']}</td>
+                                    <td>${element['data_validade']}</td>
+                                </tr>`
+    })
+}
+
+function getElementByID(elementId){
+    return document.getElementById(elementId)
+}
+
+async function getItems(){
+    const response = await fetch("../../../controle/buscar_items.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+
+        }
+    })
+
+    return await response.json()
+}

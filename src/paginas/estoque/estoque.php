@@ -210,7 +210,7 @@
         <div class="content">
             <div class="options">
                 <label for="item_selector">Selecione um Item</label><br>
-                <select name="item_selector" id="item_selector">
+                <select name="item_selector" id="excluir_item_selector">
                     <option value="">Selecione um item</option>
                 </select>
             </div>
