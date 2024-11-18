@@ -9,20 +9,20 @@ class Autenticador{
     }
 
 
-    public function logarUsuario($email,$senha){
+    // public function logarUsuario($email,$senha){
 
-       $dados = $this->query->buscarLogin($email,$senha); 
-         session_start();
-        if($dados){
-            if($dados['nivel_acesso'] ==  1){
-                $_SESSION['id_mestre'] = $dados['id_usuario'];
-            }else{
-                $_SESSION['id_usuario'] = $dados['id_usuario'];
-            }
-            return true;
-        }
-        return false;
-    }
+    //    $dados = $this->query->buscarLogin($email,$senha); 
+    //      session_start();
+    //     if($dados){
+    //         if($dados['nivel_acesso'] ==  1){
+    //             $_SESSION['id_mestre'] = $dados['id_usuario'];
+    //         }else{
+    //             $_SESSION['id_usuario'] = $dados['id_usuario'];
+    //         }
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
     public function deslogar(){
         session_unset(); 
