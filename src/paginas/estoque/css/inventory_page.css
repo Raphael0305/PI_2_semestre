@@ -121,6 +121,13 @@ do lado direito */
 .btn_side button:hover {
     background-color: #385C1D;
 }
+/* Button colors */
+.btn_side .excluir_item {
+    background-color: #c45858;
+}
+.btn_side .excluir_item:hover {
+    background-color: #964141;
+}
 
 .menu_list {
     padding: 0;

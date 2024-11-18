@@ -30,10 +30,11 @@ class Query {
         $stmt->execute();
         
         if($stmt->rowCount() > 0){
-            $response = $stmt->fetchAll();
+            $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $passwd_hash = $response[0]["senha"];
             return ManipuladorPassword::verify_password($senha, $passwd_hash);
             }
+        return false;
         
     }
     
@@ -89,14 +90,26 @@ class Query {
         }
     }
 
-    public function buscarTodosIngredientes($pagina, $limite){
-        $query = $this->conectar->prepare("SELECT * FROM ingredientes LIMIT :pagina, :limite");
+    public function buscarTodosIngredientes(){
+        $query = "SELECT * FROM ingredientes";
+        $stmt = $this->conectar->prepare($query);
+        $stmt->execute();
     
-        $query->bindValue(':pagina', $pagina, PDO::PARAM_INT);
-        $query->bindValue(':limite', $limite, PDO::PARAM_INT);
-        $query->execute();
-    
-        return $query->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function excluirItem($payload) {
+        $query = "DELETE FROM ingredientes WHERE id_ingrediente = :id_ingrediente";
+        $stmt = $this->conectar->prepare($query);
+        $stmt->bindValue(":id_ingrediente", (int)$payload['id_ingrediente']);
+
+        try {
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Erro ao deletar ingrediente: ". $e->getMessage();
+            return false;
+        }
     }
 
     public function totalPaginas($limite){

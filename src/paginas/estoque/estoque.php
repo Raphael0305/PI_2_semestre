@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/inventory_page.css?v1.5">
     <link rel="stylesheet" href="css/content.css?v1.1">
     <link rel="stylesheet" href="css/cadastrar_popup.css">
+    <link rel="stylesheet" href="css/excluir_modal.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../../assets/img/logo.png">
     <script src="https://kit.fontawesome.com/e874ed8d35.js" crossorigin="anonymous"></script>
@@ -49,7 +50,7 @@
                             <a href="../../controle/logout.php">
                                 <button style="height: 32px; font-size: 12px;" class="btn btn-danger" type="submit" name="sair">Sair</button>
                             </a>
-                            
+
                         </div>
                 </nav>
             </div>
@@ -138,11 +139,11 @@
                             </tbody>
                         </table>
                         <div style="display: flex; flex-direction: row; gap: 20px; justify-content: center; align-items:center; text-align: center;">
-                            <button><</button>
-                            <div>
-                                <h5>1</h5>
-                            </div>
-                            <button>></button>
+                            <button>><button>
+                                    <div>
+                                        <h5>1</h5>
+                                    </div>
+                                    <button>></button>
                         </div>
                     </div>
 
@@ -150,8 +151,8 @@
 
                 <div class="btn_side">
                     <button class="cadastrar_item" onclick="openPopup()">Cadastrar Item</button>
-                    <button class="atualizar_item">Atualizar Item</button>
-                    <button class="excluir_item">Excluir Item</button>
+                    <button class="atualizar_item" onclick="openAtualizarModal()">Atualizar Item</button>
+                    <button class="excluir_item" onclick="openExcluirModal()">Excluir Item</button>
                     <button class="exportar_relatorio">Exportar Relatorio</button>
                     <button class="criar_alerta">Criar alerta de baixo nível</button>
 
@@ -159,15 +160,15 @@
             </div>
         </div>
     </div>
-    
+
 </body>
 <div id="cadastrar_item_modal" class="cadastrar_item_modal">
     <div class="cadastro">
         <div class="header">
             <h2>Cadastrar Ingredientes</h2>
         </div>
-        
-        
+
+
         <div class="content">
             <form method="POST" class="my_form">
                 <div>
@@ -208,7 +209,34 @@
     </div>
 </div>
 
-<div class="remover_ingrediente"></div>
+<!-- <div class="atualizar_item_modal">
+    <div class="header">Atualizar Item</div>
+    <div class="content"></div>
+    <div class="footer"></div>
+</div> -->
+
+<div id="excluir_item_modal" class="excluir_item_modal">
+    <div class="exluir_modal">
+        <div class="header"><h5>Excluir Item</h5></div>
+        <div class="content">
+            <div class="options">
+                <label for="item_selector">Selecione um Item</label><br>
+                <select name="item_selector" id="item_selector">
+                    <option value="">Selecione um item</option>
+                </select>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="fechar">
+                <button onclick="closeEcluirModal()">Fechar</button>
+            </div>
+            <div class="excluir">
+                <button onclick="exluirItem()">Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="script/cadastrar_popup.js"></script>
+<script src="script/excluir_modal.js"></script>
 
 </html>
