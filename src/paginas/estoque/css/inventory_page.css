@@ -32,8 +32,7 @@ do lado direito */
     
 }
 .search_box {
-    min-height: 100px;
-    max-height: 100px;
+    flex: 1 0 auto;
 }
 
 .search_input {
@@ -60,41 +59,63 @@ do lado direito */
 }
 
 .table_box {
-    flex: 1;
+    flex: 0 1 85%;
     padding: 8px 20px 0px;
+    display: flex;
+    flex-direction: column;
+}
+.table_head {
+    flex: 0 1 auto;
+    justify-items: stretch;
+}
+.table_body {
+    flex: 1 0 auto;
+    max-height: 85%;
+    overflow-y: auto;
+    scrollbar-color: #5A853B;
+    scrollbar-width: thin;
 }
 
-.table {
-    min-width: 100%;
+.table_body_display {
+    height: 97%;
+    max-height: 90%;
+    width: 100%;
     font-size: 0.9em;
     background-color: #C8E1B5;
+    
+}
+
+.table_head_display {
+    height: 100%;
+    width: 100%;
     border-radius: 18px 18px 0px 0px;
     border-collapse: collapse;
     overflow: hidden;
 }
-
-.table thead tr {
+ thead {
     background-color: #B87F60;
     text-align: left;
+    overflow: hidden;
     color: white;
+    border-radius: 30px 0px;
 }
-.table tbody td{
+.table_body_display tbody td{
     font-size: 1.2em;
 }
 
-.table tbody tr {
+.table_body_display tbody tr {
     border-bottom: 1px solid #385C1D;
 }
 
-.table tbody tr:nth-child(even) {
+.table_body_display tbody tr:nth-child(even) {
     background-color: #a7be96;
 }
-.table tbody tr:last-of-type {
+.table_body_display tbody tr:last-of-type {
     border-bottom: 4px solid #B87F60;
 }
 
-.table thead th,
-.table tbody td {
+ thead th,
+.table_body_display tbody td {
     padding: 10px 10px;
 }
 

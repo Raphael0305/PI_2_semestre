@@ -65,9 +65,10 @@
                             </button>
                         </div>
                     </div>
-
-                    <div class="table_box" >
-                        <table class="table" id="table">
+                    
+                    <div class="table_box">
+                        <div class="table_head" id="table_head">
+                            <table id="table_head_display">
                             <thead>
                                 <tr>
                                     <th>Nome</th>
@@ -78,16 +79,15 @@
                                     <th>Data Validade</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            </table>
+                        </div>
 
-                            </tbody>
-                        </table>
-                        <div style="display: flex; flex-direction: row; gap: 20px; justify-content: center; align-items:center; text-align: center;">
-                            <button><<button>
-                                    <div>
-                                        <h5>1</h5>
-                                    </div>
-                                    <button>></button>
+                        <div class="table_body">
+                            <table class="table_body_display" id="table_body_display">
+                                <tbody>
+    
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 

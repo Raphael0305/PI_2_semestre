@@ -49,7 +49,7 @@ function getElementByID(elementId){
 
 
 async function showItemsAtTable(){
-    let table = getElementByID("table")
+    let table = getElementByID("table_body_display")
     let items = await getItems()
     console.log("abri")
     table.querySelector("tbody").innerHTML = `<tr></tr>`
