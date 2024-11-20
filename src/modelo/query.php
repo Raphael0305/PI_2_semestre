@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/classe-conexao.php';
-include '../modelo/uteis/manipulador_password.php';
+include_once '../uteis/manipulador_password.php';
 
 class Query {
     public $conectar;
@@ -10,42 +10,7 @@ class Query {
         $conexao = new ConexaoBanco();
         $this->conectar = $conexao->getConexao();
     }
-// ----------------------------------------------------------------------------------------------------------------------------------------
-    public function buscarUsuarioPorEmail($email) {
-        $query = $this->conectar->prepare("SELECT * FROM usuarios WHERE email = :e");
-        $query->bindValue(":e", $email);
-        $query->execute();
     
-        if ($query->rowCount() > 0) {
-            return $query->fetch();
-        } else {
-            return false; 
-        }
-    }
-// ----------------------------------------------------------------------------------------------------------------------------------------
-    public function buscarLogin($email, $senha): bool{
-        $query = "SELECT * FROM usuarios WHERE email = :e";
-        $stmt = $this->conectar->prepare($query);
-        $stmt->bindValue(":e", $email);
-        $stmt->execute();
-        
-        if($stmt->rowCount() > 0){
-            $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $passwd_hash = $response[0]["senha"];
-            return ManipuladorPassword::verify_password($senha, $passwd_hash);
-            }
-        return false;
-        
-    }
-    
-    
-// ----------------------------------------------------------------------------------------------------------------------------------------
-    public function buscarDadosUsuario($id){
-        $query = $this->conectar->prepare("SELECT * FROM usuarios WHERE id_usuario = :id");
-        $query->bindValue(":id",$id);
-        $query->execute();
-        return $query->fetch();
-    }
 // ----------------------------------------------------------------------------------------------------------------------------------------
 // BUSCAR DE INGREDIENTES**
     public function buscarIngredientesPesquisa($pesquisa){

@@ -1,23 +1,17 @@
 <?php
-include 'query.php';
+include_once '../modelo/autenticador.php';
+include_once '../modelo/usuario.php';
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $email = $_POST['email'];
+    $passwd = $_POST['passwd'];
+    $user = new Usuario(email: $email,  senha: $passwd);
+    $auth = new Autenticador();
+    $isLogged = $auth->logarUsuario($user);
 
-    $email = htmlspecialchars($_POST["email"]);
-    $passwd = htmlspecialchars($_POST["passwd"]);
-    $query = new Query();
-
-    if ($query->buscarLogin($email, $passwd)){
-
-        session_start();
-        $dados = $query->buscarUsuarioPorEmail($email);
-        $_SESSION["user_name"] = $dados['id_usuario'];
-
+    if ($isLogged){
         header("Location: ../paginas/homepage/home_page.php");
-        exit;
-
     }else{
-
         header("Location: ../index.php");
         exit;
         

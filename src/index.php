@@ -24,7 +24,7 @@
                 </ul>
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Senha</label>
+                <label for="passwd" class="form-label">Senha</label>
                 <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Digite sua Senha">
                 <ul class="passwd_error">
                     <li id="password_error_display"></li>
