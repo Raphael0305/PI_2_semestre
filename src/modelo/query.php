@@ -1,7 +1,6 @@
 <?php
 
 require_once __DIR__ . '/classe-conexao.php';
-include_once '../uteis/manipulador_password.php';
 
 class Query {
     public $conectar;

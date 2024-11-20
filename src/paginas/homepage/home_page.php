@@ -1,4 +1,7 @@
-
+<?php
+include '../../modelo/autenticador.php';
+Autenticador::autenticarUsuario();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,7 +50,8 @@
                         </div>
                         <div>
                             <form method="post" style="display: inline;">
-                                <button style="height: 32px; font-size: 12px;" class="btn btn-danger" type="submit" name="sair">Sair</button>
+                            <a href="../../controle/logout.php" class="btn btn-danger" style="height: 32px; font-size: 12px;" role="button">Sair</a>
+
                             </form>
                         </div>
                     </div>

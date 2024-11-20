@@ -1,6 +1,7 @@
 <?php
-include_once '../modelo/query.php';
-include_once '../modelo/usuario.php';
+include_once 'query.php';
+include_once 'usuario.php';
+
 
 class Autenticador{
     private $query;
@@ -8,38 +9,38 @@ class Autenticador{
     public function __construct(){
         $this->query = NEW Query;
     }
-
-
-    public function logarUsuario(Usuario $user){
-
+    
+    static public function logarUsuario(Usuario $user){
        $usuarioLogado = $user->buscarLogin($user->getEmail(),$user->getSenha()); 
        $userData = $user->buscarDadosUsuario();
        if($usuarioLogado){
             session_start();
-
             $userData = $user->buscarDadosUsuario();
             $_SESSION['userName'] = $userData['nome'];
             $_SESSION['userEmail'] = $userData['email'];
             $_SESSION['userNivelAcesso'] = $userData['nivel_acesso'];
             $_SESSION['isLogged'] = true;
-
+            
             return true;
         }
+        $_SESSION['isLogged'] = false;
         return false;
     }
 
-    public function deslogar(){
+    static public function deslogar(){
+        session_start();
+        $_SESSION = [];
         session_unset(); 
         session_destroy();
+        header("Location: ../../../index.php");
     }
 
-    public function autenticarUsuario(){
-        if(isset($_SESSION['id_mestre']) or isset($_SESSION['id_usuario'])){
-            return true;
-        }else{
-            return false;
+    static public function autenticarUsuario(){
+        session_start();
+        $teste = $_SESSION['userEmail'];
+        if(!(isset($_SESSION['userEmail']) && $_SESSION['isLogged'])){
+            header("Location: ../../../index.php");
+            exit;
         }
     }
-
 }
-?>

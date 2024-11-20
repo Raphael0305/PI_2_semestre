@@ -1,4 +1,4 @@
 <?php
-header("Location: ../index.php");
-exit;
+include '../modelo/autenticador.php';
+Autenticador::deslogar();
 ?>

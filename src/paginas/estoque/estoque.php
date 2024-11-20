@@ -1,3 +1,7 @@
+<?php
+include '../../modelo/autenticador.php';
+Autenticador::autenticarUsuario();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
