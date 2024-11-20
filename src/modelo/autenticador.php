@@ -16,10 +16,9 @@ class Autenticador{
        $userData = $user->buscarDadosUsuario();
        if($usuarioLogado){
             session_start();
-            $userData = $user->buscarDadosUsuario();
 
+            $userData = $user->buscarDadosUsuario();
             $_SESSION['userName'] = $userData['nome'];
-            $_SESSION['userSobrenome'] = $userData['sobrenome'];
             $_SESSION['userEmail'] = $userData['email'];
             $_SESSION['userNivelAcesso'] = $userData['nivel_acesso'];
             $_SESSION['isLogged'] = true;
