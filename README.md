@@ -29,7 +29,6 @@ http://localhost:8080
 
 1. Abra o arquivo `classe-conexao.php` na raiz do projeto.
 2. Localize a linha **7** e atualize as configurações de conexão com o banco de dados conforme necessário:
-<<<<<<< HEAD
    ```bash
    $this->conn = new PDO('mysql:host=SEU_HOST;dbname=SEU_BANCO_DE_DADOS', 'USUARIO', 'SENHA');
 
