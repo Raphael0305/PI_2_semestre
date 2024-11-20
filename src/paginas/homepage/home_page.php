@@ -59,7 +59,11 @@ Autenticador::autenticarUsuario();
             </div>
             <div class="page-content">
 
-                <p style="text-align: center;">Seja Bem Vindo,<br>Fulano</p>
+                <p style="text-align: center;">Seja Bem Vindo,<br>
+                <?php
+                echo $_SESSION['userName']
+                
+                ?></p>
             </div>
         </div>
     </div>
