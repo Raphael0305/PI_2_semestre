@@ -1,25 +1,16 @@
 <?php
-session_start();
-require_once __DIR__ . '/../../controle/query.php';
-require_once __DIR__ . '/../../controle/autenticador.php';
-$consulta = new Query;
-$autenticador = new Autenticador;
-$autenticador->autenticarUsuario(); 
+require_once __DIR__ . '/../../controle/class-estoque.php';
+$estoque = NEW Estoque;
 
-$pagina = 0;
-$limite = 5;
-$totalPaginas = $consulta->totalPaginas($limite);
+$estoque->EstoqueVerifLogin();   // metodo para verificar o login
 
-
-
-//caso clique no sair 
-if (isset($_POST['sair'])) { 
-    $autenticador->deslogar();
+if (isset($_POST['sair'])){ 
+    $estoque->EstoqueVerifLogin();
     header("Location: ../../index.php");
     exit();
 }
-?>
 
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -28,13 +19,15 @@ if (isset($_POST['sair'])) {
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/inventory_page.css?v1.5">
     <link rel="stylesheet" href="css/content.css?v1.1">
+    <link rel="stylesheet" href="css/cadastrar_popup.css">
+    <link rel="stylesheet" href="css/atualizar_item_modal.css">
+    <link rel="stylesheet" href="css/excluir_modal.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="assets/img/logo.png">
+    <link rel="icon" type="image/x-icon" href="../../assets/img/logo.png">
     <script src="https://kit.fontawesome.com/e874ed8d35.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Estoque Fit</title>
 </head>
-
 <body>
     <div class="screen">
         <!-- Barra lateral com botões -->
@@ -75,98 +68,202 @@ if (isset($_POST['sair'])) {
                 </nav>
             </div>
             <div class="page_content">
-                <div class="table_side">
-                    <!------------------------------------------------------- PHP  PESQUISA -------------------------->
-                    <?php
-                        $pagina = filter_input(INPUT_GET, 'pagina', FILTER_VALIDATE_INT) ?: 1; // pegar dados para paginação
-                        $pagina = max(1, min($pagina, $totalPaginas)); //controle para não passar o total de paginas
-                        $pesquisa = isset($_GET['pesquisa']) ? addslashes($_GET['pesquisa']) : ''; // pega dados para pesquisa
 
-                        if(empty($pesquisa)){
-                            $dados = $consulta->buscarTodosIngredientes($pagina,$limite);
-                        } else {
-                            $dados = $consulta->buscarIngredientesPesquisa($pesquisa);
-                        }  
-                        var_dump($pagina);
-                    ?>
-                    <form method="get">
-                        <div class="search_box">
-                            <input class="serach_input" type="text" placeholder="Buscar Produto" name='pesquisa'>
-                            <div>
+                <div class="table_side">
+                    <div class="search_box">
+                        <form method="get">
+                            <input class="search_input" type="text" placeholder="Buscar Produto" name='pesquisa'>
                                 <button class="search_btn">
                                     <i class="fa-solid fa-magnifying-glass fa-beat" style="--fa-animation-duration: 2s; color:white;"></i>
                                 </button>
-                            </div>
-                        </div>
-                    </form>
-                        <!-------------------------------------------------- FIM PHP PESQUISA --------------------------->
-
-                        <!-- ----------------------------------------------- INICIO PAGINAÇÃO --------------------------->
-
-                   <div class="paginacao">
-                       <a href="?pagina=1" class="pagina">Primeira Página</a>
-           
-                       <a href="?pagina=<?= $pagina - 1 ?>" class="pagina"><</a>
-           
-                       <div class="numero" class="pagina"><?= $pagina ?></div>
-           
-                       <a href="?pagina=<?= $pagina + 1 ?>" class="pagina">></a>
-           
-                       <a href="?pagina=<?= $totalPaginas ?>" class="pagina">Última Página</a>
-                   </div>
-                   <!-- FIM PAGINAÇÃO -->
-
+                        </form>
+                    </div>
+                    
                     <div class="table_box">
-                        <table class="tables">
+                        <div class="table_head" id="table_head">
+                            <table id="table_head_display">
                             <thead>
                                 <tr>
                                     <th>Nome</th>
+                                    <th>Categoria</th>
+                                    <th>Fornecedor</th>
                                     <th>Quantidade</th>
                                     <th>Valor Un.</th>
                                     <th>Data Validade</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            </table>
+                        </div>
+                        <?php
+                          if(isset($_GET['pesquisa'])){
+                            $pesquisa = $_GET['pesquisa'];
+                          }
+                          if(empty($pesquisa)){
+                             $dados = $estoque->EstoqueTodosIngredientes();
+                          } else {
+                             $dados = $estoque->EstoqueIngredientesPesquisa($pesquisa);
+                          }  
+                         ?>
+                        <div class="table_body">
+                            <table class="table_body_display" id="table_body_display">
+                                <tbody>
                                 <!-------------- PHP CÓDIGOS ------- -->
                                 <?php
                                 foreach ($dados as $ingredi) {
                                 ?>
                                     <tr>
                                         <td><?php echo $ingredi['nome']; ?></td>
-                                        <td><?php echo $ingredi['quantidade']; ?></td>
-                                        <td><?php echo $ingredi['preco_compra'] . '$'; ?></td>
+                                        <td><?php echo $ingredi['categoria']; ?></td>
+                                        <td><?php echo $ingredi['fornecedor']; ?></td>
+                                        <td><?php echo $ingredi['quantidade'] ; ?></td>
+                                        <td><?php echo $ingredi['preco_compra']. '$'; ?></td>
                                         <td><?php echo $ingredi['data_validade']; ?></td>
                                     </tr>
                                 <?php
                                 }
                                 ?>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+
                 </div>
 
-
-                <!-- quantidade,preço -->
-
-
-
-
-
-
                 <div class="btn_side">
-                    <button class="cadastrar">Cadastrar ingrediente</button>
-                    <button class="cadastrar">Adicionar item</button>
-                    <button class="cadastrar">Retirar item do estoque</button>
-                    <button class="cadastrar">Retirada de Estoque</button>
-                    <button class="cadastrar">Criar alerta de baixo nível</button>
+                    <button class="cadastrar_item" onclick="openPopup()">Cadastrar Item</button>
+                    <button class="atualizar_item" onclick="openAtualizarModal()">Atualizar Item</button>
+                    <button class="excluir_item" onclick="openExcluirModal()">Excluir Item</button>
+                    <button class="exportar_relatorio">Exportar Relatorio</button>
+                    <button class="criar_alerta">Criar alerta de baixo nível</button>
 
                 </div>
             </div>
         </div>
     </div>
+
 </body>
 
+<!-- Modais -->
+<div id="cadastrar_item_modal" class="cadastrar_item_modal">
+    <div class="cadastro">
+        <div class="header">
+            <h2>Cadastrar Ingredientes</h2>
+        </div>
+
+
+        <div class="content">
+            <form method="POST" class="my_form">
+                <div>
+                    <label for="nome">Nome do Produto</label><br>
+                    <input type="text" name="nome" id="nome" placeholder="Nome do Produto" required>
+                </div>
+                <div>
+                    <label for="categoria">Categoria Produto</label><br>
+                    <input type="text" name="categoria" id="categoria" placeholder="Categoria do Produto" required>
+                </div>
+                <div>
+                    <label for="fornecedor">Fornecedor</label><br>
+                    <input type="text" name="fornecedor" id="fornecedor" placeholder="Fornecedor" required>
+                </div>
+                <div>
+                    <label for="quantidade">Quantidade</label><br>
+                    <input type="select" name="quantidade" id="quantidade" placeholder="Quantidade" required>
+                </div>
+                <div>
+                    <label for="valorUn">Valor Unitario</label><br>
+                    <input type="select" name="valorUn" id="valorUn" placeholder="Valor Unitario" required>
+                </div>
+                <div>
+                    <label for="data_validade">Data de Validade</label><br>
+                    <input type="date" name="data_validade" id="data_validade" required>
+                </div>
+            </form>
+        </div>
+
+
+
+        <div class="footer">
+            <div class="buttons">
+                <button onclick="closeModal()">Fechar</button>
+                <button onclick="cadastraItem()">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="atualizar_item_modal" id="atualizar_item_modal">
+    <div class="header">Atualizar Item</div>
+    <div class="content">
+        <div class="select_item">
+            <select name="item_selector" id="item_selector">
+                <option value="">Selecione um item</option>
+            </select>
+        </div>
+        <div class="fields">
+            <div class="left_field">
+                <div>
+                <label for="nome">Nome</label><br>
+                <input type="text" name="nome" id="nome_item">
+            </div>
+            <div>
+                    <label for="categoria">Categoria</label><br>
+                    <input type="text" name="categoria" id="categoria_item">
+                </div>
+                <div>
+                    <label for="fornecedor">Forncedor</label><br>
+                    <input type="text" name="fornecedor" id="fornecedor_item">
+                </div>
+            </div>
+            <div class="right_field">
+            <div>
+                <label for="quantidade">Quantidade</label><br>
+                <input type="text" name="quantidade" id="quantidade_item">
+            </div>
+            <div>
+                    <label for="valorUn">ValorUn</label><br>
+                    <input type="text" name="valorUn" id="valorUn_item">
+                </div>
+                <div>
+                    <label for="data_validade">Data de Validade</label><br>
+                    <input type="date" name="data_validade" id="data_validade_item">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="fechar_atualizar">
+            <button onclick="closeAtualizarModal()">Fechar</button>
+        </div>
+        <div>
+            <button onclick="atualizarItemDatabase()">Atualizar</button>
+        </div>
+    </div>
+</div>
+
+<div id="excluir_item_modal" class="excluir_item_modal">
+    <div class="exluir_modal">
+        <div class="header"><h5>Excluir Item</h5></div>
+        <div class="content">
+            <div class="options">
+                <label for="item_selector">Selecione um Item</label><br>
+                <select name="item_selector" id="excluir_item_selector">
+                    <option value="">Selecione um item</option>
+                </select>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="fechar">
+                <button onclick="closeEcluirModal()">Fechar</button>
+            </div>
+            <div class="excluir">
+                <button onclick="exluirItem()">Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="script/load_table_items.js"></script>
+<script src="script/cadastrar_popup.js"></script>
+<script src="script/atualiza_modal.js"></script>
+<script src="script/excluir_modal.js"></script>
+
 </html>
-
-<?php
-

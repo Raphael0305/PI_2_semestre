@@ -9,7 +9,6 @@ class Estoque{
     private $query;
     private $pagina;
     private $limite = 5;
-    private $pesquisa;
     
 
     public function __construct()
@@ -18,43 +17,44 @@ class Estoque{
         $this->query = NEW Query;
     }
 
-// ----------------------------------------------------------    INICIO SET DE VARIAVEIS  ----------------------------------------------
-
-    public function setPesquisa($pesq){
-        $this->pesquisa = $pesq;
-    }
-
-    public function setPagina($pag){
-        $this->pagina = $pag;
-    }
-
-    public function setLimite($limit){
-        $this->limite = $limit;
-    }
 
 // ----------------------------------------------------------    FIM SET DE VARIAVEIS  ----------------------------------------------
 
-
-    public function verifLogin(){
+// AUTENTICADOR ----- 
+    public function EstoqueVerifLogin(){
         $this->aute->autenticarUsuario();
     }
 
-    public function todosIngredientes(){
-        $consul = $this->query->buscarTodosIngredientes($this->pagina,$this->limite);
+    public function EstoqueDeslgoar(){
+        $this->aute->deslogar();
+    }
+// FIM AUTENTICADOR
+
+
+// INICIO QUERY 
+
+    public function EstoqueTodosIngredientes(){
+        $consul = $this->query->buscarTodosIngredientes();
         return $consul;
     }
-    public function pesquisaIngredientes(){
-        $consul = $this->query->buscarIngredientesPesquisa($this->pesquisa);
+    public function EstoqueIngredientesPesquisa($pesquisa){
+        $consul = $this->query->buscarIngredientesPesquisa($pesquisa);
         return $consul;
     }
 
-    public function ExcluirIngred(){
+    public function EstoqueExcluirIngred(){
 
     }
 
-    public function AdicionarIngred(){
+    public function EstoqueAdicionarIngred(){
         
     }
+
+    public function EstoqueEstoqueCadastrarIngredi(){
+
+    }
+
+
 
 }
 

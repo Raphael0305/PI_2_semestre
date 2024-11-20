@@ -45,19 +45,15 @@ class Query {
 // BUSCAR DE INGREDIENTES**
     public function buscarIngredientesPesquisa($pesquisa){
 
-            $query = $this->conectar->prepare("SELECT * FROM ingredientes WHERE nome LIKE :pesquisa");
-            $query->bindValue(':pesquisa', '%' . $pesquisa . '%');         
-            $query->execute();
-            return $query->fetchAll();
+        $query = $this->conectar->prepare("SELECT * FROM ingredientes WHERE nome LIKE :pesquisa");
+        $query->bindValue(':pesquisa', '%' . $pesquisa . '%');         
+        $query->execute();
+        return $query->fetchAll();
     }
 
-    public function buscarTodosIngredientes($pagina, $limite){
-        $query = $this->conectar->prepare("SELECT * FROM ingredientes LIMIT :pagina, :limite");
-    
-        $query->bindValue(':pagina', $pagina, PDO::PARAM_INT);
-        $query->bindValue(':limite', $limite, PDO::PARAM_INT);
+    public function buscarTodosIngredientes(){
+        $query = $this->conectar->query("SELECT * FROM ingredientes");
         $query->execute();
-    
         return $query->fetchAll();
     }
 
