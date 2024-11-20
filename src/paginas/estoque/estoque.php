@@ -1,11 +1,14 @@
 <?php
+session_start();
 require_once __DIR__ . '/../../controle/class-estoque.php';
-$estoque = NEW Estoque;
-
-$estoque->EstoqueVerifLogin();   // metodo para verificar o login
-
-if (isset($_POST['sair'])){ 
-    $estoque->EstoqueVerifLogin();
+$estoque = new Estoque;
+// VERIFICAÇÃO
+if (!$estoque->EstoqueVerifLogin()) {
+    header("Location: ./../../index.php");
+}
+// LOGOUT
+if (isset($_POST['sair'])) {
+    $estoque->EstoqueDeslgoar();
     header("Location: ../../index.php");
     exit();
 }
@@ -28,6 +31,7 @@ if (isset($_POST['sair'])){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Estoque Fit</title>
 </head>
+
 <body>
     <div class="screen">
         <!-- Barra lateral com botões -->
@@ -57,7 +61,7 @@ if (isset($_POST['sair'])){
                 <nav class="navbar navbar-light">
                     <div class="container-fluid nav-content">
                         <div>
-                            <img src="../../assets/img/logo.png" alt="Marmitaria Fit Logo" width="45">
+                            <img src="./../../assets/img/logo.png" alt="Marmitaria Fit Logo" width="45">
                             <a class="navbar-brand ms-2 fs-6 fst-italic">Marmitaria Fit</a>
                         </div>
                         <div>
@@ -71,57 +75,57 @@ if (isset($_POST['sair'])){
 
                 <div class="table_side">
                     <div class="search_box">
-                        <form method="get">
+                        <form action="" method="get">
                             <input class="search_input" type="text" placeholder="Buscar Produto" name='pesquisa'>
                                 <button class="search_btn">
                                     <i class="fa-solid fa-magnifying-glass fa-beat" style="--fa-animation-duration: 2s; color:white;"></i>
                                 </button>
                         </form>
                     </div>
-                    
+
                     <div class="table_box">
                         <div class="table_head" id="table_head">
                             <table id="table_head_display">
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Categoria</th>
-                                    <th>Fornecedor</th>
-                                    <th>Quantidade</th>
-                                    <th>Valor Un.</th>
-                                    <th>Data Validade</th>
-                                </tr>
-                            </thead>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Categoria</th>
+                                        <th scope="col">Fornecedor</th>
+                                        <th scope="col">Quantidade</th>
+                                        <th scope="col">Valor Un.</th>
+                                        <th scope="col">Data Validade</th>
+                                    </tr>
+                                </thead>
                             </table>
                         </div>
                         <?php
-                          if(isset($_GET['pesquisa'])){
-                            $pesquisa = $_GET['pesquisa'];
-                          }
-                          if(empty($pesquisa)){
-                             $dados = $estoque->EstoqueTodosIngredientes();
-                          } else {
-                             $dados = $estoque->EstoqueIngredientesPesquisa($pesquisa);
-                          }  
-                         ?>
+                        $pesquisa = htmlspecialchars($_GET['pesquisa']);
+
+                        if (!empty($pesquisa)) {
+                            $dados = $estoque->EstoqueIngredientesPesquisa($pesquisa);
+                        } else {
+                            $dados = $estoque->EstoqueTodosIngredientes();
+                        }
+                        ?>
                         <div class="table_body">
                             <table class="table_body_display" id="table_body_display">
                                 <tbody>
-                                <!-------------- PHP CÓDIGOS ------- -->
-                                <?php
-                                foreach ($dados as $ingredi) {
-                                ?>
-                                    <tr>
-                                        <td><?php echo $ingredi['nome']; ?></td>
-                                        <td><?php echo $ingredi['categoria']; ?></td>
-                                        <td><?php echo $ingredi['fornecedor']; ?></td>
-                                        <td><?php echo $ingredi['quantidade'] ; ?></td>
-                                        <td><?php echo $ingredi['preco_compra']. '$'; ?></td>
-                                        <td><?php echo $ingredi['data_validade']; ?></td>
-                                    </tr>
-                                <?php
-                                }
-                                ?>
+                                    <?php if (!empty($dados)) { ?>
+                                        <?php foreach ($dados as $ingred) { ?>
+                                            <tr>
+                                                <td><?php echo htmlspecialchars($ingred['nome']); ?></td>
+                                                <td><?php echo htmlspecialchars($ingred['categoria']); ?></td>
+                                                <td><?php echo htmlspecialchars($ingred['fornecedor']); ?></td>
+                                                <td><?php echo htmlspecialchars($ingred['quantidade']); ?></td>
+                                                <td><?php echo htmlspecialchars($ingred['preco_compra']) . '$'; ?></td>
+                                                <td><?php echo htmlspecialchars($ingred['data_validade']); ?></td>
+                                            </tr>
+                                        <?php } ?>
+                                    <?php } else { ?>
+                                        <tr>
+                                            <td colspan="6">Nenhum ingrediente encontrado.</td>
+                                        </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -202,10 +206,10 @@ if (isset($_POST['sair'])){
         <div class="fields">
             <div class="left_field">
                 <div>
-                <label for="nome">Nome</label><br>
-                <input type="text" name="nome" id="nome_item">
-            </div>
-            <div>
+                    <label for="nome">Nome</label><br>
+                    <input type="text" name="nome" id="nome_item">
+                </div>
+                <div>
                     <label for="categoria">Categoria</label><br>
                     <input type="text" name="categoria" id="categoria_item">
                 </div>
@@ -215,11 +219,11 @@ if (isset($_POST['sair'])){
                 </div>
             </div>
             <div class="right_field">
-            <div>
-                <label for="quantidade">Quantidade</label><br>
-                <input type="text" name="quantidade" id="quantidade_item">
-            </div>
-            <div>
+                <div>
+                    <label for="quantidade">Quantidade</label><br>
+                    <input type="text" name="quantidade" id="quantidade_item">
+                </div>
+                <div>
                     <label for="valorUn">ValorUn</label><br>
                     <input type="text" name="valorUn" id="valorUn_item">
                 </div>
@@ -242,7 +246,9 @@ if (isset($_POST['sair'])){
 
 <div id="excluir_item_modal" class="excluir_item_modal">
     <div class="exluir_modal">
-        <div class="header"><h5>Excluir Item</h5></div>
+        <div class="header">
+            <h5>Excluir Item</h5>
+        </div>
         <div class="content">
             <div class="options">
                 <label for="item_selector">Selecione um Item</label><br>

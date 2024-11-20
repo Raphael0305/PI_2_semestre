@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../controle/autenticador.php';
 session_start();
 $aute = NEW Autenticador;
 $query = NEW Query;
-if(!$aute->autenticarUsuario()){
+if(!$aute->autenticarLogin()){
     header("Location: ../../index.php");
 }
 ?>

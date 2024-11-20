@@ -57,15 +57,30 @@ class Query {
         return $query->fetchAll();
     }
 
-    public function totalPaginas($limite){
-        $registros = $this->conectar->query("SELECT COUNT(*) FROM ingredientes")->fetchColumn();
-        $quantPaginas = ceil($registros / $limite);
-        return $quantPaginas;       
+// ISNERTS 
+
+
+public function addIngredientes($nome, $categoria, $fornecedor, $quantidade, $valorUn, $dataValidade) {
+    try {
+        $query = $this->conectar->prepare(
+            "INSERT INTO ingredientes (nome, categoria, fornecedor, quantidade, preco_compra, data_validade) 
+             VALUES (:nome, :categoria, :fornecedor, :quantidade, :preco_compra, :data_validade)"
+        );
+        $query->bindValue(':nome', $nome);
+        $query->bindValue(':categoria', $categoria);
+        $query->bindValue(':fornecedor', $fornecedor);
+        $query->bindValue(':quantidade', $quantidade, PDO::PARAM_INT);
+        $query->bindValue(':preco_compra', $valorUn, PDO::PARAM_STR);
+        $query->bindValue(':data_validade', $dataValidade);
+
+        $query->execute();
+
+        return true;
+    } catch (PDOException $e) {
+        echo "Erro ao adicionar ingrediente: " . $e->getMessage();
+        return false;
     }
-    
-// ----------------------------------------------------------------------------------------------------------------------------------------    
-    function buscarEstruturaTabela() {
-        $query = $this->conectar->query("DESCRIBE ingredientes");
-        return $query->fetchAll(PDO::FETCH_ASSOC); // Retorna a estrutura da tabela
-    }
+}
+
+
 }

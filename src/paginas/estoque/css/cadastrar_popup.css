@@ -1,0 +1,59 @@
+.cadastrar_item_modal {
+    display: none;
+    height: 550px;
+    width: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    background-color: #fff;
+    border: 2px solid #5A853B;
+    border-radius: 20px;
+}
+
+.open-modal {
+    display: block;
+}
+.close-modal {
+    display: none;
+}
+
+
+.cadastro {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+}
+
+.header {
+    text-align: center;
+    align-content: center;
+    flex: 0 1 13%;
+    border-bottom: 1px solid black;
+}
+
+.content {
+    padding: 10px 15px;
+    flex: 1 0 auto;
+    border-bottom: 1px solid black;
+}
+.cadastro .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer {
+    padding-right: 15px;
+    justify-items: end;
+    align-content: center;
+    flex: 0 1 15%;
+}
+
+.footer buttons {
+    background-color: blueviolet;
+    gap: 10px;
+
+}

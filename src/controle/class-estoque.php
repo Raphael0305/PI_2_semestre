@@ -22,7 +22,11 @@ class Estoque{
 
 // AUTENTICADOR ----- 
     public function EstoqueVerifLogin(){
-        $this->aute->autenticarUsuario();
+        if($this->aute->autenticarLogin()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public function EstoqueDeslgoar(){
@@ -46,8 +50,8 @@ class Estoque{
 
     }
 
-    public function EstoqueAdicionarIngred(){
-        
+    public function EstoqueAdicionarIngred($nome,$categoria,$fornecedor,$quantidade,$valorUn,$dataValidade){
+        $this->query->addIngredientes($nome,$categoria,$fornecedor,$quantidade,$valorUn,$dataValidade);
     }
 
     public function EstoqueEstoqueCadastrarIngredi(){
