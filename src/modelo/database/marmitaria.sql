@@ -41,13 +41,15 @@ CREATE TABLE `entrada_estoque` (
 --
 
 CREATE TABLE `ingredientes` (
-  `id_ingrediente` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL,
-  `categoria` varchar(50) DEFAULT NULL,
-  `quantidade` float NOT NULL,
-  `preco_compra` decimal(10,2) NOT NULL,
-  `data_validade` date DEFAULT NULL,
-  `quantidade_minima` float DEFAULT 0
+  `id_ingrediente` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `nome` VARCHAR(50) NOT NULL,
+  `categoria` VARCHAR(50) NOT NULL,
+  `fornecedor` VARCHAR(50) NOT NULL,
+  `quantidade` DECIMAL(10,2) NOT NULL,
+  `valorUn` DECIMAL(10,2) NOT NULL,
+  `data_validade` DATE NOT NULL,
+    CHECK (`quantidade` >= 0),
+    CHECK (`valorUn` >= 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
