@@ -2,10 +2,13 @@
 session_start();
 require_once __DIR__ . '/../../controle/class-estoque.php';
 $estoque = new Estoque;
+
 // VERIFICAÇÃO
 if (!$estoque->EstoqueVerifLogin()) {
     header("Location: ./../../index.php");
+    exit();
 }
+
 // LOGOUT
 if (isset($_POST['sair'])) {
     $estoque->EstoqueDeslgoar();
@@ -13,8 +16,17 @@ if (isset($_POST['sair'])) {
     exit();
 }
 
-?>
+// Variáveis
+$pesquisa = '';
+$mensagem = '';
 
+
+if (isset($_SESSION['mensagem'])) {
+    $mensagem = $_SESSION['mensagem'];
+    unset($_SESSION['mensagem']);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -99,7 +111,10 @@ if (isset($_POST['sair'])) {
                             </table>
                         </div>
                         <?php
-                        $pesquisa = htmlspecialchars($_GET['pesquisa']);
+                        if(isset($_GET['pesquisa'])){
+                            $pesquisa = htmlspecialchars($_GET['pesquisa']);
+                        }
+                        
 
                         if (!empty($pesquisa)) {
                             $dados = $estoque->EstoqueIngredientesPesquisa($pesquisa);
@@ -139,13 +154,13 @@ if (isset($_POST['sair'])) {
                     <button class="excluir_item" onclick="openExcluirModal()">Excluir Item</button>
                     <button class="exportar_relatorio">Exportar Relatorio</button>
                     <button class="criar_alerta">Criar alerta de baixo nível</button>
-
                 </div>
             </div>
         </div>
-    </div>
-
+        <a href="./../../controle/controlePaginas/processarCadastro.php">teste</a>
+    </div>    
 </body>
+
 
 <!-- Modais -->
 <div id="cadastrar_item_modal" class="cadastrar_item_modal">
@@ -154,9 +169,8 @@ if (isset($_POST['sair'])) {
             <h2>Cadastrar Ingredientes</h2>
         </div>
 
-
         <div class="content">
-            <form method="POST" class="my_form">
+            <form  method="POST" action="./../../controle/controlePaginas/processarCadastro.php";  class="my_form">
                 <div>
                     <label for="nome">Nome do Produto</label><br>
                     <input type="text" name="nome" id="nome" placeholder="Nome do Produto" required>
@@ -171,26 +185,24 @@ if (isset($_POST['sair'])) {
                 </div>
                 <div>
                     <label for="quantidade">Quantidade</label><br>
-                    <input type="select" name="quantidade" id="quantidade" placeholder="Quantidade" required>
+                    <input type="number" name="quantidade" id="quantidade" placeholder="Quantidade" required>
                 </div>
                 <div>
-                    <label for="valorUn">Valor Unitario</label><br>
-                    <input type="select" name="valorUn" id="valorUn" placeholder="Valor Unitario" required>
+                    <label for="valorUn">Valor Unitário</label><br>
+                    <input type="number" step="0.01" name="valorUn" id="valorUn" placeholder="Valor Unitário" required>
                 </div>
                 <div>
                     <label for="data_validade">Data de Validade</label><br>
                     <input type="date" name="data_validade" id="data_validade" required>
                 </div>
+
+                <div class="footer">
+                    <div class="buttons">
+                        <button type="button" onclick="closeModal()">Fechar</button>
+                        <button type="submit">Cadastrar</button>
+                    </div>
+                </div>
             </form>
-        </div>
-
-
-
-        <div class="footer">
-            <div class="buttons">
-                <button onclick="closeModal()">Fechar</button>
-                <button onclick="cadastraItem()">Cadastrar</button>
-            </div>
         </div>
     </div>
 </div>
@@ -267,6 +279,13 @@ if (isset($_POST['sair'])) {
         </div>
     </div>
 </div>
+
+<?php if (!empty($mensagem)) : ?>
+        <div class="alert alert-info">
+            <?php echo $mensagem; ?>
+        </div>
+<?php endif; ?>
+
 <script src="script/load_table_items.js"></script>
 <script src="script/cadastrar_popup.js"></script>
 <script src="script/atualiza_modal.js"></script>
