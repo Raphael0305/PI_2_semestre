@@ -1,6 +1,5 @@
 <?php
-include_once __DIR__ .  '/../../modelo/autenticador.php';
-Autenticador::autenticarUsuario();
+include_once __DIR__ . '/../../controle/autentica_pagina.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,12 +57,7 @@ Autenticador::autenticarUsuario();
                 </nav>
             </div>
             <div class="page-content">
-
-                <p style="text-align: center;">Seja Bem Vindo,<br>
-                <?php
-                echo $_SESSION['userName']
                 
-                ?></p>
             </div>
         </div>
     </div>

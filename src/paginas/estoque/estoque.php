@@ -1,6 +1,5 @@
 <?php
-include_once __DIR__ .  '/../../modelo/autenticador.php';
-Autenticador::autenticarUsuario();
+include_once __DIR__ . '/../../controle/autentica_pagina.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

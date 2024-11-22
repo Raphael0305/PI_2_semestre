@@ -1,30 +1,63 @@
 <?php
-require_once __DIR__ . '/../../controle/query.php';
-$consulta = new Query;
-
+include_once __DIR__ . '/../../controle/autentica_pagina.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comanda</title>
+    <link rel="stylesheet" href="css/comanda.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/img/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <title>Marmitaria Fit</title>
 </head>
 <body>
-    <h1>Comanda</h1>
+    <div class="screen">
+        <!-- Barra lateral com botões -->
+        <div class="left-side">
+            <ol class="menu_list">
+                <li>
+                    <a>
+                        <img class="menu" src="../../assets/icons/menu.svg" alt="" width="28">
+                    </a>
+                </li>
+                <li>
+                    <a href="../comanda/comanda.php">
+                        <img src="../../assets/icons/comanda.svg" alt="" width="28">
+                    </a>
+                </li>
+                <li>
+                    <a href="../estoque/estoque.php">
+                        <img src="../../assets/icons/estoque.svg" alt="" width="28">
+                    </a>
+                </li>
+            </ol>
+        </div>
 
-    <?php
-    // Tenta buscar a estrutura da tabela
-    $dados = $consulta->buscarEstruturaTabela();
+        <!-- Conteúdo da navbar e área útil -->
+        <div class="right-side">
+            <div class="navbar-position ">
+                <nav class="navbar navbar-light">
+                    <div class="container-fluid nav-content">
+                        <div>
+                            <img src="../../assets/img/logo.png" alt="Marmitaria Fit Logo" width="45">
+                            <a class="navbar-brand ms-2 fs-6 fst-italic">Marmitaria Fit</a>
+                        </div>
+                        <div>
+                            <form method="post" style="display: inline;">
+                            <a href="../../controle/logout.php" class="btn btn-danger" style="height: 32px; font-size: 12px;" role="button">Sair</a>
 
-    // Verifica se a consulta foi bem-sucedida
-    if ($dados === false) {
-        echo "Erro ao buscar a estrutura da tabela.";
-    } else {
-        // Exibe os dados retornados pela consulta
-        var_dump($dados);
-    }
-    ?>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="page-content">
+                
+            </div>
+        </div>
+    </div>
 </body>
 </html>
