@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/classe-conexao.php';
+include_once __DIR__ . '/classe-conexao.php';
 
 class Query {
     public $conectar;

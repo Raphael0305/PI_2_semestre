@@ -1,5 +1,5 @@
 <?php
-include '../modelo/query.php';
+include_once __DIR__ . '/../modelo/query.php';
 
 header("Content-Type: application/json");
 

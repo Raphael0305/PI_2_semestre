@@ -1,6 +1,6 @@
 <?php
-include_once 'query.php';
-include_once 'usuario.php';
+include_once __DIR__ . '/query.php';
+include_once __DIR__ . '/usuario.php';
 
 
 class Autenticador{

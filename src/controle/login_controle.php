@@ -1,6 +1,6 @@
 <?php
-include_once '../modelo/autenticador.php';
-include_once '../modelo/usuario.php';
+include_once __DIR__ . '/../modelo/autenticador.php';
+include_once __DIR__ . '/../modelo/usuario.php';
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $email = $_POST['email'];

@@ -1,5 +1,6 @@
 <?php
-include_once 'query.php';
+include_once __DIR__ . '/../modelo/classe-conexao.php';
+include_once __DIR__ . '/../uteis/manipulador_password.php';
 
 
 class Usuario{
@@ -120,17 +121,4 @@ class Usuario{
 
     }
 
-}
-
-class ManipuladorPassword {
-
-
-    static public function hash_password($password): string{
-        return password_hash($password, PASSWORD_BCRYPT);
-    }
-    
-    
-    static public function verify_password($password, $hash): bool{
-        return password_verify($password, $hash);
-    }
 }
