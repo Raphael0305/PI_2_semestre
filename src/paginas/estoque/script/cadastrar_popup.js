@@ -35,6 +35,7 @@ function getInputsName(){
     let fornecedor = getElementByID("fornecedor")
     let quantidade = getElementByID("quantidade")
     let valorUn = getElementByID("valorUn")
+    let quantMin = getElementByID("quantMin")
     let data_validade = getElementByID("data_validade")
     return JSON.stringify({
         nome: nome.value,
@@ -42,6 +43,7 @@ function getInputsName(){
         fornecedor: fornecedor.value,
         quantidade: quantidade.value,
         valorUn: valorUn.value,
+        quantMin: quantMin.value,
         data_validade: data_validade.value
     })
 
@@ -60,6 +62,8 @@ function clearInputs(){
     valorUn.value = null
     let data_validade = getElementByID("data_validade")
     data_validade.value = null
+    let quantMin = getElementByID("quantMin")
+    quantMin.value = null
 }
 
 function getElementByID(elementId){

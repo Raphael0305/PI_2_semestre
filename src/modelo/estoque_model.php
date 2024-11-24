@@ -64,7 +64,9 @@ class Estoque
         unset($payload["ID_ingrediente"]);
         $keys = array_keys($payload);
         $colunas = implode(', ', $keys);
-        $query = "UPDATE ingrediente SET {$colunas} WHERE ID_ingrediente = {$id}";
+        $values = array_values($payload);
+        $valuesSeparated = implode(', ', $values);
+        $query = "UPDATE ingrediente SET {$colunas} = {$valuesSeparated} WHERE ID_ingrediente = {$id}";
         $stmt = $this->conn->prepare($query);
 
         try {

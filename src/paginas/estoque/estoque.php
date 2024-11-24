@@ -17,6 +17,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Estoque Fit</title>
 </head>
+
 <body>
     <div class="screen">
         <!-- Barra lateral com botões -->
@@ -68,32 +69,29 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                             </button>
                         </div>
                     </div>
-                    
-                    <div class="table_box">
-                        <div class="table_head" id="table_head">
-                            <table id="table_head_display">
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Categoria</th>
-                                    <th>Fornecedor</th>
-                                    <th>Quantidade</th>
-                                    <th>Valor Un.</th>
-                                    <th>Data Validade</th>
-                                </tr>
-                            </thead>
-                            </table>
-                        </div>
 
-                        <div class="table_body">
-                            <table class="table_body_display" id="table_body_display">
+                    <div class="table_box" style="overflow-y: auto;">
+                        <div class="table-responsive-sm" style="height: 30px;">
+
+                            <table class="table" id="table" style="padding-right: 0px 20px;">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Categoria</th>
+                                        <th>Fornecedor</th>
+                                        <th>Quantidade</th>
+                                        <th>Valor Un.</th>
+                                        <th>Data Validade</th>
+                                        <th>Quantidade Minima</th>
+                                    </tr>
+                                </thead>
                                 <tbody>
-    
+
                                 </tbody>
                             </table>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
 
                 <div class="btn_side">
@@ -141,6 +139,10 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                     <input type="select" name="valorUn" id="valorUn" placeholder="Valor Unitario" required>
                 </div>
                 <div>
+                    <label for="quantMin">Quantidade Minima</label><br>
+                    <input type="text" name="quantMin" id="quantMin" placeholder="Quantidade Minima" required>
+                </div>
+                <div>
                     <label for="data_validade">Data de Validade</label><br>
                     <input type="date" name="data_validade" id="data_validade" required>
                 </div>
@@ -169,10 +171,10 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
         <div class="fields">
             <div class="left_field">
                 <div>
-                <label for="nome">Nome</label><br>
-                <input type="text" name="nome" id="nome_item">
-            </div>
-            <div>
+                    <label for="nome">Nome</label><br>
+                    <input type="text" name="nome" id="nome_item">
+                </div>
+                <div>
                     <label for="categoria">Categoria</label><br>
                     <input type="text" name="categoria" id="categoria_item">
                 </div>
@@ -182,17 +184,21 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                 </div>
             </div>
             <div class="right_field">
-            <div>
-                <label for="quantidade">Quantidade</label><br>
-                <input type="text" name="quantidade" id="quantidade_item">
-            </div>
-            <div>
+                <div>
+                    <label for="quantidade">Quantidade</label><br>
+                    <input type="text" name="quantidade" id="quantidade_item">
+                </div>
+                <div>
                     <label for="valorUn">ValorUn</label><br>
                     <input type="text" name="valorUn" id="valorUn_item">
                 </div>
                 <div>
                     <label for="data_validade">Data de Validade</label><br>
                     <input type="date" name="data_validade" id="data_validade_item">
+                </div>
+                <div>
+                    <label for="quantMin">Quantidade Minima</label><br>
+                    <input type="text" name="quantMin" id="quantMin_item" placeholder="Quantidade Minima" required>
                 </div>
             </div>
         </div>
@@ -209,7 +215,9 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
 
 <div id="excluir_item_modal" class="excluir_item_modal">
     <div class="exluir_modal">
-        <div class="header"><h5>Excluir Item</h5></div>
+        <div class="header">
+            <h5>Excluir Item</h5>
+        </div>
         <div class="content">
             <div class="options">
                 <label for="item_selector">Selecione um Item</label><br>

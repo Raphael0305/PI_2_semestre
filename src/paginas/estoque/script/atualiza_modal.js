@@ -12,7 +12,7 @@ function closeAtualizarModal(){
 }
 
 async function getItems(){
-    const response = await fetch("../../../controle/buscar_items.php", {
+    const response = await fetch("../../../controle/buscar_itens.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -30,7 +30,7 @@ async function atualizarSelector(){
     selector.innerHTML = `<option value="">Selecione um item</option>`
     
     items.forEach(element => {
-        selector.innerHTML += `<option value="${element['id_ingrediente']}">${element['nome']}</option>`
+        selector.innerHTML += `<option value="${element['ID_ingrediente']}">${element['nome']}</option>`
     });
 
 }
@@ -41,18 +41,17 @@ async function atualizarItemDatabase(){
     let db = itemFromDb['item']
     let itemFromInput = getInputValues()
     let updateFields = {}
-
+    console.log(itemFromInput)
     for (let key in db) {
         if(db[key] !== itemFromInput[key]){
             
             updateFields[key] = itemFromInput[key]
         }
-        if(key === "id_ingrediente"){
+        if(key === "ID_ingrediente"){
             console.log(db[key])
             updateFields[key] = db[key]
         }
     }
-    console.log(updateFields)
     let response = await fetch("../../../controle/atualiza_item.php", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
@@ -74,7 +73,7 @@ async function getItemById(id){
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
-            id_ingrediente: id
+            ID_ingrediente: id
         })
     })
     return await response.json()
@@ -89,12 +88,14 @@ function preencheCampos(item){
     let quantidade = getElementByID("quantidade_item")
     let valorUn = getElementByID("valorUn_item")
     let data_validade = getElementByID("data_validade_item")
+    let quantMin_item = getElementByID("quantMin_item")
     nome.value = item['nome']
     categoria.value = item['categoria']
     fornecedor.value = item['fornecedor']
     quantidade.value = item['quantidade']
     valorUn.value = item['valorUn']
     data_validade.value = item['data_validade']
+    quantMin_item.value = item['quantMin']
 }
 
 
@@ -105,12 +106,14 @@ function limpaCampos(){
     let quantidade = getElementByID("quantidade_item")
     let valorUn = getElementByID("valorUn_item")
     let data_validade = getElementByID("data_validade_item")
+    let quantMin_item = getElementByID("quantMin_item")
     nome.value = ""
     categoria.value = ""
     fornecedor.value = ""
     quantidade.value = ""
     valorUn.value = ""
     data_validade.value = ""
+    quantMin_item.value = ""
 }
 
 let selector = getElementByID("item_selector")
@@ -128,6 +131,7 @@ function getInputValues(){
     let fornecedor = getElementByID("fornecedor_item")
     let quantidade = getElementByID("quantidade_item")
     let valorUn = getElementByID("valorUn_item")
+    let quantMin_item = getElementByID("quantMin_item")
     let data_validade = getElementByID("data_validade_item")
     return {
         nome: nome.value,
@@ -135,7 +139,8 @@ function getInputValues(){
         fornecedor: fornecedor.value,
         quantidade: quantidade.value,
         valorUn: valorUn.value,
-        data_validade: data_validade.value
+        data_validade: data_validade.value,
+        quantMin: quantMin_item.value
 }
 }
 
@@ -152,6 +157,7 @@ async function showItemsAtTable(){
                                     <td>${element['quantidade']}</td>
                                     <td>${element['valorUn']}</td>
                                     <td>${element['data_validade']}</td>
+                                    <td>${element['quantMin']}</td>
                                 </tr>`
     })
 }
