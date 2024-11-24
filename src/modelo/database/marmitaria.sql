@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24/11/2024 às 16:12
+-- Tempo de geração: 24/11/2024 às 16:29
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -44,12 +44,12 @@ CREATE TABLE `alerta_estoque_baixo` (
 
 CREATE TABLE `ingrediente` (
   `ID_ingrediente` int(11) NOT NULL,
-  `nomeIngred` varchar(255) NOT NULL,
+  `nome` varchar(255) NOT NULL,
   `categoria` enum('proteína','carboidrato','vegetal','outros') NOT NULL,
   `fornecedor` varchar(255) DEFAULT NULL,
   `quantidade` int(11) NOT NULL,
-  `precoUn` decimal(10,2) NOT NULL,
-  `DataValidade` date DEFAULT NULL,
+  `valorUn` decimal(10,2) NOT NULL,
+  `data_validade` date DEFAULT NULL,
   `quantMin` int(11) DEFAULT 10
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -57,7 +57,7 @@ CREATE TABLE `ingrediente` (
 -- Despejando dados para a tabela `ingrediente`
 --
 
-INSERT INTO `ingrediente` (`ID_ingrediente`, `nomeIngred`, `categoria`, `fornecedor`, `quantidade`, `precoUn`, `DataValidade`, `quantMin`) VALUES
+INSERT INTO `ingrediente` (`ID_ingrediente`, `nome`, `categoria`, `fornecedor`, `quantidade`, `valorUn`, `data_validade`, `quantMin`) VALUES
 (1, 'Frango', 'proteína', 'Fornecedor A', 460, 10.50, '2024-12-31', 10),
 (2, 'Arroz Integral', 'carboidrato', 'Fornecedor B', 460, 5.00, '2025-01-15', 10),
 (3, 'Brócolis', 'vegetal', 'Fornecedor C', 460, 7.30, '2025-02-28', 10),
@@ -131,28 +131,16 @@ CREATE TABLE `pedidos` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `saida_estoque`
---
-
-CREATE TABLE `saida_estoque` (
-  `ID_saida` int(11) NOT NULL,
-  `QuantidadeIngredi` int(11) NOT NULL,
-  `ID_ingrediente` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estrutura para tabela `usuario`
 --
 
 CREATE TABLE `usuario` (
   `ID_usuario` int(11) NOT NULL,
-  `nomeCompleto` varchar(255) NOT NULL,
+  `nome` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `telefone` varchar(20) NOT NULL,
-  `nivelAcesso` enum('administrador','funcionario') NOT NULL
+  `nivel_acesso` enum('administrador','funcionario') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -192,13 +180,6 @@ ALTER TABLE `marmita_ingredi`
 ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`ID_pedido`),
   ADD KEY `ID_marmita` (`ID_marmita`);
-
---
--- Índices de tabela `saida_estoque`
---
-ALTER TABLE `saida_estoque`
-  ADD PRIMARY KEY (`ID_saida`),
-  ADD KEY `ID_ingrediente` (`ID_ingrediente`);
 
 --
 -- Índices de tabela `usuario`
@@ -242,12 +223,6 @@ ALTER TABLE `pedidos`
   MODIFY `ID_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de tabela `saida_estoque`
---
-ALTER TABLE `saida_estoque`
-  MODIFY `ID_saida` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
@@ -275,12 +250,6 @@ ALTER TABLE `marmita_ingredi`
 --
 ALTER TABLE `pedidos`
   ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`ID_marmita`) REFERENCES `marmitas` (`ID_marmita`);
-
---
--- Restrições para tabelas `saida_estoque`
---
-ALTER TABLE `saida_estoque`
-  ADD CONSTRAINT `saida_estoque_ibfk_1` FOREIGN KEY (`ID_ingrediente`) REFERENCES `ingrediente` (`ID_ingrediente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
