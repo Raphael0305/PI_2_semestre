@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 require_once __DIR__ . '/../../controle/query.php';
 require_once __DIR__ . '/../../controle/autenticador.php';
 session_start();
@@ -7,9 +8,10 @@ $query = NEW Query;
 if(!$aute->autenticarLogin()){
     header("Location: ../../index.php");
 }
+=======
+include_once __DIR__ . '/../../controle/autentica_pagina.php';
+>>>>>>> cadastroUsuario
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,15 +60,17 @@ if(!$aute->autenticarLogin()){
                         </div>
                         <div>
                             <form method="post" style="display: inline;">
-                                <button style="height: 32px; font-size: 12px;" class="btn btn-danger" type="submit" name="sair">Sair</button>
+                            <a href="../../controle/logout.php" class="btn btn-danger" style="height: 32px; font-size: 12px;" role="button">Sair</a>
+
                             </form>
                         </div>
                     </div>
                 </nav>
             </div>
             <div class="page-content">
-
+            <p style="text-align: center;">Seja Bem Vindo,<br>
                 <?php
+<<<<<<< HEAD
                 if (isset($_SESSION['id_usuario'])) {
                     $dados = $query->buscarDadosUsuario($_SESSION['id_usuario']);
                 } else {
@@ -74,17 +78,14 @@ if(!$aute->autenticarLogin()){
                 }
                 ?>
                 <p style="text-align: center; font-size:2rem">Seja Bem Vindo(a),<br><?php echo $dados['nome_completo'];  ?></p>
+=======
+                echo $_SESSION['userName']
+                
+                ?></p>
+>>>>>>> cadastroUsuario
             </div>
         </div>
     </div>
 </body>
 
 </html>
-<!-- ------------------------------    CÓDIGO PHP    ---------------------------------- -->
-<?php
-if (isset($_POST['sair'])) {
-    $aute->deslogar();
-    header("Location: ../../index.php");
-    exit();
-}
-?>

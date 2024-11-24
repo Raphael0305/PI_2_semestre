@@ -29,6 +29,7 @@ async function cadastraItem() {
 
 }
 
+<<<<<<< HEAD
 function getInputsName(){
     let nome = getElementByID("nome")
     let categoria = getElementByID("categoria")
@@ -47,6 +48,25 @@ function getInputsName(){
 
 }
 
+=======
+function getInputNovoUsuario() {
+    let nome = document.getElementById("nome"); 
+    let email = document.getElementById("email"); 
+    let senha = document.getElementById("senha"); 
+    let telefone = document.getElementById("telefone"); 
+    let nivelAcesso = document.getElementById("nivelAcesso"); 
+    
+    return JSON.stringify({
+        nome: nome.value,
+        email: email.value,
+        senha: senha.value,
+        telefone: telefone.value,
+        nivelAcesso: nivelAcesso.value
+    });
+}
+
+
+>>>>>>> cadastroUsuario
 function clearInputs(){
     let nome = getElementByID("nome")
     nome.value = null
