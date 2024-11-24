@@ -1,16 +1,5 @@
 <?php
-<<<<<<< HEAD
-require_once __DIR__ . '/../../controle/query.php';
-require_once __DIR__ . '/../../controle/autenticador.php';
-session_start();
-$aute = NEW Autenticador;
-$query = NEW Query;
-if(!$aute->autenticarLogin()){
-    header("Location: ../../index.php");
-}
-=======
 include_once __DIR__ . '/../../controle/autentica_pagina.php';
->>>>>>> cadastroUsuario
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,19 +59,9 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
             <div class="page-content">
             <p style="text-align: center;">Seja Bem Vindo,<br>
                 <?php
-<<<<<<< HEAD
-                if (isset($_SESSION['id_usuario'])) {
-                    $dados = $query->buscarDadosUsuario($_SESSION['id_usuario']);
-                } else {
-                    $dados = $query->buscarDadosUsuario($_SESSION['id_mestre']);
-                }
-                ?>
-                <p style="text-align: center; font-size:2rem">Seja Bem Vindo(a),<br><?php echo $dados['nome_completo'];  ?></p>
-=======
                 echo $_SESSION['userName']
                 
                 ?></p>
->>>>>>> cadastroUsuario
             </div>
         </div>
     </div>

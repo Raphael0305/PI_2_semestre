@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-<?php
-require_once __DIR__ . '/controle/autenticador.php';
-$aute = NEW Autenticador;
-
-?>
-
-
-=======
->>>>>>> cadastroUsuario
 <!DOCTYPE html>
 <html lang="">
 
@@ -34,37 +24,13 @@ $aute = NEW Autenticador;
                 </ul>
             </div>
             <div class="mb-3">
-<<<<<<< HEAD
-                <label for="password" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="passwd" name="password" placeholder="Digite sua Senha">
-=======
                 <label for="passwd" class="form-label">Senha</label>
                 <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Digite sua Senha">
->>>>>>> cadastroUsuario
                 <ul class="passwd_error">
                     <li id="password_error_display"></li>
                 </ul>
             </div>
-<<<<<<< HEAD
-            <button id="entrarBtn" style="margin-top: 15px;" type="submit" class="btn btn-success" disabled>Entrar</button>
-            <?php
-            if(isset($_POST['email'])){
-                $email = $_POST['email'];
-                $senha = $_POST['password'];
-
-                if($aute->logarUsuario($email,$senha)){
-                    header("Location: paginas/homepage/home_page.php");
-                }else{
-                    ?>
-                    <div class="msgErro">Usuário e/ou senha estão incorretos</p></div>
-                    <?php
-                }
-            }
-            ?>
-        </form>
-=======
             <button id="entrarBtn" style="margin-top: 15px;" type="submit" class="btn btn-success" disabled>Entrar</button></form>
->>>>>>> cadastroUsuario
     </div>
 </body>
 <script src="paginas/login/scripts/login_validation.js"></script>

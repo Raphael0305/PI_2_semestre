@@ -2,6 +2,7 @@
 
 class ManipuladorPassword {
 
+
     static public function hash_password($password): string{
         return password_hash($password, PASSWORD_BCRYPT);
     }

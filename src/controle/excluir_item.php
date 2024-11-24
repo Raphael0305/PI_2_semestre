@@ -1,21 +1,13 @@
 <?php
-include_once __DIR__ . '/../modelo/query.php';
+include_once __DIR__ . '/../modelo/estoque_model.php';
 
 header("Content-Type: application/json");
 
 $payload = json_decode(file_get_contents("php://input"), true);
-$stmt = new Query();
+$estoque = new Estoque();
 
-if ($stmt->excluirItem($payload)){
-    echo json_encode(['success'=> true,'message'=> 'Item excluido com sucesso']);
+if ($estoque->excluirItem(3)) {
+    echo json_encode(['success' => true, 'message' => 'Item excluido com sucesso']);
+} else {
+    echo json_encode(['success' => false, 'message' => 'Item nao excluido']);
 }
-else{
-    echo json_encode(['success'=> false,'message'=> 'Item nao excluido']);
-}
-
-
-
-
-
-
-?>
