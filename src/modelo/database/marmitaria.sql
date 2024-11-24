@@ -143,6 +143,13 @@ CREATE TABLE `usuario` (
   `nivel_acesso` enum('administrador','funcionario') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+INSERT INTO `usuario` (`nome`, `email`, `senha`, `telefone` ,`nivel_acesso`) VALUES
+('Isabely ', 'Isabely@marmita.com', '$2y$10$TkJI3TOgF0aJ0PPSuwszv.7349VQ5X0HhjOE7SfZQRn78qdaM1Kuu', '1999475869',  'funcionario'),
+('Raphael ', 'Raphael@marmita.com', '$2y$10$dhH3mKwHk1YKGCEDUljm/uRTRME2DWagKLMSkbfw4jX6pczHAVKN6', '1999639249',  'funcionario'),
+('Rayanne ', 'Rayanne@marmita.com', '$2y$10$LwccwhU6rfewWUglmGKoveZ3hcX5/0A9ZQKLlgWOEuzzRvuWupT7q', '1998145863',  'funcionario'),
+('Vitor', 'Vitor@marmita.com', '$2y$10$CTml5izmvunVQFviH.KLsu8cYgk.AtwI3hfcOJ99FO/yzaBy0XX4S', '1999029418', 'funcionario');
+
 --
 -- Índices para tabelas despejadas
 --
