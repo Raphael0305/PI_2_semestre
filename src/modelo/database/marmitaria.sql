@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 20/11/2024 às 19:27
+-- Tempo de geração: 24/11/2024 às 16:33
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -26,60 +26,93 @@ USE `marmitaria`;
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `alertas_estoque`
+-- Estrutura para tabela `alerta_estoque_baixo`
 --
 
-CREATE TABLE `alertas_estoque` (
-  `id_alerta` int(11) NOT NULL,
-  `id_ingrediente` int(11) NOT NULL,
-  `data_alerta` date NOT NULL,
-  `status_alerta` enum('pendente','resolvido') DEFAULT 'pendente'
+CREATE TABLE `alerta_estoque_baixo` (
+  `ID_alerta` int(11) NOT NULL,
+  `ID_ingrediente` int(11) DEFAULT NULL,
+  `quantidade_estoque` int(11) DEFAULT NULL,
+  `data_alerta` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `entradas_estoque`
+-- Estrutura para tabela `ingrediente`
 --
 
-CREATE TABLE `entradas_estoque` (
-  `id_entrada` int(11) NOT NULL,
-  `id_ingrediente` int(11) NOT NULL,
-  `quantidade_adicionada` decimal(10,2) NOT NULL,
-  `fornecedor` varchar(100) DEFAULT NULL,
-  `data_entrada` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `ingredientes`
---
-
-CREATE TABLE `ingredientes` (
-  `id_ingrediente` int(11) NOT NULL,
-  `nome` varchar(100) NOT NULL,
-  `categoria` varchar(50) DEFAULT NULL,
-  `fornecedor` varchar(100) DEFAULT NULL,
-  `quantidade` int(11) DEFAULT 0,
-  `preco_compra` decimal(10,2) DEFAULT NULL,
+CREATE TABLE `ingrediente` (
+  `ID_ingrediente` int(11) NOT NULL,
+  `nome` varchar(255) NOT NULL,
+  `categoria` enum('proteína','carboidrato','vegetal','outros') NOT NULL,
+  `fornecedor` varchar(255) DEFAULT NULL,
+  `quantidade` int(11) NOT NULL,
+  `valorUn` decimal(10,2) NOT NULL,
   `data_validade` date DEFAULT NULL,
-  `quantidade_minima` decimal(10,2) DEFAULT 0.00
+  `quantMin` int(11) DEFAULT 10
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `ingredientes`
+-- Despejando dados para a tabela `ingrediente`
 --
 
-INSERT INTO `ingredientes` (`id_ingrediente`, `nome`, `categoria`, `fornecedor`, `quantidade`, `preco_compra`, `data_validade`, `quantidade_minima`) VALUES
-(1, 'Arroz', 'carboidrato', 'Extra', 3, 3.00, '2025-02-03', 0.00),
-(2, 'Feijão ', 'carboidratos ', 'Extra', 5, 3.50, '2025-04-15', 0.00),
-(3, 'Alface ', 'Fibra', 'Extra', 5, 2.50, '2024-11-29', 0.00),
-(4, 'Frango', 'Proteina', 'Extra', 5, 5.50, '2024-11-28', 0.00),
-(5, 'ovo', 'Proteina', 'Extru', 3, 10.00, '2025-01-02', 0.00),
-(6, 'macarrão ', 'carboidratos ', 'Macarone', 12, 4.50, '2025-02-07', 0.00),
-(7, 'tofu', 'Proteina', 'Tofu-kan', 50, 3.00, '2025-01-12', 0.00),
-(8, 'azeite ', 'Gordura ', 'Azeite-kan', 3, 50.50, '2025-02-07', 0.00);
+INSERT INTO `ingrediente` (`ID_ingrediente`, `nome`, `categoria`, `fornecedor`, `quantidade`, `valorUn`, `data_validade`, `quantMin`) VALUES
+(1, 'Frango', 'proteína', 'Fornecedor A', 460, 10.50, '2024-12-31', 10),
+(2, 'Arroz Integral', 'carboidrato', 'Fornecedor B', 460, 5.00, '2025-01-15', 10),
+(3, 'Brócolis', 'vegetal', 'Fornecedor C', 460, 7.30, '2025-02-28', 10),
+(4, 'Batata Doce', 'carboidrato', 'Fornecedor D', 460, 6.20, '2025-03-10', 10),
+(5, 'Peixe', 'proteína', 'Fornecedor E', 460, 15.00, '2024-12-25', 10),
+(6, 'Abóbora', 'vegetal', 'Fornecedor F', 460, 4.80, '2025-04-05', 10);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `marmitas`
+--
+
+CREATE TABLE `marmitas` (
+  `ID_marmita` int(11) NOT NULL,
+  `nomeMarmita` varchar(255) NOT NULL,
+  `preco` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `marmitas`
+--
+
+INSERT INTO `marmitas` (`ID_marmita`, `nomeMarmita`, `preco`) VALUES
+(1, 'Marmita Fitness Frango', 20.00),
+(2, 'Marmita Fitness Peixe', 25.00),
+(3, 'Marmita Vegetariana', 18.50),
+(4, 'Marmita Low Carb', 22.00);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `marmita_ingredi`
+--
+
+CREATE TABLE `marmita_ingredi` (
+  `ID_marmitaIngredi` int(11) NOT NULL,
+  `quantidade_necessaria` int(11) NOT NULL,
+  `ID_ingrediente` int(11) NOT NULL,
+  `ID_marmita` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `marmita_ingredi`
+--
+
+INSERT INTO `marmita_ingredi` (`ID_marmitaIngredi`, `quantidade_necessaria`, `ID_ingrediente`, `ID_marmita`) VALUES
+(1, 150, 1, 1),
+(2, 120, 4, 1),
+(3, 80, 5, 2),
+(4, 100, 2, 2),
+(5, 150, 3, 3),
+(6, 100, 2, 3),
+(7, 120, 6, 4),
+(8, 80, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -88,185 +121,135 @@ INSERT INTO `ingredientes` (`id_ingrediente`, `nome`, `categoria`, `fornecedor`,
 --
 
 CREATE TABLE `pedidos` (
-  `id` int(11) NOT NULL,
-  `nome_cliente` varchar(100) NOT NULL,
-  `nome_marmita` varchar(100) NOT NULL,
-  `data_entrega` date NOT NULL,
-  `responsavel` varchar(100) DEFAULT NULL,
-  `data_pedido` timestamp NOT NULL DEFAULT current_timestamp()
+  `ID_pedido` int(11) NOT NULL,
+  `nomeCliente` varchar(255) NOT NULL,
+  `quantidade` int(11) NOT NULL,
+  `dataEntrega` date NOT NULL,
+  `ID_marmita` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `relatorios_estoque`
+-- Estrutura para tabela `usuario`
 --
 
-CREATE TABLE `relatorios_estoque` (
-  `id_relatorio` int(11) NOT NULL,
-  `data_geracao` date NOT NULL,
-  `tipo_relatorio` varchar(50) DEFAULT NULL,
-  `quantidade_movimentacao` decimal(10,2) DEFAULT 0.00,
-  `resetado` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `saidas_estoque`
---
-
-CREATE TABLE `saidas_estoque` (
-  `id_saida` int(11) NOT NULL,
-  `id_ingrediente` int(11) NOT NULL,
-  `quantidade_retirada` decimal(10,2) NOT NULL,
-  `produto_final` varchar(100) DEFAULT NULL,
-  `data_saida` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `usuarios`
---
-
-CREATE TABLE `usuarios` (
-  `id_usuario` int(11) NOT NULL,
-  `nome_completo` varchar(100) NOT NULL,
-  `email` varchar(60) NOT NULL,
+CREATE TABLE `usuario` (
+  `ID_usuario` int(11) NOT NULL,
+  `nome` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `senha` varchar(255) NOT NULL,
-  `telefone` varchar(15) DEFAULT NULL,
-  `nivel_acesso` tinyint(1) NOT NULL CHECK (`nivel_acesso` in (1,2)),
-  `data_cadastro` timestamp NOT NULL DEFAULT current_timestamp()
+  `telefone` varchar(20) NOT NULL,
+  `nivel_acesso` enum('administrador','funcionario') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `usuarios`
---
-
-INSERT INTO `usuarios` (`nome_completo`, `email`, `senha`, `telefone` ,`nivel_acesso`, `data_cadastro`) VALUES
-('Isabely ', 'Isabely@marmita.com', '$2y$10$TkJI3TOgF0aJ0PPSuwszv.7349VQ5X0HhjOE7SfZQRn78qdaM1Kuu', '1999475869', 1, '2024-11-06 10:28:43'),
-('Raphael ', 'Raphael@marmita.com', '$2y$10$dhH3mKwHk1YKGCEDUljm/uRTRME2DWagKLMSkbfw4jX6pczHAVKN6', '1999639249', 2, '2024-11-06 10:28:43'),
-('Rayanne ', 'Rayanne@marmita.com', '$2y$10$LwccwhU6rfewWUglmGKoveZ3hcX5/0A9ZQKLlgWOEuzzRvuWupT7q', '1998145863', 1, '2024-11-06 10:28:43'),
-('Vitor', 'Vitor@marmita.com', '$2y$10$CTml5izmvunVQFviH.KLsu8cYgk.AtwI3hfcOJ99FO/yzaBy0XX4S', '1999029418', 2, '2024-11-06 23:21:15');
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices de tabela `alertas_estoque`
+-- Índices de tabela `alerta_estoque_baixo`
 --
-ALTER TABLE `alertas_estoque`
-  ADD PRIMARY KEY (`id_alerta`),
-  ADD KEY `id_ingrediente` (`id_ingrediente`);
+ALTER TABLE `alerta_estoque_baixo`
+  ADD PRIMARY KEY (`ID_alerta`),
+  ADD KEY `ID_ingrediente` (`ID_ingrediente`);
 
 --
--- Índices de tabela `entradas_estoque`
+-- Índices de tabela `ingrediente`
 --
-ALTER TABLE `entradas_estoque`
-  ADD PRIMARY KEY (`id_entrada`),
-  ADD KEY `id_ingrediente` (`id_ingrediente`);
+ALTER TABLE `ingrediente`
+  ADD PRIMARY KEY (`ID_ingrediente`);
 
 --
--- Índices de tabela `ingredientes`
+-- Índices de tabela `marmitas`
 --
-ALTER TABLE `ingredientes`
-  ADD PRIMARY KEY (`id_ingrediente`);
+ALTER TABLE `marmitas`
+  ADD PRIMARY KEY (`ID_marmita`);
+
+--
+-- Índices de tabela `marmita_ingredi`
+--
+ALTER TABLE `marmita_ingredi`
+  ADD PRIMARY KEY (`ID_marmitaIngredi`),
+  ADD KEY `ID_ingrediente` (`ID_ingrediente`),
+  ADD KEY `ID_marmita` (`ID_marmita`);
 
 --
 -- Índices de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`ID_pedido`),
+  ADD KEY `ID_marmita` (`ID_marmita`);
 
 --
--- Índices de tabela `relatorios_estoque`
+-- Índices de tabela `usuario`
 --
-ALTER TABLE `relatorios_estoque`
-  ADD PRIMARY KEY (`id_relatorio`);
-
---
--- Índices de tabela `saidas_estoque`
---
-ALTER TABLE `saidas_estoque`
-  ADD PRIMARY KEY (`id_saida`),
-  ADD KEY `id_ingrediente` (`id_ingrediente`);
-
---
--- Índices de tabela `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id_usuario`),
-  ADD UNIQUE KEY `usuario` (`email`);
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`ID_usuario`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
--- AUTO_INCREMENT de tabela `alertas_estoque`
+-- AUTO_INCREMENT de tabela `alerta_estoque_baixo`
 --
-ALTER TABLE `alertas_estoque`
-  MODIFY `id_alerta` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `alerta_estoque_baixo`
+  MODIFY `ID_alerta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `entradas_estoque`
+-- AUTO_INCREMENT de tabela `ingrediente`
 --
-ALTER TABLE `entradas_estoque`
-  MODIFY `id_entrada` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `ingrediente`
+  MODIFY `ID_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de tabela `ingredientes`
+-- AUTO_INCREMENT de tabela `marmitas`
 --
-ALTER TABLE `ingredientes`
-  MODIFY `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+ALTER TABLE `marmitas`
+  MODIFY `ID_marmita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `marmita_ingredi`
+--
+ALTER TABLE `marmita_ingredi`
+  MODIFY `ID_marmitaIngredi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de tabela `relatorios_estoque`
+-- AUTO_INCREMENT de tabela `usuario`
 --
-ALTER TABLE `relatorios_estoque`
-  MODIFY `id_relatorio` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `saidas_estoque`
---
-ALTER TABLE `saidas_estoque`
-  MODIFY `id_saida` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `usuario`
+  MODIFY `ID_usuario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para tabelas despejadas
 --
 
 --
--- Restrições para tabelas `alertas_estoque`
+-- Restrições para tabelas `alerta_estoque_baixo`
 --
-ALTER TABLE `alertas_estoque`
-  ADD CONSTRAINT `alertas_estoque_ibfk_1` FOREIGN KEY (`id_ingrediente`) REFERENCES `ingredientes` (`id_ingrediente`) ON DELETE CASCADE;
+ALTER TABLE `alerta_estoque_baixo`
+  ADD CONSTRAINT `alerta_estoque_baixo_ibfk_1` FOREIGN KEY (`ID_ingrediente`) REFERENCES `ingrediente` (`ID_ingrediente`);
 
 --
--- Restrições para tabelas `entradas_estoque`
+-- Restrições para tabelas `marmita_ingredi`
 --
-ALTER TABLE `entradas_estoque`
-  ADD CONSTRAINT `entradas_estoque_ibfk_1` FOREIGN KEY (`id_ingrediente`) REFERENCES `ingredientes` (`id_ingrediente`) ON DELETE CASCADE;
+ALTER TABLE `marmita_ingredi`
+  ADD CONSTRAINT `marmita_ingredi_ibfk_1` FOREIGN KEY (`ID_ingrediente`) REFERENCES `ingrediente` (`ID_ingrediente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `marmita_ingredi_ibfk_2` FOREIGN KEY (`ID_marmita`) REFERENCES `marmitas` (`ID_marmita`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `saidas_estoque`
+-- Restrições para tabelas `pedidos`
 --
-ALTER TABLE `saidas_estoque`
-  ADD CONSTRAINT `saidas_estoque_ibfk_1` FOREIGN KEY (`id_ingrediente`) REFERENCES `ingredientes` (`id_ingrediente`) ON DELETE CASCADE;
+ALTER TABLE `pedidos`
+  ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`ID_marmita`) REFERENCES `marmitas` (`ID_marmita`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
