@@ -5,7 +5,7 @@ include_once __DIR__ . '/../modelo/usuario.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $passwd = $_POST['passwd'];
-    $user = new Usuario(email: $email,  senha: $passwd);
+    $user = Usuario::factoryUsuario(email: $email,  senha: $passwd);
     $auth = new Autenticador();
     $isLogged = $auth->logarUsuario($user);
 
