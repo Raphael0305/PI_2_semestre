@@ -125,7 +125,7 @@ class Query
 
     public function cadastrarUsuario($nome,$email, $senha, $telefone, $nivelAcesso) {
 
-        $query = "INSERT INTO usuarios (
+        $query = "INSERT INTO usuario (
             nome, 
             email, 
             senha, 
