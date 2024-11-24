@@ -1,11 +1,12 @@
 <?php
-include '../modelo/query.php';
+include_once  __DIR__ . '/../modelo/estoque_model.php';
 
 header('Content-Type: application/json');
 
 $payload = file_get_contents('php://input');
-$stmt = new Query();
-$isUpdated = $stmt->atualizarItemPorId((array)json_decode($payload, true));
+$estoque = new Estoque();
+$itens = (array)json_decode($payload);
+$isUpdated = $estoque->atualizarItemPorId(payload: $itens);
 
 if( $isUpdated ){
     echo json_encode(["success" => true, "msg" => "Atualizado com sucesso"]);

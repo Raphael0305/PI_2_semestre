@@ -1,34 +1,29 @@
 <?php
-include_once '../modelo/query.php';
+include_once __DIR__ . '/../modelo/estoque_model.php';
+include_once __DIR__ . '/../modelo/ingredientes.php';
 
 header('Content-Type: application/json');
+
 $postData = file_get_contents("php://input");
-
 $data = json_decode($postData, true);
+$estoque = new Estoque();
+$ingredientes = new Ingredientes(
+    nome: htmlspecialchars($data['nome']),
+    categoria: htmlspecialchars($data['categoria']),
+    fornecedor: htmlspecialchars($data['fornecedor']),
+    quantidade: htmlspecialchars($data['quantidade']),
+    valorUn: htmlspecialchars($data['valorUn']),
+    data_validade: htmlspecialchars($data['data_validade'])
+);
 
-$nome = htmlspecialchars($data['nome']);
-$categoria = htmlspecialchars($data['categoria']);
-$fornecedor = htmlspecialchars($data['fornecedor']);
-$quantidade = htmlspecialchars($data['quantidade']);
-$valorUn = htmlspecialchars($data['valorUn']);
-$data_validade = htmlspecialchars($data['data_validade']);
-$stmt = new Query();
 
-try {
-    $isProductRegistered = $stmt->cadastrarIngrediente([
-        "nome" => $nome,
-        "categoria" => $categoria,
-        "fornecedor" => $fornecedor,
-        "quantidade" => $quantidade,
-        "valorUn" => $valorUn,
-        "data_validade" => $data_validade,
-    ]);
+$isProductRegistered = $estoque->cadastrarItem($ingredientes->toJson());
+if($isProductRegistered){
     echo json_encode([
         "isRegistered" => true
     ]);
     exit;
-
-} catch (PDOException $th) {
+}else{
     echo json_encode([
         "isRegistered" => false
     ]);
