@@ -62,7 +62,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
 
                 <div class="table_side">
                     <div class="search_box">
-                        <input class="search_input" type="text" placeholder="Buscar Produto" name='pesquisa'>
+                        <input id="buscar_item" class="search_input" type="text" placeholder="Buscar Produto" name='pesquisa'>
                         <div>
                             <button class="search_btn">
                                 <i class="fa-solid fa-magnifying-glass fa-beat" style="--fa-animation-duration: 2s; color:white;"></i>
@@ -236,6 +236,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
         </div>
     </div>
 </div>
+<script src="script/busca_barra_pesquisa.js"></script>
 <script src="script/load_table_items.js"></script>
 <script src="script/cadastrar_popup.js"></script>
 <script src="script/atualiza_modal.js"></script>
