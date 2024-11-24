@@ -6,20 +6,20 @@ async function openExcluirModal(){
     modal.classList.add("open_excluir_modal")
     console.log(selector.value)
     items.forEach(element => {
-        console.log(element['id_ingrediente'])
-        selector.innerHTML += `<option value="${element['id_ingrediente']}">${element["nome"]}</option>`
+        selector.innerHTML += `<option value="${element['ID_ingrediente']}">${element["nome"]}</option>`
     })
 }
 
 async function exluirItem(){
     let selector = getElementByID("excluir_item_selector")
+    console.log(selector.value)
     const response = await fetch("../../../controle/excluir_item.php", {
         method:"POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            id_ingrediente: selector.value
+            ID_ingrediente: selector.value
         })
     })
 
@@ -47,9 +47,8 @@ function getElementByID(elementId){
     return document.getElementById(elementId)
 }
 
-
 async function showItemsAtTable(){
-    let table = getElementByID("table_body_display")
+    let table = getElementByID("table")
     let items = await getItems()
     console.log("abri")
     table.querySelector("tbody").innerHTML = `<tr></tr>`
@@ -61,6 +60,7 @@ async function showItemsAtTable(){
                                     <td>${element['quantidade']}</td>
                                     <td>${element['valorUn']}</td>
                                     <td>${element['data_validade']}</td>
+                                    <td>${element['quantMin']}</td>
                                 </tr>`
     })
 }
@@ -70,7 +70,7 @@ function getElementByID(elementId){
 }
 
 async function getItems(){
-    const response = await fetch("../../../controle/buscar_items.php", {
+    const response = await fetch("../../../controle/buscar_itens.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

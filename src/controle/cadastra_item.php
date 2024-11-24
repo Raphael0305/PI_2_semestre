@@ -18,17 +18,14 @@ $ingredientes = new Ingredientes(
 );
 
 
-$estoque->cadastrarItem($dummyIngredientes->toJson());
 
 $isProductRegistered = $estoque->cadastrarItem($ingredientes->toJson());
 if ($isProductRegistered) {
     echo json_encode([
         "isRegistered" => true
     ]);
-    exit;
 } else {
     echo json_encode([
         "isRegistered" => false
     ]);
-    exit;
 }
