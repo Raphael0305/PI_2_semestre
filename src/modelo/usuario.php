@@ -1,124 +1,121 @@
 <?php
 include_once __DIR__ . '/../modelo/classe-conexao.php';
 include_once __DIR__ . '/../uteis/manipulador_password.php';
+include_once __DIR__ . '/../uteis/nivel_acesso.php';
 
 
-class Usuario{
+class Usuario
+{
 
     private $conn;
-    private string $nome = '';
-    private string $sobrenome = '';
-    private int $nivel_acesso = 1;
+    private string $nome;
+    private NivelAcesso $nivel_acesso;
     private string $email;
-    private string $senha = '';
+    private string $senha;
     private DateTime $data_cadastro;
 
-    public function __construct($email, $nome = '', $sobrenome = '', $nivel_acesso = 1, $senha = '', $data_cadastro = null) {
+    public function __construct($email, $nome, $nivel_acesso, $senha, $data_cadastro)
+    {
         $this->setEmail($email);
         $this->setNome($nome);
-        $this->setSobrenome($sobrenome);
-        $this->setNivelAcesso($nivel_acesso);
+        $this->nivel_acesso = $nivel_acesso;
         $this->setSenha($senha);
-        $this->setDataCadastro($data_cadastro ?? '');
+        $this->data_cadastro = $data_cadastro;
         $database = new ConexaoBanco();
         $this->conn = $database->getConexao();
+    }
 
+    static public function factoryUsuario(String $email, String $senha): Usuario
+    {
+        return new Usuario(
+            email: $email,
+            nome: 'nome_placeholder',
+            nivel_acesso: NivelAcesso::FUNCIONARIO,
+            senha: $senha,
+            data_cadastro: new DateTime('now', new DateTimeZone('America/Sao_Paulo'))
+        );
     }
 
     // ----------------------------------------------------------------------------------------------------------------------------------------
-    public function buscarLogin($email, $senha): bool{
-        $query = "SELECT * FROM usuarios WHERE email = :e";
+    public function buscarLogin(): bool
+    {
+        $email = $this->email;
+        $senha = $this->senha;
+        $query = "SELECT * FROM usuario WHERE email = '{$email}'";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindValue(":e", $email);
         $stmt->execute();
-        
-        if($stmt->rowCount() > 0){
+
+        if ($stmt->rowCount() > 0) {
             $response = $stmt->fetch(PDO::FETCH_ASSOC);
             $passwd_hash = $response["senha"];
             return ManipuladorPassword::verify_password($senha, $passwd_hash);
-            }
+        }
         return false;
-        
     }
 
-    public function buscarDadosUsuario(){
-        $query = $this->conn->prepare("SELECT * FROM usuarios WHERE email = :email");
-        $query->bindValue(":email",$this->email);
+    public function buscarDadosUsuario()
+    {
+        $email = $this->email;
+        $query = $this->conn->prepare("SELECT * FROM usuario WHERE email = '{$email}'");
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function buscarUsuarioPorEmail() {
-        $query = $this->conn->prepare("SELECT * FROM usuarios WHERE email = :e");
-        $query->bindValue(":e", $this->email);
+    public function buscarUsuarioPorEmail()
+    {
+        $email = $this->email;
+        $query = $this->conn->prepare("SELECT * FROM usuarios WHERE email = {$email}");
         $query->execute();
-    
+
         if ($query->rowCount() > 0) {
             return $query->fetch();
         } else {
-            return false; 
+            return false;
         }
     }
 
-    public function setNome($nome){
+    public function setNome($nome)
+    {
         $this->nome = $nome;
     }
 
-    public function setSobrenome($sobrenome){
-        $this->sobrenome = $sobrenome;
-    }
-
-    public function setNivelAcesso($nivel_acesso){
+    public function setNivelAcesso($nivel_acesso)
+    {
         $this->nivel_acesso = $nivel_acesso;
     }
 
-    public function setEmail($email){
+    public function setEmail($email)
+    {
         $this->email = $email;
     }
 
-    public function setSenha($senha){
+    public function setSenha($senha)
+    {
         $this->senha = $senha;
     }
 
-     public function setDataCadastro($data_cadastro){
-        if(!empty($data_cadastro)){
-            $date = DateTime::createFromFormat("Y-m-d", $data_cadastro);
-            if($date !== false){
-                $this->data_cadastro = $date;
-            }
-        }
-    }
-
-    public function getNome(){
+    public function getNome()
+    {
         return $this->nome;
     }
 
-    public function getSobrenome(){
-        return $this->sobrenome;
-    }
-
-    public function getNivelAcesso(){
+    public function getNivelAcesso()
+    {
         return $this->nivel_acesso;
     }
 
-    public function getEmail(){
+    public function getEmail()
+    {
         return $this->email;
     }
 
-    public function getSenha(){
+    public function getSenha()
+    {
         return $this->senha;
     }
 
-    public function getDataCadastro(){
+    public function getDataCadastro()
+    {
         return $this->data_cadastro;
     }
-
-    public function validarEmail(){
-
-    }
-    
-    public function validarSenha(){
-
-    }
-
 }

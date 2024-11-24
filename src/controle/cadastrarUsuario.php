@@ -16,14 +16,6 @@ $nivelAcesso = (int) htmlspecialchars($data['nivelAcesso']) ;
 
 $stmt = new Query();
 
-if($stmt->verifEmail($email)){
-    $_SESSION['error'] = "email já cadastrado!";
-    echo json_encode([
-        "isRegistered" => false
-    ]);
-    exit;
-}
-
 $hash = ManipuladorPassword::hash_password($senha);
 
 try {
