@@ -144,11 +144,11 @@ CREATE TABLE `usuarios` (
 -- Despejando dados para a tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nome_completo`, `email`, `senha`, `telefone`, `nivel_acesso`, `data_cadastro`) VALUES
-(2, 'rayane', 'ray@teste.com', 'Teste123!', '199999999', 1, '2024-11-02 02:58:14'),
-(3, 'Isabely', 'isa@teste.com', 'Teste123!', '999999999', 1, '2024-11-02 02:58:14'),
-(4, 'Vitor', 'vitor@teste.com', 'Teste123!', '989898989', 1, '2024-11-02 02:59:44'),
-(6, 'raphael', 'raphael@teste.com', 'Teste123!', '2311231', 1, '2024-11-15 19:16:07');
+INSERT INTO `usuarios` (`nome_completo`, `email`, `senha`, `telefone` ,`nivel_acesso`, `data_cadastro`) VALUES
+('Isabely ', 'Isabely@marmita.com', '$2y$10$TkJI3TOgF0aJ0PPSuwszv.7349VQ5X0HhjOE7SfZQRn78qdaM1Kuu', '1999475869', 1, '2024-11-06 10:28:43'),
+('Raphael ', 'Raphael@marmita.com', '$2y$10$dhH3mKwHk1YKGCEDUljm/uRTRME2DWagKLMSkbfw4jX6pczHAVKN6', '1999639249', 2, '2024-11-06 10:28:43'),
+('Rayanne ', 'Rayanne@marmita.com', '$2y$10$LwccwhU6rfewWUglmGKoveZ3hcX5/0A9ZQKLlgWOEuzzRvuWupT7q', '1998145863', 1, '2024-11-06 10:28:43'),
+('Vitor', 'Vitor@marmita.com', '$2y$10$CTml5izmvunVQFviH.KLsu8cYgk.AtwI3hfcOJ99FO/yzaBy0XX4S', '1999029418', 2, '2024-11-06 23:21:15');
 
 --
 -- Índices para tabelas despejadas
