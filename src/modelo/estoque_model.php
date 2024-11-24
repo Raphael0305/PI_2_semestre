@@ -82,10 +82,6 @@ class Estoque {
             return false;
         }
     }
-
-    public function gerarRelatorio(){
-        
-    }
     
     public function __construct() {
         $database = new ConexaoBanco();
