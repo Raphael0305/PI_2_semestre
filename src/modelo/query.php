@@ -123,17 +123,36 @@ class Query
         }
     }
 
-    public function totalPaginas($limite)
-    {
-        $registros = $this->conectar->query("SELECT COUNT(*) FROM ingredientes")->fetchColumn();
-        $quantPaginas = ceil($registros / $limite);
-        return $quantPaginas;
-    }
+    public function cadastrarUsuario($nome,$email, $senha, $telefone, $nivelAcesso) {
 
-    // ----------------------------------------------------------------------------------------------------------------------------------------    
-    function buscarEstruturaTabela()
-    {
-        $query = $this->conectar->query("DESCRIBE ingredientes");
-        return $query->fetchAll(PDO::FETCH_ASSOC); // Retorna a estrutura da tabela
+        $query = "INSERT INTO usuario (
+            nome, 
+            email, 
+            senha, 
+            telefone, 
+            nivel_acesso
+        ) VALUES (
+            :nome,
+            :email,
+            :senha,
+            :telefone,
+            :nivelAcesso
+        )";
+    
+        $stmt = $this->conectar->prepare($query);
+    
+        $stmt->bindValue(":nome", $nome);
+        $stmt->bindValue(":email", $email);
+        $stmt->bindValue(":senha", $senha);
+        $stmt->bindValue(":telefone", $telefone);
+        $stmt->bindValue(":nivelAcesso", $nivelAcesso);
+    
+        try {
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Ocorreu um erro ao cadastrar item: " . $e->getMessage();
+            return false;
+        }
     }
 }
