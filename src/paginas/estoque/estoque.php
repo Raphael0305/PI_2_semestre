@@ -34,8 +34,8 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                     </a>
                 </li>
                 <li>
-                    <a href="../estoque/estoque.php">
-                        <img src="../../assets/icons/estoque.svg" alt="" width="28">
+                    <a href="../novoUsuario/cadastro.php">
+                        <img src="../../assets/icons/usuario.png" alt="" width="28">
                     </a>
                 </li>
             </ol>
@@ -47,7 +47,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                 <nav class="navbar navbar-light">
                     <div class="container-fluid nav-content">
                         <div>
-                            <img src="../../assets/img/logo.png" alt="Marmitaria Fit Logo" width="45">
+                            <img src="./../../assets/img/logo.png" alt="Marmitaria Fit Logo" width="45">
                             <a class="navbar-brand ms-2 fs-6 fst-italic">Marmitaria Fit</a>
                         </div>
                         <div>
