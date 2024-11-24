@@ -62,12 +62,17 @@ class Estoque
     {
         $id = $payload["ID_ingrediente"];
         unset($payload["ID_ingrediente"]);
-        $keys = array_keys($payload);
-        $colunas = implode(', ', $keys);
-        $values = array_values($payload);
-        $valuesSeparated = implode(', ', $values);
-        $query = "UPDATE ingrediente SET {$colunas} = {$valuesSeparated} WHERE ID_ingrediente = {$id}";
+        $values = [];
+        foreach ($payload as $key => $value) {
+            if (is_float($value) || is_int($value)) {
+                $values[] = "{$key} = {$value}";
+            }
+            $values[] = "{$key} = '{$value}'";
+        }
+        $columUpdates = implode(',', $values);
+        $query = "UPDATE ingrediente SET {$columUpdates} WHERE ID_ingrediente = {$id}";
         $stmt = $this->conn->prepare($query);
+
 
         try {
             $stmt->execute();

@@ -13,7 +13,6 @@ function closeModal(){
 
 async function cadastraItem() {
     payload = getInputsName()
-    console.log("cadastrou")
     const response = await fetch("../../../controle/cadastra_item.php", {
         method: "POST",
         headers: {

@@ -59,8 +59,8 @@ async function showItemsAtTable(){
                                     <td>${element['fornecedor']}</td>
                                     <td>${element['quantidade']}</td>
                                     <td>${element['valorUn']}</td>
-                                    <td>${element['quantMin']}</td>
                                     <td>${element['data_validade']}</td>
+                                    <td>${element['quantMin']}</td>
                                 </tr>`
     })
 }
