@@ -9,21 +9,24 @@ $data = json_decode($postData, true);
 $estoque = new Estoque();
 $ingredientes = new Ingredientes(
     nome: htmlspecialchars($data['nome']),
-    categoria: htmlspecialchars($data['categoria']),
+    categoria: Ingredientes::getCategoria(htmlspecialchars($data['categoria'])),
     fornecedor: htmlspecialchars($data['fornecedor']),
-    quantidade: htmlspecialchars($data['quantidade']),
-    valorUn: htmlspecialchars($data['valorUn']),
-    data_validade: htmlspecialchars($data['data_validade'])
+    quantidade: (float) htmlspecialchars($data['quantidade']),
+    valorUn: (float) htmlspecialchars($data['valorUn']),
+    data_validade: htmlspecialchars($data['data_validade']),
+    quantMin: (float) htmlspecialchars($data['quantMin'])
 );
 
 
+$estoque->cadastrarItem($dummyIngredientes->toJson());
+
 $isProductRegistered = $estoque->cadastrarItem($ingredientes->toJson());
-if($isProductRegistered){
+if ($isProductRegistered) {
     echo json_encode([
         "isRegistered" => true
     ]);
     exit;
-}else{
+} else {
     echo json_encode([
         "isRegistered" => false
     ]);

@@ -2,25 +2,29 @@
 
 include_once __DIR__ . '/classe-conexao.php';
 
-class Query {
+class Query
+{
     public $conectar;
-// ----------------------------------------------------------------------------------------------------------------------------------------
-    public function __construct() {
+    // ----------------------------------------------------------------------------------------------------------------------------------------
+    public function __construct()
+    {
         $conexao = new ConexaoBanco();
         $this->conectar = $conexao->getConexao();
     }
-    
-// ----------------------------------------------------------------------------------------------------------------------------------------
-// BUSCAR DE INGREDIENTES**
-    public function buscarIngredientesPesquisa($pesquisa){
 
-            $query = $this->conectar->prepare("SELECT * FROM ingredientes WHERE nome LIKE :pesquisa");
-            $query->bindValue(':pesquisa', '%' . $pesquisa . '%');         
-            $query->execute();
-            return $query->fetchAll();
+    // ----------------------------------------------------------------------------------------------------------------------------------------
+    // BUSCAR DE INGREDIENTES**
+    public function buscarIngredientesPesquisa($pesquisa)
+    {
+
+        $query = $this->conectar->prepare("SELECT * FROM ingredientes WHERE nome LIKE :pesquisa");
+        $query->bindValue(':pesquisa', '%' . $pesquisa . '%');
+        $query->execute();
+        return $query->fetchAll();
     }
 
-    public function cadastrarIngrediente(array $ingrediente): bool{
+    public function cadastrarIngrediente(array $ingrediente): bool
+    {
         $query = "INSERT INTO ingredientes (
                     nome, 
                     categoria, 
@@ -54,35 +58,38 @@ class Query {
         }
     }
 
-    public function buscarTodosIngredientes(){
+    public function buscarTodosIngredientes()
+    {
         $query = "SELECT * FROM ingredientes";
         $stmt = $this->conectar->prepare($query);
         $stmt->execute();
-    
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function buscarItemPorId(String $id){
+    public function buscarItemPorId(String $id)
+    {
         $query = "SELECT * FROM ingredientes WHERE id_ingrediente = :id";
         $stmt = $this->conectar->prepare($query);
-        $stmt->bindValue(":id", (String)$id);
+        $stmt->bindValue(":id", (string)$id);
 
         try {
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             return [
-                "Item nao encontrado"=> $e->getMessage(),
+                "Item nao encontrado" => $e->getMessage(),
             ];
         }
     }
 
-    public function atualizarItemPorId(array $payload){
+    public function atualizarItemPorId(array $payload)
+    {
         $id = $payload["id_ingrediente"];
         unset($payload["id_ingrediente"]);
         $setParts = [];
         foreach ($payload as $key => $value) {
-        $setParts[] = "$key = :$key";
+            $setParts[] = "$key = :$key";
         }
         $setClause = implode(', ', $setParts);
         $query = "UPDATE ingredientes SET {$setClause} WHERE id_ingrediente = :id";
@@ -91,38 +98,41 @@ class Query {
         foreach ($payload as $key => $value) {
             $stmt->bindValue(":$key", $value);
         }
-        
+
         try {
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
-            echo "Erro ao atualizar item: ". $e;
+            echo "Erro ao atualizar item: " . $e;
             return false;
         }
     }
 
-    public function excluirItem($payload) {
-        $query = "DELETE FROM ingredientes WHERE id_ingrediente = :id_ingrediente";
+    public function excluirItem($payload)
+    {
+        $id = (int)$payload['id_ingrediente'];
+        $query = "DELETE FROM ingrediente WHERE ID_ingrediente = {$id}";
         $stmt = $this->conectar->prepare($query);
-        $stmt->bindValue(":id_ingrediente", (int)$payload['id_ingrediente']);
 
         try {
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
-            echo "Erro ao deletar ingrediente: ". $e->getMessage();
+            echo "Erro ao deletar ingrediente: " . $e->getMessage();
             return false;
         }
     }
 
-    public function totalPaginas($limite){
+    public function totalPaginas($limite)
+    {
         $registros = $this->conectar->query("SELECT COUNT(*) FROM ingredientes")->fetchColumn();
         $quantPaginas = ceil($registros / $limite);
-        return $quantPaginas;       
+        return $quantPaginas;
     }
-    
-// ----------------------------------------------------------------------------------------------------------------------------------------    
-    function buscarEstruturaTabela() {
+
+    // ----------------------------------------------------------------------------------------------------------------------------------------    
+    function buscarEstruturaTabela()
+    {
         $query = $this->conectar->query("DESCRIBE ingredientes");
         return $query->fetchAll(PDO::FETCH_ASSOC); // Retorna a estrutura da tabela
     }
