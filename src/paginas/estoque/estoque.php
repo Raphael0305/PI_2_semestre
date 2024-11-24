@@ -34,7 +34,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                     </a>
                 </li>
                 <li>
-                    <a href="../novoUsuario/cadastro.php">
+                    <a href="../NovoUsuario/cadastro.php">
                         <img src="../../assets/icons/usuario.png" alt="" width="28">
                     </a>
                 </li>
@@ -62,7 +62,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
 
                 <div class="table_side">
                     <div class="search_box">
-                        <input class="search_input" type="text" placeholder="Buscar Produto" name='pesquisa'>
+                        <input id="buscar_item" class="search_input" type="text" placeholder="Buscar Produto" name='pesquisa'>
                         <div>
                             <button class="search_btn">
                                 <i class="fa-solid fa-magnifying-glass fa-beat" style="--fa-animation-duration: 2s; color:white;"></i>
@@ -99,7 +99,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                     <button class="atualizar_item" onclick="openAtualizarModal()">Atualizar Item</button>
                     <button class="excluir_item" onclick="openExcluirModal()">Excluir Item</button>
                     <button class="exportar_relatorio">Exportar Relatorio</button>
-                    <button class="criar_alerta">Criar alerta de baixo nível</button>
+                    <button class="criar_alerta" onclick="criarAlerta()">Criar alerta de baixo nível</button>
 
                 </div>
             </div>
@@ -236,7 +236,9 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
         </div>
     </div>
 </div>
+<script src="script/busca_barra_pesquisa.js"></script>
 <script src="script/load_table_items.js"></script>
+<script src="script/criar_alerta_baixo_nivel.js"></script>
 <script src="script/cadastrar_popup.js"></script>
 <script src="script/atualiza_modal.js"></script>
 <script src="script/excluir_modal.js"></script>

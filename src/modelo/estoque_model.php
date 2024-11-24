@@ -4,10 +4,10 @@ class Estoque
 {
     private $conn;
 
-    public function cadastrarItem(array $ingredientes): bool
+    public function cadastrarItem(array $ingrediente): bool
     {
-        $colunaIngredientes = array_keys($ingredientes);
-        $ingredienteValores = array_map(fn($value) => "'{$value}'", $ingredientes);
+        $colunaIngredientes = array_keys($ingrediente);
+        $ingredienteValores = array_map(fn($value) => "'{$value}'", $ingrediente);
         $colunas = implode(',', $colunaIngredientes);
         $placeholder = implode(',', $ingredienteValores);
         $query = "INSERT INTO ingrediente ({$colunas}) VALUES ({$placeholder})";
@@ -23,7 +23,7 @@ class Estoque
 
     public function buscarItemPorNome(String $pesquisa): array
     {
-        $query = "SELECT * FROM ingredientes WHERE nome LIKE '%$pesquisa%'";
+        $query = "SELECT * FROM ingrediente WHERE nome LIKE '%$pesquisa%'";
         $stmt = $this->conn->prepare($query);
 
         try {
