@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", showItemsAtTable())
 
 async function showItemsAtTable(){
-    let table = getElementByID("table_body_display")
+    let table = getElementByID("table")
     let items = await getItems()
-    console.log("abri")
     table.querySelector("tbody").innerHTML = `<tr></tr>`
     items.forEach(element =>{
         table.querySelector("tbody").innerHTML += `<tr>
@@ -13,6 +12,7 @@ async function showItemsAtTable(){
                                     <td>${element['quantidade']}</td>
                                     <td>${element['valorUn']}</td>
                                     <td>${element['data_validade']}</td>
+                                    <td style="text-align:center;">${element['quantMin']}</td>
                                 </tr>`
     })
 }
@@ -22,7 +22,7 @@ function getElementByID(elementId){
 }
 
 async function getItems(){
-    const response = await fetch("../../../controle/buscar_items.php", {
+    const response = await fetch("../../../controle/buscar_itens.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
