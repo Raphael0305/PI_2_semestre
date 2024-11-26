@@ -117,6 +117,134 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
 
 </body>
 
+<!-- Modais -->
+<div id="cadastrar_item_modal" class="cadastrar_item_modal">
+    <div class="cadastro">
+        <div class="header">
+            <h2>Cadastrar Ingredientes</h2>
+        </div>
+
+
+        <div class="content">
+            <form method="POST" class="my_form">
+                <div>
+                    <label for="nome">Nome do Produto</label><br>
+                    <input type="text" name="nome" id="nome" placeholder="Nome do Produto" required>
+                </div>
+                <div>
+                    <label for="categoria">Categoria Produto</label><br>
+                    <input type="text" name="categoria" id="categoria" placeholder="Categoria do Produto" required>
+                </div>
+                <div>
+                    <label for="fornecedor">Fornecedor</label><br>
+                    <input type="text" name="fornecedor" id="fornecedor" placeholder="Fornecedor" required>
+                </div>
+                <div>
+                    <label for="quantidade">Quantidade</label><br>
+                    <input type="select" name="quantidade" id="quantidade" placeholder="Quantidade" required>
+                </div>
+                <div>
+                    <label for="valorUn">Valor Unitario</label><br>
+                    <input type="select" name="valorUn" id="valorUn" placeholder="Valor Unitario" required>
+                </div>
+                <div>
+                    <label for="quantMin">Quantidade Minima</label><br>
+                    <input type="text" name="quantMin" id="quantMin" placeholder="Quantidade Minima" required>
+                </div>
+                <div>
+                    <label for="data_validade">Data de Validade</label><br>
+                    <input type="date" name="data_validade" id="data_validade" required>
+                </div>
+            </form>
+        </div>
+
+
+
+        <div class="footer">
+            <div class="buttons">
+                <button onclick="closeModal()">Fechar</button>
+                <button onclick="cadastraItem()">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="atualizar_item_modal" id="atualizar_item_modal">
+    <div class="header">Atualizar Item</div>
+    <div class="content">
+        <div class="select_item">
+            <select name="item_selector" id="item_selector">
+                <option value="">Selecione um item</option>
+            </select>
+        </div>
+        <div class="fields">
+            <div class="left_field">
+                <div>
+                    <label for="nome">Nome</label><br>
+                    <input type="text" name="nome" id="nome_item">
+                </div>
+                <div>
+                    <label for="categoria">Categoria</label><br>
+                    <input type="text" name="categoria" id="categoria_item">
+                </div>
+                <div>
+                    <label for="fornecedor">Forncedor</label><br>
+                    <input type="text" name="fornecedor" id="fornecedor_item">
+                </div>
+            </div>
+            <div class="right_field">
+                <div>
+                    <label for="quantidade">Quantidade</label><br>
+                    <input type="text" name="quantidade" id="quantidade_item">
+                </div>
+                <div>
+                    <label for="valorUn">ValorUn</label><br>
+                    <input type="text" name="valorUn" id="valorUn_item">
+                </div>
+                <div>
+                    <label for="data_validade">Data de Validade</label><br>
+                    <input type="date" name="data_validade" id="data_validade_item">
+                </div>
+                <div>
+                    <label for="quantMin">Quantidade Minima</label><br>
+                    <input type="text" name="quantMin" id="quantMin_item" placeholder="Quantidade Minima" required>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="fechar_atualizar">
+            <button onclick="closeAtualizarModal()">Fechar</button>
+        </div>
+        <div>
+            <button onclick="atualizarItemDatabase()">Atualizar</button>
+        </div>
+    </div>
+</div>
+
+<div id="excluir_item_modal" class="excluir_item_modal">
+    <div class="exluir_modal">
+        <div class="header">
+            <h5>Excluir Item</h5>
+        </div>
+        <div class="content">
+            <div class="options">
+                <label for="item_selector">Selecione um Item</label><br>
+                <select name="item_selector" id="excluir_item_selector">
+                    <option value="">Selecione um item</option>
+                </select>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="fechar">
+                <button onclick="closeEcluirModal()">Fechar</button>
+            </div>
+            <div class="excluir">
+                <button onclick="exluirItem()">Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="script/busca_barra_pesquisa.js"></script>
 <script src="script/load_table_items.js"></script>
 <script src="modais/criarAlertaItemModal/scripts/abrir_criar_alerta_modal.js"></script>
