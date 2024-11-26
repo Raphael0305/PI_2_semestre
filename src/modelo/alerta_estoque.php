@@ -9,7 +9,7 @@ class AlertaEstoque
     private $conn;
 
 
-    public function __construct(int $ID_ingrediente, int $quantidade_estoque, DateTime $data_alerta, int $idAlerta = 0)
+    public function __construct(int $ID_ingrediente, float $quantidade_estoque, DateTime $data_alerta, int $idAlerta = 0)
     {
         $this->ID_alerta = $idAlerta;
         $this->ID_ingrediente = $ID_ingrediente;
@@ -31,7 +31,7 @@ class AlertaEstoque
     }
 
 
-    public function criarAlerta(): bool
+    public function criarAlerta($quantidadeMin): bool
     {
         $item = $this->toJson();
         unset($item['ID_alerta']);
@@ -46,8 +46,7 @@ class AlertaEstoque
         } catch (PDOException $e) {
             echo "Erro ao inserir item no banco de dados: {$e->getMessage()}";
         }
-        $quantidade_estoque = $item['quantidade_estoque'];
-        $updateQuery = "UPDATE ingrediente SET quantMin = {$quantidade_estoque} WHERE ID_ingrediente = {$item['ID_ingrediente']}";
+        $updateQuery = "UPDATE ingrediente SET quantMin = {$quantidadeMin} WHERE ID_ingrediente = {$item['ID_ingrediente']}";
         $stmt = $this->conn->prepare($updateQuery);
 
         try {

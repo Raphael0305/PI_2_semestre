@@ -1,29 +1,16 @@
 <?php
 include __DIR__ . "/../modelo/alerta_estoque.php";
-header("Content: application/php");
+header("Content-Type: application/json");
 
-$data = file_get_contents('php//input');
+$data = json_decode(file_get_contents('php://input'), true);
 $alerta = new AlertaEstoque(
-    ID_ingrediente: $data['ID_igrediente'],
-    quantidade_estoque: $data['quantidade_estoque'],
-    data_alerta: DateTime::createFromFormat('Y-m-d', $data['data_alerta']),
+    ID_ingrediente: (int)$data['ID_ingrediente'],
+    quantidade_estoque: (float)$data['quantidade_estoque'],
+    data_alerta: new DateTime('now'),
 );
 
-if ($alerta->criarAlerta()) {
+if ($alerta->criarAlerta($data['quantMin'])) {
     echo json_encode(['status' => true, 'msg' => 'Alerta cadastrado com sucesso']);
 } else {
     echo json_encode(['status' => false, 'msg' => 'Alerta nao cadastrado']);
 }
-
-
-
-
-
-
-// modelo json
-// [
-//     'item' => [
-//         'ID_ingrediente' => '2',
-//         'quantidade_estoque' => '500',
-//         'data_alerta' => '2024-11-24',
-//     ],

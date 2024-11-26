@@ -11,6 +11,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
     <link rel="stylesheet" href="css/cadastrar_popup.css">
     <link rel="stylesheet" href="css/atualizar_item_modal.css">
     <link rel="stylesheet" href="css/excluir_modal.css">
+    <link rel="stylesheet" href="modais/criarAlertaItemModal/css/cadastrar_item_modal_style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../../assets/img/logo.png">
     <script src="https://kit.fontawesome.com/e874ed8d35.js" crossorigin="anonymous"></script>
@@ -98,8 +99,8 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                     <button class="cadastrar_item" onclick="openPopup()">Cadastrar Item</button>
                     <button class="atualizar_item" onclick="openAtualizarModal()">Atualizar Item</button>
                     <button class="excluir_item" onclick="openExcluirModal()">Excluir Item</button>
-                    <button class="exportar_relatorio">Exportar Relatorio</button>
-                    <button class="criar_alerta" onclick="criarAlerta()">Criar alerta de baixo nível</button>
+                    <button class="exportar_relatorio">Exportar </button>
+                    <button class="criar_alerta" onclick="abrirCriarAlertaModal()">Criar alerta de baixo nível</button>
 
                 </div>
             </div>
@@ -110,7 +111,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
     include_once __DIR__ . '/modais/cadastrar_item_modal.php';
     include_once __DIR__ . '/modais/atualizar_item_modal.php';
     include_once __DIR__ . '/modais/excluir_item_modal.php';
-    include_once __DIR__ . '/modais/criar_alerta_estoque_modal.php';
+    include_once __DIR__ . '/modais/criarAlertaItemModal/criar_alerta_estoque_modal.php';
 
     ?>
 
@@ -118,7 +119,8 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
 
 <script src="script/busca_barra_pesquisa.js"></script>
 <script src="script/load_table_items.js"></script>
-<script src="script/criar_alerta_baixo_nivel.js"></script>
+<script src="modais/criarAlertaItemModal/scripts/abrir_criar_alerta_modal.js"></script>
+<script src="modais/criarAlertaItemModal/scripts/criar_alerta_btn.js"></script>
 <script src="script/cadastrar_popup.js"></script>
 <script src="script/atualiza_modal.js"></script>
 <script src="script/excluir_modal.js"></script>
