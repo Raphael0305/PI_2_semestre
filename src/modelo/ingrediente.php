@@ -1,6 +1,6 @@
 <?php
 include_once __dir__ . "/../uteis/categoria_enum.php";
-class Ingredientes
+class Ingrediente
 {
     private String $nome;
     private Categoria $categoria;
@@ -10,7 +10,7 @@ class Ingredientes
     private String $data_validade;
     private float $quantMin;
 
-    public function __construct($nome, Categoria $categoria, $fornecedor, $quantidade, $valorUn, $data_validade, $quantMin)
+    public function __construct(String $nome, Categoria $categoria, String $fornecedor, float $quantidade, float $valorUn, String $data_validade, float $quantMin)
     {
         $this->nome = $nome;
         $this->categoria = $categoria;
@@ -34,17 +34,31 @@ class Ingredientes
         return Categoria::OUTROS;
     }
 
+
+    public static function fromJson(array $data): Ingrediente
+    {
+        return new Ingrediente(
+            $data['nome'],
+            self::getCategoria($data['categoria']),
+            $data['fornecedor'],
+            $data['quantidade'],
+            $data['valorUn'],
+            $data['data_validade'],
+            $data['quantMin']
+        );
+    }
+
     public function toJson()
     {
         return [
 
-            'nome' => $this->nome,
-            'categoria' => $this->categoria->name,
-            'fornecedor' => $this->fornecedor,
-            'quantidade' => $this->quantidade,
-            'valorUn' => $this->valorUn,
-            'data_validade' => $this->data_validade,
-            'quantMin' => $this->quantMin
+            'nome' => $this->nome ?? '',
+            'categoria' => $this->categoria->name ?? '',
+            'fornecedor' => $this->fornecedor ?? '',
+            'quantidade' => $this->quantidade ?? '',
+            'valorUn' => $this->valorUn ?? '',
+            'data_validade' => $this->data_validade ?? '',
+            'quantMin' => $this->quantMin ?? ''
         ];
     }
 }
