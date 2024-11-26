@@ -57,31 +57,31 @@
                     <div class="inputs elemento1">
                         <label for="nome">Nome</label>
                         <input type="text" name="nome" id="nome" required>
-                    </div>    
-            
+                    </div>
 
                     <div class="inputs">
                         <label for="email">Email</label>
-                        <input type="text" name="email" id="email" required>
+                        <input type="email" name="email" id="email" required>
                     </div>
 
                     <div class="inputs">
                         <label for="senha">Senha</label>
-                        <input type="text" name="senha" id="senha" required>
+                        <input type="password" name="senha" id="senha" required>
                     </div>
 
                     <div class="inputs">
                         <label for="telefone">Telefone</label>
-                        <input type="text" name="telefone" id="telefone">
+                        <input type="tel" name="telefone" id="telefone">
                     </div>
 
                     <div class="inputs inputs2">
-                        <select name="nivelAcesso" id="nivelAcesso" >
+                        <select name="nivelAcesso" id="nivelAcesso">
                             <option value="1">Administrador</option>
                             <option value="2">Funcionário</option>
                         </select>
                     </div>
-                    <a href="#" class="enviar" onclick="cadastrarUsuario()">ENVIAR</a>
+
+                    <button type="submit" class="enviar" onclick="cadastrarUsuario()">ENVIAR</button>
                 </form>
                 <?php 
                         if (isset($_SESSION["error"])) { 
