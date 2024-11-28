@@ -40,7 +40,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                 </li>
                 <li>
                     <a href="../marmitas/marmita.php">
-                        <img src="../../assets/icons/usuario.png" alt="" width="28">
+                        <img src="../../assets/icons/icons8-cadastro-100.png" alt="" width="28">
                     </a>
                 </li>
             </ol>

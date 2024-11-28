@@ -30,6 +30,11 @@
                         <img src="../../assets/icons/estoque.svg" alt="" width="28">
                     </a>
                 </li>
+                <li>
+                    <a href="../marmitas/marmita.php">
+                        <img src="../../assets/icons/icons8-cadastro-100.png" alt="" width="28">
+                    </a>
+                </li>
             </ol>
         </div>
 

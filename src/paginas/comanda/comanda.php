@@ -24,13 +24,18 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                     </a>
                 </li>
                 <li>
-                    <a href="../comanda/comanda.php">
-                        <img src="../../assets/icons/comanda.svg" alt="" width="28">
+                    <a href="../estoque/estoque.php">
+                        <img src="../../assets/icons/estoque.svg" alt="" width="28">
                     </a>
                 </li>
                 <li>
-                    <a href="../estoque/estoque.php">
-                        <img src="../../assets/icons/estoque.svg" alt="" width="28">
+                    <a href="../novoUsuario/cadastro.php">
+                        <img src="../../assets/icons/usuario.png" alt="" width="28">
+                    </a>
+                </li>
+                <li>
+                    <a href="../marmitas/marmita.php">
+                        <img src="../../assets/icons/icons8-cadastro-100.png" alt="" width="28">
                     </a>
                 </li>
             </ol>
