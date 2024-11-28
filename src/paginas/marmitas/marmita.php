@@ -109,7 +109,7 @@
             
                     <!-- Botão de Enviar -->
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success" class="enviar">CADASTRAR MARMITA</button>
+                       <button type="button" class="btn btn-success" id="botaoCadastrar">CADASTRAR MARMITA</button>
                     </div>
                 </div>
             </form>
