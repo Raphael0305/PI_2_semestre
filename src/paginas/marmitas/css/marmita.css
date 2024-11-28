@@ -58,6 +58,30 @@ do lado direito */
     background-color: #5A853B;
 }
 
-.boxCadastro{    
-   background-color: blue;
+.titulo{
+    margin-top: 2%;
+    color: #274311;
 }
+
+.boxCadastro{
+    display: flex;
+    flex-direction: column;
+    margin: 8% auto;
+    width: 30%;
+    border-radius: 5px;
+    border: 5px solid #B1CFA1;
+    background-color: #A4BB94;
+    align-items: center;
+    padding-bottom: 35px;
+}
+
+.la{
+    font-size: 1.2rem;
+}
+
+
+
+
+
+
+
