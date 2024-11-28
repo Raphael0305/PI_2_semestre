@@ -70,55 +70,42 @@
                         <input type="number" id="precoMarmita" name="precoMarmita" class="form-control" placeholder="Ex.: 25.00" min="0" step="0.01" required>
                     </div>
             
-     
-                    <div class="mb-3">
-                        <label for="ingredientes" class="form-label la">Selecione os Ingredientes e Quantidade</label>
-                        
-                        <!-- Ingrediente 1 -->
-                        <div class="d-flex align-items-center mb-2">
-                            <select id="ingrediente1" name="ingrediente1" class="form-select me-2" style="max-width: 250px;" required>
-                                <option value="">Escolha o ingrediente 1</option>
-                                <option value="1">Ingrediente 1</option>
-                                <option value="2">Ingrediente 2</option>
-                                <option value="3">Ingrediente 3</option>
-                            </select>
-                            <input type="number" name="quantidade1" id="quantidade1" class="form-control" placeholder="Quantidade" min="1" style="max-width: 120px;" required oninput="atualizarUnidade('quantidade1', 'unidade1')">
-                            <select id="unidade1" name="unidade1" class="form-select ms-2" style="max-width: 80px;" required disabled>
-                                <option value="gramas">g</option>
-                                <option value="quilos">kg</option>
-                            </select>
-                        </div>
-            
-                        <!-- Ingrediente 2 -->
-                        <div class="d-flex align-items-center mb-2">
-                            <select id="ingrediente2" name="ingrediente2" class="form-select me-2" style="max-width: 250px;" required>
-                                <option value="">Escolha o ingrediente 2</option>
-                                <option value="1">Ingrediente 1</option>
-                                <option value="2">Ingrediente 2</option>
-                                <option value="3">Ingrediente 3</option>
-                            </select>
-                            <input type="number" name="quantidade2" id="quantidade2" class="form-control" placeholder="Quantidade" min="1" style="max-width: 120px;" required oninput="atualizarUnidade('quantidade2', 'unidade2')">
-                            <select id="unidade2" name="unidade2" class="form-select ms-2" style="max-width: 80px;" required disabled>
-                                <option value="gramas">g</option>
-                                <option value="quilos">kg</option>
-                            </select>
-                        </div>
-            
-                        <!-- Ingrediente 3 -->
-                        <div class="d-flex align-items-center mb-2">
-                            <select id="ingrediente3" name="ingrediente3" class="form-select me-2" style="max-width: 250px;" required>
-                                <option value="">Escolha o ingrediente 3</option>
-                                <option value="1">Ingrediente 1</option>
-                                <option value="2">Ingrediente 2</option>
-                                <option value="3">Ingrediente 3</option>
-                            </select>
-                            <input type="number" name="quantidade3" id="quantidade3" class="form-control" placeholder="Quantidade" min="1" style="max-width: 120px;" required oninput="atualizarUnidade('quantidade3', 'unidade3')">
-                            <select id="unidade3" name="unidade3" class="form-select ms-2" style="max-width: 80px;" required disabled>
-                                <option value="gramas">g</option>
-                                <option value="quilos">kg</option>
-                            </select>
-                        </div>
+                    <!-- Ingrediente 1 -->
+                    <div class="d-flex align-items-center mb-2">
+                        <select id="ingrediente1" name="ingrediente1" class="form-select me-2" style="max-width: 250px;" required aria-label="Selecione o ingrediente 1">
+                            <option value="">Escolha o ingrediente 1</option>
+                        </select>
+                        <input type="number" name="quantidade1" id="quantidade1" class="form-control" placeholder="Quantidade" min="1" style="max-width: 120px;" required oninput="atualizarUnidade('quantidade1', 'unidade1')">
+                        <select id="unidade1" name="unidade1" class="form-select ms-2" style="max-width: 80px;" required disabled>
+                            <option value="gramas">g</option>
+                            <option value="quilos">kg</option>
+                        </select>
                     </div>
+
+                    <!-- Ingrediente 2 -->
+                    <div class="d-flex align-items-center mb-2">
+                        <select id="ingrediente2" name="ingrediente2" class="form-select me-2" style="max-width: 250px;" required aria-label="Selecione o ingrediente 2">
+                            <option value="">Escolha o ingrediente 2</option>
+                        </select>
+                        <input type="number" name="quantidade2" id="quantidade2" class="form-control" placeholder="Quantidade" min="1" style="max-width: 120px;" required oninput="atualizarUnidade('quantidade2', 'unidade2')">
+                        <select id="unidade2" name="unidade2" class="form-select ms-2" style="max-width: 80px;" required disabled>
+                            <option value="gramas">g</option>
+                            <option value="quilos">kg</option>
+                        </select>
+                    </div>
+
+                    <!-- Ingrediente 3 -->
+                    <div class="d-flex align-items-center mb-2">
+                        <select id="ingrediente3" name="ingrediente3" class="form-select me-2" style="max-width: 250px;" required aria-label="Selecione o ingrediente 3">
+                            <option value="">Escolha o ingrediente 3</option>
+                        </select>
+                        <input type="number" name="quantidade3" id="quantidade3" class="form-control" placeholder="Quantidade" min="1" style="max-width: 120px;" required oninput="atualizarUnidade('quantidade3', 'unidade3')">
+                        <select id="unidade3" name="unidade3" class="form-select ms-2" style="max-width: 80px;" required disabled>
+                            <option value="gramas">g</option>
+                            <option value="quilos">kg</option>
+                        </select>
+                    </div>
+
             
                     <!-- Botão de Enviar -->
                     <div class="text-center">
@@ -131,17 +118,6 @@
     </div>
 </body>
 
-<script>
-    function atualizarUnidade(inputId, unidadeId) {
-        var quantidade = document.getElementById(inputId).value;
-        var unidadeSelect = document.getElementById(unidadeId);
-
-        if (quantidade >= 1000) {
-            unidadeSelect.value = "quilos"; 
-        } else {
-            unidadeSelect.value = "gramas"; 
-        }
-    }
-</script>
+<script src="./script/marmita.js"></script>
 
 </html>

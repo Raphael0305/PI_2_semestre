@@ -155,4 +155,5 @@ class Query
             return false;
         }
     }
+
 }
