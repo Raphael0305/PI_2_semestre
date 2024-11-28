@@ -19,7 +19,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
         <div class="left-side">
             <ol class="menu_list">
                 <li>
-                    <a>
+                    <a href="./../homepage/home_page.php">
                         <img class="menu" src="../../assets/icons/menu.svg" alt="" width="28">
                     </a>
                 </li>
@@ -42,7 +42,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                 <nav class="navbar navbar-light">
                     <div class="container-fluid nav-content">
                         <div>
-                            <img src="../../assets/img/logo.png" alt="Marmitaria Fit Logo" width="45">
+                            <a href="./../homepage/home_page.php"><img src="../../assets/img/logo.png" alt="Marmitaria Fit Logo" width="45"></a>
                             <a class="navbar-brand ms-2 fs-6 fst-italic">Marmitaria Fit</a>
                         </div>
                         <div>

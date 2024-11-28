@@ -16,7 +16,7 @@
         <div class="left-side">
             <ol class="menu_list">
                 <li>
-                    <a>
+                    <a href="./../homepage/home_page.php">
                         <img class="menu" src="../../assets/icons/menu.svg" alt="" width="28">
                     </a>
                 </li>
@@ -83,12 +83,6 @@
 
                     <button type="submit" class="enviar" onclick="cadastrarUsuario()">ENVIAR</button>
                 </form>
-                <?php 
-                        if (isset($_SESSION["error"])) { 
-                            echo $_SESSION["error"];  
-                        } 
-                ?>
-
         </div>
     </div>
 </body>
