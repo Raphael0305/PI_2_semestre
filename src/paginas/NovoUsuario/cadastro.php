@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./CSS/cadastro.css">
+    <link rel="stylesheet" href="./CSS/cadastro.css?v1.2">
     <link rel="icon" type="image/x-icon" href="../../assets/img/logo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -16,7 +16,7 @@
         <div class="left-side">
             <ol class="menu_list">
                 <li>
-                    <a>
+                    <a href="./../homepage/home_page.php">
                         <img class="menu" src="../../assets/icons/menu.svg" alt="" width="28">
                     </a>
                 </li>
@@ -28,6 +28,11 @@
                 <li>
                     <a href="../estoque/estoque.php">
                         <img src="../../assets/icons/estoque.svg" alt="" width="28">
+                    </a>
+                </li>
+                <li>
+                    <a href="../marmitas/marmita.php">
+                        <img src="../../assets/icons/icons8-cadastro-100.png" alt="" width="28">
                     </a>
                 </li>
             </ol>
@@ -57,38 +62,32 @@
                     <div class="inputs elemento1">
                         <label for="nome">Nome</label>
                         <input type="text" name="nome" id="nome" required>
-                    </div>    
-            
+                    </div>
 
                     <div class="inputs">
                         <label for="email">Email</label>
-                        <input type="text" name="email" id="email" required>
+                        <input type="email" name="email" id="email" required>
                     </div>
 
                     <div class="inputs">
                         <label for="senha">Senha</label>
-                        <input type="text" name="senha" id="senha" required>
+                        <input type="password" name="senha" id="senha" required>
                     </div>
 
                     <div class="inputs">
                         <label for="telefone">Telefone</label>
-                        <input type="text" name="telefone" id="telefone">
+                        <input type="tel" name="telefone" id="telefone">
                     </div>
 
                     <div class="inputs inputs2">
-                        <select name="nivelAcesso" id="nivelAcesso" >
+                        <select name="nivelAcesso" id="nivelAcesso">
                             <option value="1">Administrador</option>
                             <option value="2">Funcionário</option>
                         </select>
                     </div>
-                    <a href="#" class="enviar" onclick="cadastrarUsuario()">ENVIAR</a>
-                </form>
-                <?php 
-                        if (isset($_SESSION["error"])) { 
-                            echo $_SESSION["error"];  
-                        } 
-                ?>
 
+                    <button type="submit" class="enviar" onclick="cadastrarUsuario()">ENVIAR</button>
+                </form>
         </div>
     </div>
 </body>

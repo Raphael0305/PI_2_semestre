@@ -3,18 +3,16 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/home_page.css">
+    <link rel="stylesheet" href="css/comanda.css">
     <link rel="icon" type="image/x-icon" href="../../assets/img/logo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 
     <title>Marmitaria Fit</title>
 </head>
-
 <body>
     <div class="screen">
         <!-- Barra lateral com botões -->
@@ -23,11 +21,6 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                 <li>
                     <a href="./../homepage/home_page.php">
                         <img class="menu" src="../../assets/icons/menu.svg" alt="" width="28">
-                    </a>
-                </li>
-                <li>
-                    <a href="../comanda/comanda.php">
-                        <img src="../../assets/icons/comanda.svg" alt="" width="28">
                     </a>
                 </li>
                 <li>
@@ -60,20 +53,16 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                         <div>
                             <form method="post" style="display: inline;">
                             <a href="../../controle/logout.php" class="btn btn-danger" style="height: 32px; font-size: 12px;" role="button">Sair</a>
+
                             </form>
                         </div>
                     </div>
                 </nav>
             </div>
             <div class="page-content">
-            <p style="text-align: center;">Seja Bem Vindo,<br>
-                <?php
-                echo $_SESSION['userName']
                 
-                ?></p>
             </div>
         </div>
     </div>
 </body>
-
 </html>

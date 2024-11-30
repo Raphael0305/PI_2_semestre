@@ -77,7 +77,6 @@ async function getItemById(id){
         })
     })
     return await response.json()
-    
 
 }
 

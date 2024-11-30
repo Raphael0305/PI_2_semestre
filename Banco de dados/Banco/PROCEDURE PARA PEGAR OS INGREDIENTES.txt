@@ -1,0 +1,61 @@
+DELIMITER $$
+
+CREATE PROCEDURE AtualizarEstoqueMarmita(
+    IN p_ID_marmita INT,   -- ID da marmita
+    IN p_quantidade INT     -- Quantidade de marmitas a serem pedidas
+)
+BEGIN
+    -- Declarações de variáveis
+    DECLARE v_ID_ingrediente INT;
+    DECLARE v_quantidade_necessaria INT;
+    DECLARE v_estoque_atual INT;
+    DECLARE done INT DEFAULT 0;
+
+    -- Cursor para pegar os ingredientes e suas quantidades
+    DECLARE cursor_ingredientes CURSOR FOR
+        SELECT ID_ingrediente, quantidade_necessaria
+        FROM marmita_ingredi
+        WHERE ID_marmita = p_ID_marmita;
+
+    -- Handler para encerrar o cursor
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+    -- Abrir o cursor
+    OPEN cursor_ingredientes;
+
+    -- Loop para processar cada ingrediente
+    read_loop: LOOP
+        -- Buscar o próximo ingrediente e a quantidade
+        FETCH cursor_ingredientes INTO v_ID_ingrediente, v_quantidade_necessaria;
+
+        -- Verificar se o loop terminou
+        IF done = 1 THEN
+            LEAVE read_loop;
+        END IF;
+
+        -- Multiplicar a quantidade necessária pela quantidade de marmitas
+        SET v_quantidade_necessaria = v_quantidade_necessaria * p_quantidade;
+
+        -- Obter o estoque atual do ingrediente
+        SELECT quantidade INTO v_estoque_atual
+        FROM ingrediente
+        WHERE ID_ingrediente = v_ID_ingrediente;
+
+        -- Verificar se há estoque suficiente
+        IF v_estoque_atual >= v_quantidade_necessaria THEN
+            -- Atualizar o estoque
+            UPDATE ingrediente
+            SET quantidade = quantidade - v_quantidade_necessaria
+            WHERE ID_ingrediente = v_ID_ingrediente;
+        ELSE
+            -- Caso o estoque seja insuficiente, lançar um erro
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = CONCAT('Estoque insuficiente para o ingrediente ID: ', v_ID_ingrediente);
+        END IF;
+
+    END LOOP;
+
+    -- Fechar o cursor
+    CLOSE cursor_ingredientes;
+END $$
+
+DELIMITER ;
