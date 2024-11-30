@@ -12,6 +12,19 @@ class Query
         $this->conectar = $conexao->getConexao();
     }
 
+    public function beginTransaction() {
+        return $this->conectar->beginTransaction();
+    }
+
+    public function commit() {
+        return $this->conectar->commit();
+    }
+
+
+    public function rollBack() {
+        return $this->conectar->rollBack();
+    }
+
     // ----------------------------------------------------------------------------------------------------------------------------------------
     // BUSCAR DE INGREDIENTES**
     public function buscarIngredientesPesquisa($pesquisa)
@@ -153,6 +166,45 @@ class Query
         } catch (PDOException $e) {
             echo "Ocorreu um erro ao cadastrar item: " . $e->getMessage();
             return false;
+        }
+    }
+
+
+    public function cadastrarMarmita($nomeMarmita, $precoMarmita) {
+        try {
+    
+            $consurta = "INSERT INTO marmitas (nomeMarmita, preco) VALUES (:nomeMarmita, :preco)";
+            $query = $this->conectar->prepare($consurta);
+            $query->bindParam(':nomeMarmita', $nomeMarmita);
+            $query->bindParam(':preco', $precoMarmita);
+            $query->execute();
+    
+
+            $idMarmita = $this->conectar->lastInsertId();
+    
+            return $idMarmita;
+    
+        } catch (Exception $e) {
+            throw new Exception("Erro ao cadastrar marmita: " . $e->getMessage());
+        }
+    }
+
+    public function cadastrarIngredientes($idMarmita, $ingredientes) {
+        try {
+            foreach ($ingredientes as $ingrediente) {
+                $idIngrediente = $ingrediente['id'];
+                $quantidade = $ingrediente['quantidade'];
+
+                $consurta = "INSERT INTO marmita_ingredi (quantidade_necessaria, ID_ingrediente, ID_marmita) 
+                                   VALUES (:quantidade_necessaria, :ID_ingrediente, :ID_marmita)";
+                $query = $this->conectar->prepare($consurta);
+                $query->bindParam(':quantidade_necessaria', $quantidade);
+                $query->bindParam(':ID_ingrediente', $idIngrediente);
+                $query->bindParam(':ID_marmita', $idMarmita);
+                $query->execute();
+            }
+        } catch (Exception $e) {
+            throw new Exception("Erro ao cadastrar ingredientes: " . $e->getMessage());
         }
     }
 }

@@ -61,7 +61,7 @@ do lado direito */
 .elementos{
     display: flex;
     flex-direction: column;
-    margin: 4% auto;
+    margin: auto auto;
     width: 50%;
     border-radius: 5px;
     border: 5px solid #B1CFA1;

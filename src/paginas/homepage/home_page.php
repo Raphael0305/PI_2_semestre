@@ -21,7 +21,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
         <div class="left-side">
             <ol class="menu_list">
                 <li>
-                    <a>
+                    <a href="./../homepage/home_page.php">
                         <img class="menu" src="../../assets/icons/menu.svg" alt="" width="28">
                     </a>
                 </li>
@@ -35,6 +35,16 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                         <img src="../../assets/icons/estoque.svg" alt="" width="28">
                     </a>
                 </li>
+                <li>
+                    <a href="../novoUsuario/cadastro.php">
+                        <img src="../../assets/icons/usuario.png" alt="" width="28">
+                    </a>
+                </li>
+                <li>
+                    <a href="../marmitas/marmita.php">
+                        <img src="../../assets/icons/icons8-cadastro-100.png" alt="" width="28">
+                    </a>
+                </li>
             </ol>
         </div>
 
@@ -44,13 +54,12 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                 <nav class="navbar navbar-light">
                     <div class="container-fluid nav-content">
                         <div>
-                            <img src="../../assets/img/logo.png" alt="Marmitaria Fit Logo" width="45">
+                            <a href="./../homepage/home_page.php"><img src="../../assets/img/logo.png" alt="Marmitaria Fit Logo" width="45"></a>
                             <a class="navbar-brand ms-2 fs-6 fst-italic">Marmitaria Fit</a>
                         </div>
                         <div>
                             <form method="post" style="display: inline;">
                             <a href="../../controle/logout.php" class="btn btn-danger" style="height: 32px; font-size: 12px;" role="button">Sair</a>
-
                             </form>
                         </div>
                     </div>
