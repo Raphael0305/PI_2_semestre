@@ -46,7 +46,7 @@ class Estoque
 
     public function buscarItemPorId(String $id): array
     {
-        $query = "SELECT * FROM ingrediente WHERE ID_ingrediente = $id";
+        $query = "SELECT * FROM ingrediente WHERE ID_ingrediente = {$id}";
         $stmt = $this->conn->prepare($query);
 
         try {

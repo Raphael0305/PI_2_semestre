@@ -6,12 +6,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/inventory_page.css?v1.5">
-    <link rel="stylesheet" href="css/content.css?v1.1">
-    <link rel="stylesheet" href="css/cadastrar_popup.css">
-    <link rel="stylesheet" href="css/atualizar_item_modal.css">
-    <link rel="stylesheet" href="css/excluir_modal.css">
-    <link rel="stylesheet" href="modais/criarAlertaItemModal/css/cadastrar_item_modal_style.css">
+    <link rel="stylesheet" href="css/gerenciar_pedidos.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../../assets/img/logo.png">
     <script src="https://kit.fontawesome.com/e874ed8d35.js" crossorigin="anonymous"></script>
@@ -25,7 +20,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
         <div class="left-side">
             <ol class="menu_list">
                 <li>
-                    <a href="./../homepage/home_page.php">
+                    <a>
                         <img class="menu" src="../../assets/icons/menu.svg" alt="" width="28">
                     </a>
                 </li>
@@ -39,11 +34,6 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                         <img src="../../assets/icons/usuario.png" alt="" width="28">
                     </a>
                 </li>
-                <li>
-                    <a href="../marmitas/marmita.php">
-                        <img src="../../assets/icons/icons8-cadastro-100.png" alt="" width="28">
-                    </a>
-                </li>
             </ol>
         </div>
 
@@ -53,7 +43,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                 <nav class="navbar navbar-light">
                     <div class="container-fluid nav-content">
                         <div>
-                            <a href="./../homepage/home_page.php"><img src="../../assets/img/logo.png" alt="Marmitaria Fit Logo" width="45"></a>
+                            <img src="./../../assets/img/logo.png" alt="Marmitaria Fit Logo" width="45">
                             <a class="navbar-brand ms-2 fs-6 fst-italic">Marmitaria Fit</a>
                         </div>
                         <div>
