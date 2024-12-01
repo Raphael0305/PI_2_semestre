@@ -26,6 +26,9 @@
             <a href="../novoUsuario/cadastro.php" class="mb-3">
                 <img src="../../assets/icons/usuario.png" alt="Cadastro" width="28">
             </a>
+                        <a href="../marmitas/marmita.php" class="mb-3">
+                <img src="../../assets/icons/icons8-cadastro-100.png" alt="Cadastro" width="28">
+            </a>
         </div>
 
         <!-- Parte Central -->
@@ -65,8 +68,11 @@
                         <select id="ingrediente1" name="ingrediente1" class="form-select me-2" style="max-width: 250px;" required>
                             <option value="">Escolha o ingrediente 1</option>
                         </select>
-                        <input type="number" name="quantidade1" id="quantidade1" class="form-control" placeholder="Quantidade" min="1" style="max-width: 120px;" required>
-                        <select id="unidade1" name="unidade1" class="form-select ms-2" style="max-width: 80px;" required disabled>
+                        <input type="number" name="quantidade1" id="quantidade1" class="form-control" min="0.1" 
+                               step="0.01" 
+                               placeholder="Quantidade" style="max-width: 120px;"  
+                               oninput="atualizarUnidade('quantidade1', 'unidade1')">
+                        <select id="unidade1" name="unidade1" class="form-select ms-2" style="max-width: 80px;" disabled>
                             <option value="gramas">g</option>
                             <option value="quilos">kg</option>
                         </select>
@@ -74,10 +80,13 @@
 
                     <!-- Ingrediente 2 -->
                     <div class="d-flex align-items-center mb-2">
-                        <select id="ingrediente2" name="ingrediente2" class="form-select me-2" style="max-width: 250px;" required>
+                        <select id="ingrediente2" name="ingrediente2" class="form-select me-2" style="max-width: 250px;" >
                             <option value="">Escolha o ingrediente 2</option>
                         </select>
-                        <input type="number" name="quantidade2" id="quantidade2" class="form-control" placeholder="Quantidade" min="1" style="max-width: 120px;" required>
+                        <input type="number" name="quantidade2" id="quantidade2" class="form-control" min="0.1" 
+                               step="0.01" 
+                               placeholder="Quantidade" style="max-width: 120px;" required 
+                               oninput="atualizarUnidade('quantidade2', 'unidade2')">
                         <select id="unidade2" name="unidade2" class="form-select ms-2" style="max-width: 80px;" required disabled>
                             <option value="gramas">g</option>
                             <option value="quilos">kg</option>
@@ -86,10 +95,14 @@
 
                     <!-- Ingrediente 3 -->
                     <div class="d-flex align-items-center mb-2">
-                        <select id="ingrediente3" name="ingrediente3" class="form-select me-2" style="max-width: 250px;" required>
+                        <select id="ingrediente3" name="ingrediente3" class="form-select me-2" style="max-width: 250px;" required >
                             <option value="">Escolha o ingrediente 3</option>
                         </select>
-                        <input type="number" name="quantidade3" id="quantidade3" class="form-control" placeholder="Quantidade" min="1" style="max-width: 120px;" required>
+                        <input type="number" name="quantidade3" id="quantidade3" class="form-control" 
+                               min="0.1" step="0.01" placeholder="Quantidade" 
+                               style="max-width: 120px;" required 
+                               oninput="atualizarUnidade('quantidade3', 'unidade3')">
+
                         <select id="unidade3" name="unidade3" class="form-select ms-2" style="max-width: 80px;" required disabled>
                             <option value="gramas">g</option>
                             <option value="quilos">kg</option>
@@ -98,11 +111,10 @@
 
                     <!-- Botão de Enviar -->
                     <div class="text-center">
-                        <button type="button" class="btn btn-success" id="botaoCadastrar">CADASTRAR MARMITA</button>
+                        <button type="button" class="btn btn-success" id="botaoCadastrar"">CADASTRAR MARMITA</button>
                     </div>
                 </div>
             </form>
-
         </div>
     </div>
 </body>
