@@ -2,31 +2,37 @@
 include_once __DIR__ . '/../modelo/query.php';
 include_once __DIR__ . './../uteis/manipulador_password.php';
 header('Content-Type: application/json');
-$postData = file_get_contents("php://input");
+$dadu = json_decode(file_get_contents("php://input"), true);
 
-session_start();
+if (!$dadu) {
+    echo json_encode([
+        'status' => 'erro',
+        'mensagem' => 'JSON inválido ou não recebido',
+        'raw' => file_get_contents("php://input")
+    ]);
+    exit;
+}
 
-$data = json_decode($postData, true);
 
-$nome = htmlspecialchars($data['nome']) ;
-$email = htmlspecialchars($data['email']);
-$senha = htmlspecialchars($data['senha']) ;
-$telefone = htmlspecialchars($data['telefone']);
-$nivelAcesso = (int) htmlspecialchars($data['nivelAcesso']) ;
-
-$stmt = new Query();
-
-$hash = ManipuladorPassword::hash_password($senha);
+$nome = htmlspecialchars($dadu['nome']) ;
+$email = htmlspecialchars($dadu['email']);
+$senha = htmlspecialchars($dadu['senha']) ;
+$telefone = htmlspecialchars($dadu['telefone']);
+$nivelAcesso = htmlspecialchars($dadu['nivelAcesso']);
 
 try {
-    $isProductRegistered = $stmt->cadastrarUsuario($nome,$email,$hash,$telefone,$nivelAcesso);
+    $query = new Query();
+
+    $hash = ManipuladorPassword::hash_password($senha);
+
+    $query->cadastrarUsuarioProcedure($nome,$email,$hash,$telefone,$nivelAcesso);
     echo json_encode([
-        "isRegistered" => true
+        "status" => 'sucesso'
     ]);
     exit;
 } catch (PDOException $th) {
     echo json_encode([
-        "isRegistered" => false
+        "status" => 'erro', 'menssage' => $th->getMessage()
     ]);
     exit;
 }

@@ -241,5 +241,25 @@ class Query
         }
     }
     
+    public function cadastrarUsuarioProcedure($nome,$email, $senha, $telefone, $nivelAcesso) {
+
+        $query = "call addUsuario(:Nomecliente, :Email, :Senha, :Telefone, :nivelAcessso)";
+    
+        $stmt = $this->conectar->prepare($query);
+    
+        $stmt->bindValue(":Nomecliente", $nome);
+        $stmt->bindValue(":Email", $email);
+        $stmt->bindValue(":Senha", $senha);
+        $stmt->bindValue(":Telefone", $telefone);
+        $stmt->bindValue(":nivelAcessso", $nivelAcesso);
+    
+        try {
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Ocorreu um erro ao cadastrar item: " . $e->getMessage();
+            return false;
+        }
+    }
 
 }

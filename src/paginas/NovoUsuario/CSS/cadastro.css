@@ -54,7 +54,6 @@ do lado direito */
 }
 .menu_list li:hover {
     border: 1px solid black;
-    border-radius: 10px;
     background-color: #5A853B;
 }
 
@@ -84,12 +83,8 @@ do lado direito */
 
 
 
-/* parte do form  */
 
-.form-control, .form-select {
-    border: 2px solid #B1CFA1;
-    border-radius: 5px;
-}
+
 
 .form-control:focus, .form-select:focus {
     border-color: #5C7345;
