@@ -10,13 +10,23 @@ class PedidoModelo
     private DateTime $dataEntrega;
     private Marmita $marmita;
 
-    public function __construct(int $id_pedido, string $nomeCliente, int $quantidade, DateTime $dataEntrega, Marmita $marmita)
+    public function __construct(string $nomeCliente, int $quantidade, Marmita $marmita, int $id_pedido = 0)
     {
         $this->id_pedido = $id_pedido;
         $this->nomeCliente = $nomeCliente;
         $this->quantidade = $quantidade;
-        $this->dataEntrega = $dataEntrega;
+        $this->dataEntrega = new DateTime('now');
         $this->marmita = $marmita;
+    }
+
+    public static function factoryOnlyID(int $id): PedidoModelo
+    {
+        return new PedidoModelo(
+            id_pedido: $id,
+            nomeCliente: '',
+            quantidade: 0,
+            marmita: Marmita::factoryMarmitaVazia()
+        );
     }
     public function getIdPedido(): int
     {
@@ -46,7 +56,7 @@ class PedidoModelo
     public function toArray(): array
     {
         return [
-            "id_pedido" => $this->id_pedido,
+            "id_pedido" => $this->id_pedido ?? 0,
             "nomeCliente" => $this->nomeCliente,
             "quantidade" => $this->quantidade,
             "dataEntrega" => $this->dataEntrega,
