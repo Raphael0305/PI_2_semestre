@@ -2,6 +2,7 @@
 include_once __dir__ . "/../uteis/categoria_enum.php";
 class Ingrediente
 {
+    private int $id_ingrediente;
     private String $nome;
     private Categoria $categoria;
     private String $fornecedor;
@@ -10,8 +11,9 @@ class Ingrediente
     private String $data_validade;
     private float $quantMin;
 
-    public function __construct(String $nome, Categoria $categoria, String $fornecedor, float $quantidade, float $valorUn, String $data_validade, float $quantMin)
+    public function __construct(String $nome, Categoria $categoria, String $fornecedor, float $quantidade, float $valorUn, String $data_validade, float $quantMin, int $id_ingrediente = 0)
     {
+        $this->id_ingrediente = $id_ingrediente;
         $this->nome = $nome;
         $this->categoria = $categoria;
         $this->fornecedor = $fornecedor;
@@ -19,6 +21,18 @@ class Ingrediente
         $this->valorUn = (float) $valorUn;
         $this->data_validade = $data_validade;
         $this->quantMin = (float) $quantMin;
+    }
+    public static function factoryIngredienteVazio(): Ingrediente
+    {
+        return new Ingrediente(
+            nome: '',
+            categoria: Categoria::OUTROS,
+            fornecedor: '',
+            quantidade: 0.0,
+            valorUn: 0.0,
+            data_validade: '',
+            quantMin: 0.0
+        );
     }
 
     static function getCategoria(String $categoria): Categoria
@@ -35,20 +49,21 @@ class Ingrediente
     }
 
 
-    public static function fromJson(array $data): Ingrediente
+    public static function fromArray(array $data): Ingrediente
     {
+
         return new Ingrediente(
-            $data['nome'],
-            self::getCategoria($data['categoria']),
-            $data['fornecedor'],
-            $data['quantidade'],
-            $data['valorUn'],
-            $data['data_validade'],
-            $data['quantMin']
+            nome: $data['nome'],
+            categoria: self::getCategoria($data['categoria']),
+            fornecedor: $data['fornecedor'],
+            quantidade: $data['quantidade'],
+            valorUn: $data['valorUn'],
+            data_validade: $data['data_validade'],
+            quantMin: $data['quantMin']
         );
     }
 
-    public function toJson()
+    public function toArray()
     {
         return [
 
