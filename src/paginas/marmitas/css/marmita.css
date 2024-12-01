@@ -33,13 +33,7 @@ do lado direito */
     
 }
 
-.page-content {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90%;
-}
+
 
 .menu_list {
     padding: 0;
@@ -58,10 +52,30 @@ do lado direito */
     background-color: #5A853B;
 }
 
-.titulo{
-    margin-top: 2%;
-    color: #274311;
+.sidebar{
+    background-color: #5A853B;
 }
+
+.topo{
+    background-color: #B87F60;
+}
+
+.sidebar a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    border: 1px solid transparent;
+    border-radius: 6px; 
+    transition: all 0.3s ease; 
+}
+
+.sidebar a:hover {
+    border: 1px solid #526C3F; 
+    padding: 8px;
+    background-color: rgba(82, 108, 63, 0.1);
+}
+
 
 .boxCadastro{
     display: flex;
