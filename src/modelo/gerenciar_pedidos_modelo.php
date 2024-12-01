@@ -9,24 +9,25 @@ class GerenciarPedidosModelo
     private PedidoModelo $pedidoModelo;
     private $conn;
 
-    public function __construct(PedidoModelo $pedido)
+    public function __construct(PedidoModelo $pedidoModelo)
     {
-        $this->pedidoModelo = $pedido;
+        $this->pedidoModelo = $pedidoModelo;
         $database = new ConexaoBanco();
         $this->conn = $database->getConexao();
     }
 
-    public static function factoryEmptyValues(): PedidoModelo
+    public static function factoryEmptyValues(): GerenciarPedidosModelo
     {
-        return new PedidoModelo(
-            id_pedido: 0,
-            nomeCliente: '',
-            quantidade: 0,
-            dataEntrega: new DateTime(),
-            marmita: new Marmita(
-                id_marmita: 0,
-                nomeMarmita: '',
-                preco: 0.0,
+        return new GerenciarPedidosModelo(
+            pedidoModelo: new PedidoModelo(
+                id_pedido: 0,
+                nomeCliente: '',
+                quantidade: 0,
+                marmita: new Marmita(
+                    id_marmita: 0,
+                    nomeMarmita: '',
+                    preco: 0.0,
+                )
             )
         );
     }
@@ -57,8 +58,9 @@ class GerenciarPedidosModelo
     }
 
 
-    public function excluirPedido($pedidoId): bool|string
+    public function excluirPedido(): bool|string
     {
+        $pedidoId = $this->pedidoModelo->getIdPedido();
         $query = "DELETE FROM pedidos WHERE id_pedido = {$pedidoId}";
         $stmt = $this->conn->prepare($query);
 
@@ -76,10 +78,10 @@ class GerenciarPedidosModelo
     {
         $query = "SELECT * FROM pedidos";
         $stmt = $this->conn->prepare(query: $query);
-        $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         try {
             $stmt->execute();
+            $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $pedidos ?? [];
         } catch (PDOException $e) {
             echo "Ocorreu um erro ao buscar os pedidos: " . $e->getMessage();
