@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27/11/2024 às 22:30
+-- Tempo de geração: 01/12/2024 às 01:42
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -27,55 +27,84 @@ DELIMITER $$
 --
 -- Procedimentos
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `AtualizarEstoqueMarmita` (IN `p_ID_marmita` INT, IN `p_quantidade` INT)   BEGIN
-    -- Declarações de variáveis
-    DECLARE v_ID_ingrediente INT;
-    DECLARE v_quantidade_necessaria INT;
-    DECLARE v_estoque_atual INT;
-    DECLARE done INT DEFAULT 0;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addMarmita` (IN `p_nomeM` VARCHAR(100), IN `p_preco` DECIMAL(10,2), IN `p_qtdeMarmita1` DECIMAL(10,2), IN `p_qtdeMarmita2` DECIMAL(10,2), IN `p_qtdeMarmita3` DECIMAL(10,2), IN `P_IDingred1` INT, IN `P_IDingred2` INT, IN `P_IDingred3` INT)   BEGIN 
 
-    -- Cursor para pegar os ingredientes e suas quantidades
-    DECLARE cursor_ingredientes CURSOR FOR
-        SELECT ID_ingrediente, quantidade_necessaria
-        FROM marmita_ingredi
-        WHERE ID_marmita = p_ID_marmita;
+	DECLARE var_idMarmita INT;
+	
+	INSERT INTO marmitas(nomeMarmita,preco) VALUE (p_nomeM,p_preco);
+	
+	SET var_idMarmita = LAST_INSERT_ID();
+	
+	INSERT INTO marmita_ingredi(ID_marmita, ID_ingrediente, quantidade_necessaria) 
+	VALUES (var_idMarmita, P_IDingred1, p_qtdeMarmita1),
+	       (var_idMarmita, P_IDingred2, p_qtdeMarmita2),
+	       (var_idMarmita, P_IDingred3, p_qtdeMarmita3);
+END$$
 
-    -- Handler para encerrar o cursor
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addUsuario` (IN `p_nome` VARCHAR(100), IN `p_email` VARCHAR(100), IN `p_senha` VARCHAR(100), IN `p_telefone` VARCHAR(100), IN `p_Nivel` VARCHAR(20))   BEGIN 
+	INSERT INTO usuario(nome,email,senha,telefone,nivel_acesso) VALUE(p_nome,p_email,p_senha,p_telefone,p_Nivel);
+END$$
 
-    -- Abrir o cursor
-    OPEN cursor_ingredientes;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cadastrarPedido` (IN `p_nome` VARCHAR(100), IN `p_quantidade` INT, IN `p_dataEntrega` DATE, IN `ID_marmita` INT)   BEGIN 
+	INSERT INTO pedidos (nomeCliente, quantidade, dataEntrega, ID_marmita) 
+	VALUE (p_nome,p_quantidade,p_dataEntrega,ID_marmita);
+END$$
 
-    -- Loop para processar cada ingrediente
-    read_loop: LOOP
-        -- Buscar o próximo ingrediente e a quantidade
-        FETCH cursor_ingredientes INTO v_ID_ingrediente, v_quantidade_necessaria;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Pro_atualizaIngredientes` (IN `p_ID_Marmita` INT, `p_Quantidade` INT)   BEGIN 
+	DECLARE var_qtde_necessaria INT ;
+	DECLARE var_ID_Ingrediente INT ;
+	DECLARE var_Qtde_Atual INT;
+	DECLARE var_QtdeGasta INT;
+	DECLARE var_resultado INT;
+	DECLARE fim INT DEFAULT 0;
+	DECLARE var_message TEXT;
+			
+	DECLARE cur CURSOR FOR 
+		SELECT quantidade_necessaria,ID_ingrediente 
+		FROM marmita_ingredi
+		WHERE ID_marmita = p_ID_Marmita;
+		
+	DECLARE CONTINUE handler FOR NOT FOUND SET fim = TRUE;
+	
+	
+	OPEN cur;
+	
+	read_loop: LOOP
+		FETCH cur INTO var_qtde_necessaria, var_ID_Ingrediente;
+		
+		IF fim THEN 
+			LEAVE read_loop;
+		END IF;
+		
+		SELECT quantidade INTO var_Qtde_Atual FROM ingrediente WHERE ID_ingrediente = var_ID_Ingrediente; 
+		
+		SET var_QtdeGasta = p_Quantidade * var_qtde_necessaria;
 
-        -- Verificar se o loop terminou
-        IF done = 1 THEN
-            LEAVE read_loop;
-        END IF;
+		SET var_resultado = var_Qtde_Atual - var_QtdeGasta;
 
-        -- Multiplicar a quantidade necessária pela quantidade de marmitas
-        SET v_quantidade_necessaria = v_quantidade_necessaria * p_quantidade;
+		IF var_resultado >= 0 THEN
+			UPDATE ingrediente SET quantidade = quantidade - var_QtdeGasta WHERE ID_ingrediente = var_ID_Ingrediente;
+		ELSE 
+            SET var_message = CONCAT('Estoque insuficiente para o ingrediente ID: ', CAST(var_ID_Ingrediente AS CHAR));
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = var_message;
+		END IF;
+		
+	END LOOP;
 
-        -- Obter o estoque atual do ingrediente
-        SELECT quantidade INTO v_estoque_atual
-        FROM ingrediente
-        WHERE ID_ingrediente = v_ID_ingrediente;
+	
+	CLOSE cur;
+	
+END$$
 
-        -- Verificar se há estoque suficiente
-        IF v_estoque_atual >= v_quantidade_necessaria THEN
-            -- Atualizar o estoque
-            UPDATE ingrediente
-            SET quantidade = quantidade - v_quantidade_necessaria
-            WHERE ID_ingrediente = v_ID_ingrediente;
-        END IF;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_atualizaIngredi` (IN `p_novaQtde` INT, IN `p_id_ingrediente` INT, IN `p_tipo` ENUM('retirar','adicionar'))   BEGIN 
+	
+	IF p_tipo = 'retirar' then 
+		UPDATE ingrediente  SET quantidade = quantidade - p_novaQtde  WHERE ID_ingrediente = p_id_ingrediente; 
+	ELSE 
+		UPDATE ingrediente  SET quantidade = quantidade + p_novaQtde  WHERE ID_ingrediente = p_id_ingrediente;  
+	END IF;
 
-    END LOOP;
 
-    -- Fechar o cursor
-    CLOSE cursor_ingredientes;
 END$$
 
 DELIMITER ;
@@ -115,10 +144,10 @@ CREATE TABLE `ingrediente` (
 --
 
 INSERT INTO `ingrediente` (`ID_ingrediente`, `nome`, `categoria`, `fornecedor`, `quantidade`, `valorUn`, `data_validade`, `quantMin`) VALUES
-(1, 'Frango', 'proteína', 'Fornecedor A', 997, 10.50, '2024-12-31', 10),
-(2, 'Arroz Integral', 'carboidrato', 'Fornecedor B', 1000, 5.00, '2025-01-15', 10),
-(3, 'Brócolis', 'vegetal', 'Fornecedor C', 1000, 7.30, '2025-02-28', 10),
-(4, 'Batata Doce', 'carboidrato', 'Fornecedor D', 997, 6.20, '2025-03-10', 10),
+(1, 'Frango', 'proteína', 'Fornecedor A', 998, 10.50, '2024-12-31', 10),
+(2, 'Arroz Integral', 'carboidrato', 'Fornecedor B', 998, 5.00, '2025-01-15', 10),
+(3, 'Brócolis', 'vegetal', 'Fornecedor C', 999, 7.30, '2025-02-28', 10),
+(4, 'Batata Doce', 'carboidrato', 'Fornecedor D', 1000, 6.20, '2025-03-10', 10),
 (5, 'Peixe', 'proteína', 'Fornecedor E', 1000, 15.00, '2024-12-25', 10),
 (6, 'Abóbora', 'vegetal', 'Fornecedor F', 1000, 4.80, '2025-04-05', 10);
 
@@ -158,7 +187,8 @@ INSERT INTO `marmitas` (`ID_marmita`, `nomeMarmita`, `preco`) VALUES
 (1, 'Marmita Fitness Frango', 20.00),
 (2, 'Marmita Fitness Peixe', 25.00),
 (3, 'Marmita Vegetariana', 18.50),
-(4, 'Marmita Low Carb', 22.00);
+(4, 'Marmita Low Carb', 22.00),
+(5, 'Marmita de Frango', 25.50);
 
 -- --------------------------------------------------------
 
@@ -185,7 +215,10 @@ INSERT INTO `marmita_ingredi` (`ID_marmitaIngredi`, `quantidade_necessaria`, `ID
 (5, 150, 3, 3),
 (6, 100, 2, 3),
 (7, 120, 6, 4),
-(8, 80, 1, 4);
+(8, 80, 1, 4),
+(9, 2, 2, 5),
+(10, 2, 1, 5),
+(11, 1, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -198,21 +231,26 @@ CREATE TABLE `pedidos` (
   `nomeCliente` varchar(255) NOT NULL,
   `quantidade` int(11) NOT NULL,
   `dataEntrega` date NOT NULL,
-  `ID_marmita` int(11) NOT NULL
+  `ID_marmita` int(11) NOT NULL,
+  `completo` enum('sim','não') DEFAULT 'não'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `pedidos`
 --
 
-INSERT INTO `pedidos` (`ID_pedido`, `nomeCliente`, `quantidade`, `dataEntrega`, `ID_marmita`) VALUES
-(1, 'Cliente Exemplo', 3, '2024-11-30', 1);
+INSERT INTO `pedidos` (`ID_pedido`, `nomeCliente`, `quantidade`, `dataEntrega`, `ID_marmita`, `completo`) VALUES
+(4, 'jonas', 1, '2022-03-01', 1, 'não'),
+(5, 'jonas', 1, '2022-03-01', 1, 'não'),
+(7, 'jonas', 3, '2023-03-05', 2, 'sim'),
+(8, 'jonas', 1, '2023-03-05', 1, 'sim'),
+(9, 'teste1', 1, '2023-01-01', 5, 'sim');
 
 --
 -- Acionadores `pedidos`
 --
 DELIMITER $$
-CREATE TRIGGER `TG_atualizaIngredientes` AFTER INSERT ON `pedidos` FOR EACH ROW BEGIN
+CREATE TRIGGER `TG_atualizaIngredientes` AFTER UPDATE ON `pedidos` FOR EACH ROW BEGIN
 
     DECLARE ID_marmita INT;
     DECLARE quantidade INT;
@@ -222,7 +260,7 @@ CREATE TRIGGER `TG_atualizaIngredientes` AFTER INSERT ON `pedidos` FOR EACH ROW 
     SET quantidade = NEW.quantidade;
 
 
-    CALL AtualizarEstoqueMarmita(ID_marmita, quantidade);
+    CALL Pro_atualizaIngredientes(ID_marmita, quantidade);
 END
 $$
 DELIMITER ;
@@ -250,7 +288,8 @@ INSERT INTO `usuario` (`ID_usuario`, `nome`, `email`, `senha`, `telefone`, `nive
 (1, 'Isabely ', 'Isabely@marmita.com', '$2y$10$TkJI3TOgF0aJ0PPSuwszv.7349VQ5X0HhjOE7SfZQRn78qdaM1Kuu', '1999475869', 'funcionario'),
 (2, 'Raphael ', 'Raphael@marmita.com', '$2y$10$dhH3mKwHk1YKGCEDUljm/uRTRME2DWagKLMSkbfw4jX6pczHAVKN6', '1999639249', 'funcionario'),
 (3, 'Rayanne ', 'Rayanne@marmita.com', '$2y$10$LwccwhU6rfewWUglmGKoveZ3hcX5/0A9ZQKLlgWOEuzzRvuWupT7q', '1998145863', 'funcionario'),
-(4, 'Vitor', 'Vitor@marmita.com', '$2y$10$CTml5izmvunVQFviH.KLsu8cYgk.AtwI3hfcOJ99FO/yzaBy0XX4S', '1999029418', 'funcionario');
+(4, 'Vitor', 'Vitor@marmita.com', '$2y$10$CTml5izmvunVQFviH.KLsu8cYgk.AtwI3hfcOJ99FO/yzaBy0XX4S', '1999029418', 'funcionario'),
+(5, 'Maria', 'maria@email.com', 'senha123', '11987654321', 'administrador');
 
 --
 -- Índices para tabelas despejadas
@@ -304,7 +343,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `alerta_estoque_baixo`
 --
 ALTER TABLE `alerta_estoque_baixo`
-  MODIFY `ID_alerta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_alerta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `ingrediente`
@@ -316,25 +355,25 @@ ALTER TABLE `ingrediente`
 -- AUTO_INCREMENT de tabela `marmitas`
 --
 ALTER TABLE `marmitas`
-  MODIFY `ID_marmita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID_marmita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `marmita_ingredi`
 --
 ALTER TABLE `marmita_ingredi`
-  MODIFY `ID_marmitaIngredi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID_marmitaIngredi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `ID_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `ID_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
