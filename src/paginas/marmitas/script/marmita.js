@@ -1,6 +1,6 @@
 document.getElementById('botaoCadastrar').addEventListener('click', async (e) => {
-    e.preventDefault(); // Evita o comportamento padrão de recarregar a página
-    await enviarDadosFormulario(); // Chama a função de envio
+    e.preventDefault(); 
+    await enviarDadosFormulario(); 
 });
 
 
@@ -11,7 +11,6 @@ async function getItems(){
             "Content-Type": "application/json"
         }
     })
-    
     return await response.json()
 }
 
@@ -47,10 +46,19 @@ async function enviarDadosFormulario(){
         },
         body: JSON.stringify(dados) 
     });
+    if (!response.ok) { 
+        console.error("Erro na requisição:", response.status, response.statusText);
+        return;
+    }
 
-    const resultado = await response.json();
-    console.log("Em, viado com sucesso");
-    limpaCampos()
+    try {
+        const resultado = await response.json();
+        console.log("Resultado:", resultado);
+        console.log("Em, viado com sucesso");
+    } catch (error) {
+        console.error("Erro ao interpretar o JSON:", error);
+    }
+    limpaCampos();
 }
 
 function pegarDadosFormulario() {
@@ -58,15 +66,15 @@ function pegarDadosFormulario() {
     const precoMarmita = document.getElementById('precoMarmita').value;
     
     const ingrediente1 = document.getElementById('ingrediente1').value;
-    const quantidade1 = document.getElementById('quantidade1').value;
+    const quantidade1 = parseFloat(document.getElementById('quantidade1').value);  
 
 
     const ingrediente2 = document.getElementById('ingrediente2').value;
-    const quantidade2 = document.getElementById('quantidade2').value;
+    const quantidade2 = parseFloat(document.getElementById('quantidade2').value); 
 
 
     const ingrediente3 = document.getElementById('ingrediente3').value;
-    const quantidade3 = document.getElementById('quantidade3').value;
+    const quantidade3 = parseFloat(document.getElementById('quantidade3').value);  
 
 
     return {
@@ -78,7 +86,6 @@ function pegarDadosFormulario() {
             { id: ingrediente3, quantidade: quantidade3}
         ]
     };
-    
 }
 
 
