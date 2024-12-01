@@ -7,8 +7,23 @@
     <link rel="icon" type="image/x-icon" href="../../assets/img/logo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Marmitaria Fit</title>
-</head>
+    <style>
+        .card {
+            border: 3px solid #B1CFA1;
+            border-radius: 10px;
+        }
 
+        .botaoCadastro {
+            background-color: #5A952D;
+            color: #ffff;
+        }
+
+        .inputes:focus {
+            border-color: #5A952D;
+            box-shadow: 0 0 5px #5A952D;
+        }
+    </style>
+</head>
 <body class="bg-light">
     <div class="d-flex flex-column flex-md-row vh-100">
         <!-- Sidebar -->
@@ -25,17 +40,15 @@
             <a href="../novoUsuario/cadastro.php" class="mb-3">
                 <img src="../../assets/icons/usuario.png" alt="Cadastro" width="28">
             </a>
-                        <a href="../marmitas/marmita.php" class="mb-3">
+            <a href="../marmitas/marmita.php" class="mb-3">
                 <img src="../../assets/icons/icons8-cadastro-100.png" alt="Cadastro" width="28">
             </a>
         </div>
 
         <!-- Parte central -->
-
-        <div class="flex-grow-1 " >
-
+        <div class="flex-grow-1">
             <!-- navbar -->
-            <nav class="topo navbar  shadow-sm py-3">
+            <nav class="topo navbar shadow-sm py-3">
                 <div class="container-fluid d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
                         <a href="./../homepage/home_page.php">
@@ -49,40 +62,39 @@
                 </div>
             </nav>
 
-            <!-- Parte do form  -->
-            <div class="container py-5" style="margin: 6% auto;">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6 col-md-8">
-                        <div class="card shadow-sm">
-                            <div class="card-body" style="background-color:#A4BB94; border: 3px solid #B1CFA1 ; padding: 20px; border-radius: 10px;">
-                                <h2 class="text-center text-uppercase mb-" style="color: #274311;">Cadastro de Usuário</h2>
-                                <form id="formCadastro">
-                                    <div class="mb-3">
-                                        <label for="nome" class="form-label">Nome</label>
-                                        <input type="text" class="form-control inputes" id="nome" name="nome" placeholder="Digite o nome completo" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control inputes" id="email" name="email" placeholder="Digite o email" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="senha" class="form-label">Senha</label>
-                                        <input type="password" class="form-control inputes" id="senha" name="senha" placeholder="Digite a senha" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="telefone" class="form-label ">Telefone</label>
-                                        <input type="tel" class="form-control inputes" id="telefone" name="telefone" placeholder="(00) 00000-0000">
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="nivelAcesso" class="form-label ">Nível de Acesso</label>
-                                        <select class="form-select inputes inputes" id="nivelAcesso" name="nivelAcesso" required >
-                                            <option value="1">Administrador</option>
-                                            <option value="2">Funcionário</option>
-                                        </select>
-                                    </div>
-                                    <button type="button" class="btn  w-100 botaoCadastro" id="botaoCadastrar" style="background-color:#5A952D ; color: white; margin-top: 5%;"  onclick="cadastrarUsuario()">Cadastrar Usuário</button>
-                                </form>
-                            </div>
+            <!-- Formulário centralizado -->
+            <div class="container d-flex justify-content-center align-items-center" style="height: calc(100vh - 80px);">
+                <div class="col-lg-6 col-md-8">
+                    <div class="card shadow-sm">
+                        <div class="card-body" style="background-color:#A4BB94; border-radius: 8px;">
+                            <h2 class="text-center text-uppercase mb-4" style="color: #274311; font-size: 2.5rem;">Cadastro de Usuário</h2>
+                            <form id="formCadastro">
+                                <div class="mb-3">
+                                    <label for="nome" class="form-label">Nome</label>
+                                    <input type="text" class="form-control inputes" id="nome" name="nome" placeholder="Digite o nome completo">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control inputes" id="email" name="email" placeholder="Digite o email">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="senha" class="form-label">Senha</label>
+                                    <input type="password" class="form-control inputes" id="senha" name="senha" placeholder="Digite a senha">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="telefone" class="form-label">Telefone</label>
+                                    <input type="tel" class="form-control inputes" id="telefone" name="telefone" placeholder="(00) 00000-0000">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="nivelAcesso" class="form-label">Nível de Acesso</label>
+                                    <select class="form-select inputes" id="nivelAcesso" name="nivelAcesso">
+                                        <option value="">Nível de Acesso</option>
+                                        <option value="administrador">Administrador</option>
+                                        <option value="funcionario">Funcionário</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn w-100 botaoCadastro" id="botaoCadastrar" onclick="validarFormulario()">Cadastrar Usuário</button>
+                            </form>
                         </div>
                     </div>
                 </div>
