@@ -27,57 +27,6 @@ DELIMITER $$
 --
 -- Procedimentos
 --
-<<<<<<< HEAD
-CREATE DEFINER=`root`@`localhost` PROCEDURE `AtualizarEstoqueMarmita` (IN `p_ID_marmita` INT, IN `p_quantidade` INT)   BEGIN
-    -- Declarações de variáveis
-    DECLARE v_ID_ingrediente INT;
-    DECLARE v_quantidade_necessaria INT;
-    DECLARE v_estoque_atual INT;
-    DECLARE done INT DEFAULT 0;
-
-    -- Cursor para pegar os ingredientes e suas quantidades
-    DECLARE cursor_ingredientes CURSOR FOR
-        SELECT ID_ingrediente, quantidade_necessaria
-        FROM marmita_ingredi
-        WHERE ID_marmita = p_ID_marmita;
-
-    -- Handler para encerrar o cursor
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
-
-    -- Abrir o cursor
-    OPEN cursor_ingredientes;
-
-    -- Loop para processar cada ingrediente
-    read_loop: LOOP
-        -- Buscar o próximo ingrediente e a quantidade
-        FETCH cursor_ingredientes INTO v_ID_ingrediente, v_quantidade_necessaria;
-
-        -- Verificar se o loop terminou
-        IF done = 1 THEN
-            LEAVE read_loop;
-        END IF;
-
-        -- Multiplicar a quantidade necessária pela quantidade de marmitas
-        SET v_quantidade_necessaria = v_quantidade_necessaria * p_quantidade;
-
-        -- Obter o estoque atual do ingrediente
-        SELECT quantidade INTO v_estoque_atual
-        FROM ingrediente
-        WHERE ID_ingrediente = v_ID_ingrediente;
-
-        -- Verificar se há estoque suficiente
-        IF v_estoque_atual >= v_quantidade_necessaria THEN
-            -- Atualizar o estoque
-            UPDATE ingrediente
-            SET quantidade = quantidade - v_quantidade_necessaria
-            WHERE ID_ingrediente = v_ID_ingrediente;
-        END IF;
-
-    END LOOP;
-
-    -- Fechar o cursor
-    CLOSE cursor_ingredientes;
-=======
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addMarmita` (IN `p_nomeM` VARCHAR(100), IN `p_preco` DECIMAL(10,2), IN `p_qtdeMarmita1` DECIMAL(10,2), IN `p_qtdeMarmita2` DECIMAL(10,2), IN `p_qtdeMarmita3` DECIMAL(10,2), IN `P_IDingred1` INT, IN `P_IDingred2` INT, IN `P_IDingred3` INT)   BEGIN 
 
 	DECLARE var_idMarmita INT;
@@ -156,7 +105,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `p_atualizaIngredi` (IN `p_novaQtde`
 	END IF;
 
 
->>>>>>> dev
 END$$
 
 DELIMITER ;
@@ -302,11 +250,7 @@ INSERT INTO `pedidos` (`ID_pedido`, `nomeCliente`, `quantidade`, `dataEntrega`, 
 -- Acionadores `pedidos`
 --
 DELIMITER $$
-<<<<<<< HEAD
-CREATE TRIGGER `TG_atualizaIngredientes` AFTER INSERT ON `pedidos` FOR EACH ROW BEGIN
-=======
 CREATE TRIGGER `TG_atualizaIngredientes` AFTER UPDATE ON `pedidos` FOR EACH ROW BEGIN
->>>>>>> dev
 
     DECLARE ID_marmita INT;
     DECLARE quantidade INT;
@@ -316,11 +260,7 @@ CREATE TRIGGER `TG_atualizaIngredientes` AFTER UPDATE ON `pedidos` FOR EACH ROW 
     SET quantidade = NEW.quantidade;
 
 
-<<<<<<< HEAD
-    CALL AtualizarEstoqueMarmita(ID_marmita, quantidade);
-=======
     CALL Pro_atualizaIngredientes(ID_marmita, quantidade);
->>>>>>> dev
 END
 $$
 DELIMITER ;
