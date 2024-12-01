@@ -13,7 +13,7 @@
     <div class="d-flex flex-column flex-md-row vh-100">
         <!-- Sidebar -->
         <div class="sidebar text-white d-flex flex-column align-items-center py-4 px-3" style="width: 60px;">
-        <a href="./../homepage/home_page.php" class="mb-4">
+            <a href="./../homepage/home_page.php" class="mb-4">
                 <img src="../../assets/icons/menu.svg" alt="Menu" width="32">
             </a>
             <a href="../comanda/comanda.php" class="mb-3">

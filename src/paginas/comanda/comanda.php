@@ -30,7 +30,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
             <a href="../novoUsuario/cadastro.php" class="mb-3">
                 <img src="../../assets/icons/usuario.png" alt="Cadastro" width="28">
             </a>
-            <a href="../marmitas/marmita.php" class="mb-3">
+                        <a href="../marmitas/marmita.php" class="mb-3">
                 <img src="../../assets/icons/icons8-cadastro-100.png" alt="Cadastro" width="28">
             </a>
         </div>
