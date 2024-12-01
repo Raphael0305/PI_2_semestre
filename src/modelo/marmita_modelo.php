@@ -9,7 +9,7 @@ class Marmita
     private float $preco;
     private array $ingredientes;
 
-    public function __construct(int $id_marmita, String $nomeMarmita, float $preco)
+    public function __construct(int $id_marmita, String $nomeMarmita = '', float $preco = 0.0)
     {
         $todosIngrediente = [];
         $database = new ConexaoBanco();
