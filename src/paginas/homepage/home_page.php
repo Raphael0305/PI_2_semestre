@@ -11,7 +11,6 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
     <link rel="icon" type="image/x-icon" href="../../assets/img/logo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-
     <title>Marmitaria Fit</title>
 </head>
 
@@ -50,7 +49,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
 
         <!-- Conteúdo da navbar e área útil -->
         <div class="right-side">
-            <div class="navbar-position ">
+            <div class="navbar-position">
                 <nav class="navbar navbar-light">
                     <div class="container-fluid nav-content">
                         <div>
@@ -59,18 +58,25 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                         </div>
                         <div>
                             <form method="post" style="display: inline;">
-                            <a href="../../controle/logout.php" class="btn btn-danger" style="height: 32px; font-size: 12px;" role="button">Sair</a>
+                                <a href="../../controle/logout.php" class="btn btn-danger" style="height: 32px; font-size: 12px;" role="button">Sair</a>
                             </form>
                         </div>
                     </div>
                 </nav>
             </div>
             <div class="page-content">
-            <p style="text-align: center;">Seja Bem Vindo,<br>
-                <?php
-                echo $_SESSION['userName']
-                
-                ?></p>
+                <p style="text-align: center;">Seja Bem Vindo,<br>
+                    <strong>
+                        <?php
+                        // Verifica se a variável de sessão está definida
+                        if (isset($_SESSION['userName'])) {
+                            echo htmlspecialchars($_SESSION['userName'], ENT_QUOTES, 'UTF-8'); // Proteção contra XSS
+                        } else {
+                            echo "Usuário";
+                        }
+                        ?>
+                    </strong>
+                </p>
             </div>
         </div>
     </div>
