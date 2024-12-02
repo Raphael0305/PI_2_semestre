@@ -67,7 +67,7 @@
                 <div class="col-lg-6 col-md-8">
                     <div class="card shadow-sm">
                         <div class="card-body" style="background-color:#A4BB94; border-radius: 8px;">
-                            <h2 class="text-center text-uppercase mb-4" style="color: #274311; font-size: 2.5rem;">Cadastro de Usuário</h2>
+                            <h2 class="text-center text-uppercase mb-4" style="color: #274311;">Cadastro de Usuário</h2>
                             <form id="formCadastro">
                                 <div class="mb-3">
                                     <label for="nome" class="form-label">Nome</label>
