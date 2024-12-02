@@ -4,8 +4,7 @@ class ConexaoBanco
 {
     private $conexao;
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->conectarBanco('marmitaria', 'db', 'root', 'Marmita@02');
     }
 

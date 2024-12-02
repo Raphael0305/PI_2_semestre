@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 01/12/2024 às 01:42
+-- Tempo de geração: 27/11/2024 às 22:30
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -144,10 +144,10 @@ CREATE TABLE `ingrediente` (
 --
 
 INSERT INTO `ingrediente` (`ID_ingrediente`, `nome`, `categoria`, `fornecedor`, `quantidade`, `valorUn`, `data_validade`, `quantMin`) VALUES
-(1, 'Frango', 'proteína', 'Fornecedor A', 998, 10.50, '2024-12-31', 10),
-(2, 'Arroz Integral', 'carboidrato', 'Fornecedor B', 998, 5.00, '2025-01-15', 10),
-(3, 'Brócolis', 'vegetal', 'Fornecedor C', 999, 7.30, '2025-02-28', 10),
-(4, 'Batata Doce', 'carboidrato', 'Fornecedor D', 1000, 6.20, '2025-03-10', 10),
+(1, 'Frango', 'proteína', 'Fornecedor A', 997, 10.50, '2024-12-31', 10),
+(2, 'Arroz Integral', 'carboidrato', 'Fornecedor B', 1000, 5.00, '2025-01-15', 10),
+(3, 'Brócolis', 'vegetal', 'Fornecedor C', 1000, 7.30, '2025-02-28', 10),
+(4, 'Batata Doce', 'carboidrato', 'Fornecedor D', 997, 6.20, '2025-03-10', 10),
 (5, 'Peixe', 'proteína', 'Fornecedor E', 1000, 15.00, '2024-12-25', 10),
 (6, 'Abóbora', 'vegetal', 'Fornecedor F', 1000, 4.80, '2025-04-05', 10);
 
@@ -239,12 +239,17 @@ CREATE TABLE `pedidos` (
 -- Despejando dados para a tabela `pedidos`
 --
 
+<<<<<<< HEAD
 INSERT INTO `pedidos` (`nomeCliente`, `quantidade`, `dataEntrega`, `ID_marmita`, `completo`) VALUES
 ('patrik', 1, '2022-03-01', 1, 'nao'),
 ('jonas', 1, '2022-03-01', 1, 'nao'),
 ('carlos rodolfo', 3, '2023-03-05', 2, 'nao'),
 ('pedro palmo', 1, '2023-03-05', 1, 'sim'),
 ('olosco', 1, '2023-01-01', 5, 'sim');
+=======
+INSERT INTO `pedidos` (`ID_pedido`, `nomeCliente`, `quantidade`, `dataEntrega`, `ID_marmita`) VALUES
+(1, 'Cliente Exemplo', 3, '2024-11-30', 1);
+>>>>>>> f915b682e9bd6ee0db12f0e1f4ef1678351a1076
 
 --
 -- Acionadores `pedidos`
@@ -288,8 +293,7 @@ INSERT INTO `usuario` (`ID_usuario`, `nome`, `email`, `senha`, `telefone`, `nive
 (1, 'Isabely ', 'Isabely@marmita.com', '$2y$10$TkJI3TOgF0aJ0PPSuwszv.7349VQ5X0HhjOE7SfZQRn78qdaM1Kuu', '1999475869', 'funcionario'),
 (2, 'Raphael ', 'Raphael@marmita.com', '$2y$10$dhH3mKwHk1YKGCEDUljm/uRTRME2DWagKLMSkbfw4jX6pczHAVKN6', '1999639249', 'funcionario'),
 (3, 'Rayanne ', 'Rayanne@marmita.com', '$2y$10$LwccwhU6rfewWUglmGKoveZ3hcX5/0A9ZQKLlgWOEuzzRvuWupT7q', '1998145863', 'funcionario'),
-(4, 'Vitor', 'Vitor@marmita.com', '$2y$10$CTml5izmvunVQFviH.KLsu8cYgk.AtwI3hfcOJ99FO/yzaBy0XX4S', '1999029418', 'funcionario'),
-(5, 'Maria', 'maria@email.com', 'senha123', '11987654321', 'administrador');
+(4, 'Vitor', 'Vitor@marmita.com', '$2y$10$CTml5izmvunVQFviH.KLsu8cYgk.AtwI3hfcOJ99FO/yzaBy0XX4S', '1999029418', 'funcionario');
 
 --
 -- Índices para tabelas despejadas
@@ -343,7 +347,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `alerta_estoque_baixo`
 --
 ALTER TABLE `alerta_estoque_baixo`
-  MODIFY `ID_alerta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_alerta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `ingrediente`
@@ -367,13 +371,13 @@ ALTER TABLE `marmita_ingredi`
 -- AUTO_INCREMENT de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `ID_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `ID_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
