@@ -8,6 +8,28 @@
     <link rel="icon" type="image/x-icon" href="../../assets/img/logo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Marmitaria Fit</title>
+    <style>
+        .card {
+            border-radius: 10px;
+            border: 3px solid #B1CFA1;
+            background-color: #A4BB94;
+        }
+
+        .form-control:focus {
+            border-color: #5A952D;
+            box-shadow: 0 0 5px #5A952D;
+        }
+
+        .btn-success {
+            background-color: #5A952D;
+            border-color: #5A952D;
+        }
+
+        .btn-success:hover {
+            background-color: #4C8224;
+            border-color: #4C8224;
+        }
+    </style>
 </head>
 
 <body class="bg-light">
@@ -25,6 +47,9 @@
             </a>
             <a href="../novoUsuario/cadastro.php" class="mb-3">
                 <img src="../../assets/icons/usuario.png" alt="Cadastro" width="28">
+            </a>
+            <a href="../marmitas/marmita.php" class="mb-3">
+                <img src="../../assets/icons/icons8-cadastro-100.png" alt="Cadastro" width="28">
             </a>
         </div>
 
@@ -45,68 +70,75 @@
                 </div>
             </nav>
 
-            <!-- Formulário de Cadastro -->
-            <form id="formCadastro" class="container py-5" style="margin: auto  auto;">
-                <div class="boxCadastro card shadow-sm" style="padding: 20px; border-radius: 10px; background-color:#A4BB94; border: 3px solid #B1CFA1;">
-                    <h1 class="titulo text-center" style="color: #274311;">CADASTRO DE MARMITA</h1>
+            <!-- Formulário Centralizado -->
+            <div class="container d-flex justify-content-center align-items-center" style="height: calc(100vh - 80px);">
+                <div class="col-lg-6 col-md-8">
+                    <form id="formCadastro" class="card shadow-sm p-4">
+                        <h1 class="titulo text-center mb-4" style="color: #274311;">CADASTRO DE MARMITA</h1>
 
-                    <div class="mb-3">
-                        <label for="nomeMarmita" class="form-label">Nome da Marmita</label>
-                        <input type="text" id="nomeMarmita" name="nomeMarmita" class="form-control" placeholder="Ex.: Marmita Fit de Frango" required>
-                    </div>
+                        <div class="mb-3">
+                            <label for="nomeMarmita" class="form-label">Nome da Marmita</label>
+                            <input type="text" id="nomeMarmita" name="nomeMarmita" class="form-control" placeholder="Ex.: Marmita Fit de Frango" required>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="precoMarmita" class="form-label">Preço da Marmita (R$)</label>
-                        <input type="number" id="precoMarmita" name="precoMarmita" class="form-control" placeholder="Ex.: 25.00" min="0" step="0.01" required>
-                    </div>
+                        <div class="mb-3">
+                            <label for="precoMarmita" class="form-label">Preço da Marmita (R$)</label>
+                            <input type="number" id="precoMarmita" name="precoMarmita" class="form-control" placeholder="Ex.: 25.00" min="0" step="0.01" required>
+                        </div>
 
-                    <!-- Ingrediente 1 -->
-                    <div class="d-flex align-items-center mb-2">
-                        <select id="ingrediente1" name="ingrediente1" class="form-select me-2" style="max-width: 250px;" required>
-                            <option value="">Escolha o ingrediente 1</option>
-                        </select>
-                        <input type="number" name="quantidade1" id="quantidade1" class="form-control" placeholder="Quantidade" min="1" style="max-width: 120px;" required>
-                        <select id="unidade1" name="unidade1" class="form-select ms-2" style="max-width: 80px;" required disabled>
-                            <option value="gramas">g</option>
-                            <option value="quilos">kg</option>
-                        </select>
-                    </div>
+                        <!-- Ingredientes -->
+                        <div class="mb-2">
+                            <label for="ingrediente1" class="form-label">Ingrediente 1</label>
+                            <div class="d-flex">
+                                <select id="ingrediente1" name="ingrediente1" class="form-select me-2" required>
+                                    <option value="">Escolha o ingrediente 1</option>
+                                </select>
+                                <input type="number" name="quantidade1" id="quantidade1" class="form-control me-2" min="0.1" step="0.01" placeholder="Quantidade" required>
+                                <select id="unidade1" name="unidade1" class="form-select" required>
+                                    <option value="gramas">g</option>
+                                    <option value="quilos">kg</option>
+                                </select>
+                            </div>
+                        </div>
 
-                    <!-- Ingrediente 2 -->
-                    <div class="d-flex align-items-center mb-2">
-                        <select id="ingrediente2" name="ingrediente2" class="form-select me-2" style="max-width: 250px;" required>
-                            <option value="">Escolha o ingrediente 2</option>
-                        </select>
-                        <input type="number" name="quantidade2" id="quantidade2" class="form-control" placeholder="Quantidade" min="1" style="max-width: 120px;" required>
-                        <select id="unidade2" name="unidade2" class="form-select ms-2" style="max-width: 80px;" required disabled>
-                            <option value="gramas">g</option>
-                            <option value="quilos">kg</option>
-                        </select>
-                    </div>
+                        <div class="mb-2">
+                            <label for="ingrediente2" class="form-label">Ingrediente 2</label>
+                            <div class="d-flex">
+                                <select id="ingrediente2" name="ingrediente2" class="form-select me-2" required>
+                                    <option value="">Escolha o ingrediente 2</option>
+                                </select>
+                                <input type="number" name="quantidade2" id="quantidade2" class="form-control me-2" min="0.1" step="0.01" placeholder="Quantidade" required>
+                                <select id="unidade2" name="unidade2" class="form-select" required>
+                                    <option value="gramas">g</option>
+                                    <option value="quilos">kg</option>
+                                </select>
+                            </div>
+                        </div>
 
-                    <!-- Ingrediente 3 -->
-                    <div class="d-flex align-items-center mb-2">
-                        <select id="ingrediente3" name="ingrediente3" class="form-select me-2" style="max-width: 250px;" required>
-                            <option value="">Escolha o ingrediente 3</option>
-                        </select>
-                        <input type="number" name="quantidade3" id="quantidade3" class="form-control" placeholder="Quantidade" min="1" style="max-width: 120px;" required>
-                        <select id="unidade3" name="unidade3" class="form-select ms-2" style="max-width: 80px;" required disabled>
-                            <option value="gramas">g</option>
-                            <option value="quilos">kg</option>
-                        </select>
-                    </div>
+                        <div class="mb-2">
+                            <label for="ingrediente3" class="form-label">Ingrediente 3</label>
+                            <div class="d-flex">
+                                <select id="ingrediente3" name="ingrediente3" class="form-select me-2" required>
+                                    <option value="">Escolha o ingrediente 3</option>
+                                </select>
+                                <input type="number" name="quantidade3" id="quantidade3" class="form-control me-2" min="0.1" step="0.01" placeholder="Quantidade" required>
+                                <select id="unidade3" name="unidade3" class="form-select" required>
+                                    <option value="gramas">g</option>
+                                    <option value="quilos">kg</option>
+                                </select>
+                            </div>
+                        </div>
 
-                    <!-- Botão de Enviar -->
-                    <div class="text-center">
-                        <button type="button" class="btn btn-success" id="botaoCadastrar">CADASTRAR MARMITA</button>
-                    </div>
+                        <!-- Botão de Enviar -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success w-100" id="botaoCadastrar">CADASTRAR MARMITA</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
-
+            </div>
         </div>
     </div>
 </body>
 
 <script src="./script/marmita.js"></script>
-
 </html>

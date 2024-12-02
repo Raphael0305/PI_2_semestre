@@ -5,58 +5,127 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+                
+        .modal-dialog {
+            max-width: 600px; 
+        }
+        
+        .modal-body {
+            max-height: 650px;
+        }
+        
+        .modal-body .mb-2 {
+            margin-bottom: 1rem; 
+        }
+  
+        #atualizar_item_modal .modal-content {
+            background-color: #e9f7e9; 
+            border: 2px solid #4CAF50; 
+            border-radius: 8px; 
+        }
+        .modal-header {
+            background-color: #4CAF50; 
+            color: white;
+            border-bottom: 2px solid #388E3C;
+        }
+
+        .btn-close {
+            color: white;
+        }
+
+        .btn-success {
+            background-color: #4CAF50; 
+            border-color: #388E3C; 
+        }
+
+        .btn-success:hover {
+            background-color: #388E3C; 
+        }
+
+        .btn-secondary {
+            background-color: #A5D6A7; 
+            border-color: #81C784; 
+        }
+
+        .btn-secondary:hover {
+            background-color: #81C784; 
+        }
+
+        .form-label {
+            color: #388E3C; 
+        }
+
+        .form-select, .form-control {
+            border-color: #4CAF50; 
+        }
+
+        .form-select:focus, .form-control:focus {
+            border-color: #388E3C; 
+        }
+    </style>
 </head>
 
 <body>
-    <div class="atualizar_item_modal" id="atualizar_item_modal">
-        <div class="header">Atualizar Item</div>
-        <div class="content">
-            <div class="select_item">
-                <select name="item_selector" id="item_selector">
-                    <option value="">Selecione um item</option>
-                </select>
-            </div>
-            <div class="fields">
-                <div class="left_field">
-                    <div>
-                        <label for="nome">Nome</label><br>
-                        <input type="text" name="nome" id="nome_item">
+    <div id="atualizar_item_modal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="atualizarItemModalLabel">Atualizar Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="select_item mb-3">
+                        <label for="item_selector">Selecione um Item</label>
+                        <select name="item_selector" id="item_selector" class="form-select" style="cursor: pointer;">
+                            <option value="">Selecione um item</option>
+                        </select>
                     </div>
-                    <div>
-                        <label for="categoria">Categoria</label><br>
-                        <input type="text" name="categoria" id="categoria_item">
-                    </div>
-                    <div>
-                        <label for="fornecedor">Forncedor</label><br>
-                        <input type="text" name="fornecedor" id="fornecedor_item">
+
+                    <div class="fields mt-3">
+                        <div class="left_field">
+                            <div class="mb-2">
+                                <label for="nome_item" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nome_item" name="nome" placeholder="Nome do Produto">
+                            </div>
+                            <div class="mb-2">
+                                <label for="categoria_item" class="form-label">Categoria</label>
+                                <select class="form-select" id="categoria_item" name="categoria" style="cursor: pointer;">
+                                    <option value="">Categoria</option>
+                                    <option value="proteina">Proteína</option>
+                                    <option value="carboidrato">Carboidrato</option>
+                                    <option value="vegetal">Vegetal</option>
+                                    <option value="outros">Outros</option>
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <label for="fornecedor_item" class="form-label">Fornecedor</label>
+                                <input type="text" class="form-control" id="fornecedor_item" name="fornecedor" placeholder="Fornecedor">
+                            </div>
+                        </div>
+
+                        <div class="right_field">
+                            <div class="mb-2">
+                                <label for="quantidade_item" class="form-label">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidade_item" name="quantidade" placeholder="Quantidade">
+                            </div>
+                            <div class="mb-2">
+                                <label for="valorUn_item" class="form-label">Valor Unitário</label>
+                                <input type="text" class="form-control" id="valorUn_item" name="valorUn" placeholder="Valor Unitário">
+                            </div>
+                            <div class="mb-2">
+                                <label for="data_validade_item" class="form-label">Data de Validade</label>
+                                <input type="date" class="form-control" id="data_validade_item" name="data_validade">
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="right_field">
-                    <div>
-                        <label for="quantidade">Quantidade</label><br>
-                        <input type="text" name="quantidade" id="quantidade_item">
-                    </div>
-                    <div>
-                        <label for="valorUn">ValorUn</label><br>
-                        <input type="text" name="valorUn" id="valorUn_item">
-                    </div>
-                    <div>
-                        <label for="data_validade">Data de Validade</label><br>
-                        <input type="date" name="data_validade" id="data_validade_item">
-                    </div>
-                    <div>
-                        <label for="quantMin">Quantidade Minima</label><br>
-                        <input type="text" name="quantMin" id="quantMin_item" placeholder="Quantidade Minima" required>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-success" onclick="atualizarItemDatabase()">Atualizar</button>
                 </div>
-            </div>
-        </div>
-        <div class="footer">
-            <div class="fechar_atualizar">
-                <button onclick="closeAtualizarModal()">Fechar</button>
-            </div>
-            <div>
-                <button onclick="atualizarItemDatabase()">Atualizar</button>
             </div>
         </div>
     </div>
