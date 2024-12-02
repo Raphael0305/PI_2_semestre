@@ -28,15 +28,3 @@ if ($produtoCriado) {
 }
 echo json_encode(["status" => false,]);
 exit;
-
-
-
-// Modelo de json entrada
-
-/**
- * [
-    "nomeCliente" => "John Doe",
-    "quantidade" => 2,
-    "id_marmita" => 1
-    ]
- */

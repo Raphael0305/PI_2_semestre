@@ -25,8 +25,8 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                     </a>
                 </li>
                 <li>
-                    <a href="../comanda/comanda.php">
-                        <img src="../../assets/icons/comanda.svg" alt="" width="28">
+                    <a href="../gerenciarPedidos/gerenciar_pedidos.php">
+                        <img src="../../assets/icons/novo_pedido.svg" alt="" width="28">
                     </a>
                 </li>
                 <li>

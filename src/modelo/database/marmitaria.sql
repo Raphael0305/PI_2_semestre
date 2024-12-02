@@ -239,12 +239,12 @@ CREATE TABLE `pedidos` (
 -- Despejando dados para a tabela `pedidos`
 --
 
-INSERT INTO `pedidos` (`ID_pedido`, `nomeCliente`, `quantidade`, `dataEntrega`, `ID_marmita`, `completo`) VALUES
-(4, 'jonas', 1, '2022-03-01', 1, 'não'),
-(5, 'jonas', 1, '2022-03-01', 1, 'não'),
-(7, 'jonas', 3, '2023-03-05', 2, 'sim'),
-(8, 'jonas', 1, '2023-03-05', 1, 'sim'),
-(9, 'teste1', 1, '2023-01-01', 5, 'sim');
+INSERT INTO `pedidos` (`nomeCliente`, `quantidade`, `dataEntrega`, `ID_marmita`, `completo`) VALUES
+('patrik', 1, '2022-03-01', 1, 'nao'),
+('jonas', 1, '2022-03-01', 1, 'nao'),
+('carlos rodolfo', 3, '2023-03-05', 2, 'nao'),
+('pedro palmo', 1, '2023-03-05', 1, 'sim'),
+('olosco', 1, '2023-01-01', 5, 'sim');
 
 --
 -- Acionadores `pedidos`
