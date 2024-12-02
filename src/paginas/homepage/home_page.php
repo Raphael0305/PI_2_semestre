@@ -73,4 +73,6 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
 
 </body>
 
+<script src="./script/marmita.js"></script>
+
 </html>
