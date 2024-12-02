@@ -2,7 +2,7 @@
 include_once __DIR__ . '/../../controle/autentica_pagina.php';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -30,7 +30,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
             <a href="../novoUsuario/cadastro.php" class="mb-3">
                 <img src="../../assets/icons/usuario.png" alt="Cadastro" width="28">
             </a>
-                        <a href="../marmitas/marmita.php" class="mb-3">
+            <a href="../marmitas/marmita.php" class="mb-3">
                 <img src="../../assets/icons/icons8-cadastro-100.png" alt="Cadastro" width="28">
             </a>
         </div>
@@ -38,7 +38,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
         <!-- Parte Central -->
         <div class="flex-grow-1">
             <!-- Navbar -->
-            <nav class="topo navbar shadow-sm py-3">
+            <nav class="navbar navbar-expand-lg navbar-light shadow-sm py-3 topo">
                 <div class="container-fluid d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
                         <a href="./../homepage/home_page.php">
@@ -52,26 +52,25 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                 </div>
             </nav>
 
-                <div class="page-content d-flex justify-content-center align-items-center" style="height: 100vh;">
-                    <p class="text-center">
-                        Seja Bem Vindo,<br>
-                        <strong>
-                            <?php
-                            if (isset($_SESSION['userName'])) {
-                                echo htmlspecialchars($_SESSION['userName']); 
-                            } else {
-                                echo "Usuário";
-                            }
-                            ?>
-                        </strong>
-                    </p>
-                </div>
-
+            <!-- Centralizando conteúdo -->
+            <div class="page-content d-flex justify-content-center align-items-center" style="height: 80vh;">
+                <p class="text-center">
+                    Seja Bem Vindo,<br>
+                    <strong>
+                        <?php
+                        if (isset($_SESSION['userName'])) {
+                            echo htmlspecialchars($_SESSION['userName']); 
+                        } else {
+                            echo "Usuário";
+                        }
+                        ?>
+                    </strong>
+                </p>
             </div>
+
         </div>
     </div>
-</body>
 
-<script src="./script/marmita.js"></script>
+</body>
 
 </html>
