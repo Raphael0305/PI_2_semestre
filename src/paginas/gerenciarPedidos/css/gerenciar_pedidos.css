@@ -1,0 +1,89 @@
+/* Definindo tamanho da tela em 100% do visível e retirando qualquer margin */
+html, body {
+    height: 100%;
+    margin: 0px;
+}
+/* Screen, left-side e right-side fazem parte do 
+dimensionamento do menu lateral esquerdo e conteúdo
+do lado direito */
+.screen {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+
+.left-side {
+    flex: 0 1 40px;
+    display: flex;
+    justify-content: center;
+    background-color:#526C3F;
+}
+
+.right-side {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100vh;
+}
+
+.navbar-position {
+    flex: 0 1 10%;
+    background-color: #B87F60;
+    
+}
+
+.page_content {
+    width: 100%;
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding-top: 20px;
+}
+
+.menu_list {
+    padding: 0;
+    list-style: none;
+}
+
+.menu_list li {
+    border: 1px solid #526C3F;
+    padding: 4px;
+    margin-top: 13px;
+
+}
+.menu_list li:hover {
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #5A853B;
+}
+
+.boxCadastro{    
+   background-color: blue;
+}
+
+h1 {
+    text-align: center;
+}
+h1::after{
+    content: "";
+    display: block; /* Ensures the pseudo-element behaves like a block-level element */
+    width: 100%; /* Adjust width as needed */
+    margin: 8px auto 0; /* Center and add spacing */
+    border-bottom: 2px solid #5A853B; /* The underline */
+} 
+
+.lista {
+    border: 1px solid #526C3F;
+    border-radius: 10px;
+    overflow-y: auto;
+    padding: 9px;
+    height: 400px;
+}
+.list-group {
+    gap: 8px;
+
+}
+

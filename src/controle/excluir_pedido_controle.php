@@ -5,10 +5,9 @@ include_once __DIR__ . "/../modelo/marmita_modelo.php";
 header('Content-Type: application/json');
 
 $payload = file_get_contents('php://input');
-
+$pedido = json_decode($payload, true);
 $gerenciarPedido = new GerenciarPedidosModelo(
-    pedidoModelo: PedidoModelo::factoryOnlyID(2)
-    // pedidoModelo: PedidoModelo::factoryOnlyID($payload['id_pedido'])
+    pedidoModelo: PedidoModelo::factoryOnlyID($pedido['ID_pedido'])
 );
 
 

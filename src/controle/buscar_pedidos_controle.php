@@ -7,4 +7,5 @@ $gerenciadorPedido = GerenciarPedidosModelo::factoryEmptyValues();
 
 $pedidos = $gerenciadorPedido->buscarTodosOsPedidos();
 
-echo json_encode($pedidos);
+echo json_encode(value: $pedidos);
+exit;

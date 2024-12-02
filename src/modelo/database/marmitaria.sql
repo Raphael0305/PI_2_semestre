@@ -239,8 +239,17 @@ CREATE TABLE `pedidos` (
 -- Despejando dados para a tabela `pedidos`
 --
 
+<<<<<<< HEAD
+INSERT INTO `pedidos` (`nomeCliente`, `quantidade`, `dataEntrega`, `ID_marmita`, `completo`) VALUES
+('patrik', 1, '2022-03-01', 1, 'nao'),
+('jonas', 1, '2022-03-01', 1, 'nao'),
+('carlos rodolfo', 3, '2023-03-05', 2, 'nao'),
+('pedro palmo', 1, '2023-03-05', 1, 'sim'),
+('olosco', 1, '2023-01-01', 5, 'sim');
+=======
 INSERT INTO `pedidos` (`ID_pedido`, `nomeCliente`, `quantidade`, `dataEntrega`, `ID_marmita`) VALUES
 (1, 'Cliente Exemplo', 3, '2024-11-30', 1);
+>>>>>>> f915b682e9bd6ee0db12f0e1f4ef1678351a1076
 
 --
 -- Acionadores `pedidos`
