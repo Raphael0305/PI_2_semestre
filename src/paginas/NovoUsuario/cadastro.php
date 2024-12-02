@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,6 +25,7 @@
         }
     </style>
 </head>
+
 <body class="bg-light">
     <div class="d-flex flex-column flex-md-row vh-100">
         <!-- Sidebar -->
@@ -31,8 +33,8 @@
             <a href="./../homepage/home_page.php" class="mb-4">
                 <img src="../../assets/icons/menu.svg" alt="Menu" width="32">
             </a>
-            <a href="../comanda/comanda.php" class="mb-3">
-                <img src="../../assets/icons/comanda.svg" alt="Comanda" width="28">
+            <a href="../gerenciar_pedidos/gerenciar_pedidos.php" class="mb-3">
+                <img src="../../assets/icons/novo_pedido.svg" alt="gerenciar_pedidos" width="28">
             </a>
             <a href="../estoque/estoque.php" class="mb-3">
                 <img src="../../assets/icons/estoque.svg" alt="Estoque" width="28">
@@ -104,4 +106,5 @@
 
     <script src="script/cadastro.js"></script>
 </body>
+
 </html>
