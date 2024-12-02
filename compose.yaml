@@ -1,0 +1,25 @@
+services: 
+  php:
+    build:
+      context: .
+      dockerfile: ./php.Dockerfile
+    container_name: php-apache
+    restart: always
+    volumes:
+      - ./src/:/var/www/html
+      - ./php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - 8080:80
+    depends_on: 
+      - db
+    links:
+      - db
+
+  db:
+    build:
+      context: .
+      dockerfile: ./db.Dockerfile
+    ports:
+      - 3306:3306
+    container_name: db
+    restart: always

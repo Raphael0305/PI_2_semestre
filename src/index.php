@@ -1,17 +1,10 @@
-<?php
-require_once __DIR__ . '/controle/autenticador.php';
-$login = NEW Autenticador();
-
-?>
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="paginas/login/css/style.css?v=1.0">
+    <link rel="stylesheet" href="paginas/login/css/style.css?v=2.33">
     <link rel="icon" type="image/x-icon" href="assets/img/logo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Marmitaria Fit</title>
@@ -19,7 +12,7 @@ $login = NEW Autenticador();
 
 <body>
     <div class="wrapper">
-        <form method="POST" class="d-flex flex-column bd-highlight" style="width: 80%;">
+        <form action="controle/login_controle.php" method="POST" class="d-flex flex-column bd-highlight" style="width: 80%;">
             <div class="mb-3 welcome">
                 <h1>Seja bem Vindo!!</h1>
             </div>
@@ -31,33 +24,13 @@ $login = NEW Autenticador();
                 </ul>
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Senha</label>
+                <label for="passwd" class="form-label">Senha</label>
                 <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Digite sua Senha">
                 <ul class="passwd_error">
                     <li id="password_error_display"></li>
                 </ul>
             </div>
-            <button id="entrarBtn" style="margin-top: 15px;" type="submit" class="btn btn-success" disabled>Entrar</button>
-            <!-- -----------------------------------------         INICIO PHP           ---------------------------------------------------->
-            <?php
-               if(isset($_POST['email'])){
-                    $email = addslashes ($_POST['email']);
-                    $senha = addslashes ($_POST['passwd']);
-
-                    if($login->logarUsuario($email,$senha)){
-                        header("Location: ./paginas/homepage/home_page.php");
-                    }else{
-                    ?>
-                    <div class="msgErro">
-                    <?php
-                       echo   'Usuário e/ou senha estão incorretos';
-                     ?>   
-                    </div>
-                    <?php
-                    }
-               }
-            ?>
-        </form>
+            <button id="entrarBtn" style="margin-top: 15px;" type="submit" class="btn btn-success" disabled>Entrar</button></form>
     </div>
 </body>
 <script src="paginas/login/scripts/login_validation.js"></script>

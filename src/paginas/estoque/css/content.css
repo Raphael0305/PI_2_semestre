@@ -1,21 +1,119 @@
 .page_content {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: stretch;
     flex: 1;
+    gap: 10px;
+    margin: 0px 10px 5px;
 }
 
 .table_side {
-    flex: 0 0 80%;
+    flex: 0 1 90%;
     display: flex;
     flex-direction: column;
 }
 
 .search_box {
-    margin-top: 2%;
-    flex: 0 0 100px;
+    flex: 0 1 20%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+.table_box {
+    flex: 1 0 auto;
+    border-bottom: 2px solid #B87F60;
+    min-height: max-content;
+}
+
+
+
+
+/* Definindo tamanho da tela em 100% do visível e retirando qualquer margin */
+html, body {
+    height: 100%;
+    margin: 0px;
+}
+/* Screen, left-side e right-side fazem parte do 
+dimensionamento do menu lateral esquerdo e conteúdo
+do lado direito */
+.screen {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+
+.left-side {
+    flex: 0 0 40px;
+    display: flex;
+    justify-content: center;
+    background-color:#526C3F;
+}
+
+.right-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.navbar-position {
+    flex: 0 60px;
+    background-color: #B87F60;
+    
+}
+
+
+
+.menu_list {
+    padding: 0;
+    list-style: none;
+}
+
+.menu_list li {
+    border: 1px solid #526C3F;
+    padding: 4px;
+    margin-top: 13px;
+
+}
+.menu_list li:hover {
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #5A853B;
+}
+
+.sidebar{
+    background-color: #5A853B;
+}
+
+.topo{
+    background-color: #B87F60;
+}
+
+.sidebar a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    border: 1px solid transparent;
+    border-radius: 6px; 
+    transition: all 0.3s ease; 
+}
+
+.sidebar a:hover {
+    border: 1px solid #526C3F; 
+    padding: 8px;
+    background-color: rgba(82, 108, 63, 0.1);
+}
+
+
+.la{
+    font-size: 1.2rem;
+}
+
+
+
+
+
+
+

@@ -8,7 +8,6 @@ class Autenticador{
         $this->query = NEW Query;
     }
 
-
     public function logarUsuario($email,$senha){
 
        $dados = $this->query->buscarLogin($email,$senha); 
@@ -29,7 +28,7 @@ class Autenticador{
         session_destroy();
     }
 
-    public function autenticarUsuario(){
+    public function autenticarLogin(){
         if(isset($_SESSION['id_mestre']) or isset($_SESSION['id_usuario'])){
             return true;
         }else{

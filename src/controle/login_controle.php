@@ -1,20 +1,19 @@
 <?php
+include_once __DIR__ . '/../modelo/autenticador.php';
+include_once __DIR__ . '/../modelo/usuario.php';
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $email = $_POST["email"];
-    $passwd = $_POST["passwd"];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'];
+    $passwd = $_POST['passwd'];
+    $user = Usuario::factoryUsuario(email: $email,  senha: $passwd);
+    $auth = new Autenticador();
+    $isLogged = $auth->logarUsuario($user);
 
-    $correctEmail = "marmitaria.fit@contato.com";
-    $correctPassword = "Marmita@123";
-
-    if($email == $correctEmail && $correctPassword == $passwd){
+    if ($isLogged) {
         header("Location: ../paginas/homepage/home_page.php");
-        exit;
-    }else{
+    } else {
         header("Location: ../index.php");
         exit;
+        
     }
-
 }
-
-?>
