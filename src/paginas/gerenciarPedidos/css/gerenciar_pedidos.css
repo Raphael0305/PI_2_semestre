@@ -87,3 +87,29 @@ h1::after{
 
 }
 
+
+
+
+.sidebar {
+    background-color: #5A853B;
+}
+
+.navbar {
+    background-color: #B87F60;
+}
+
+.sidebar a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    border: 1px solid transparent;
+    border-radius: 6px; 
+    transition: all 0.3s ease; 
+}
+
+.sidebar a:hover {
+    border: 1px solid #526C3F; 
+    padding: 8px;
+    background-color: rgba(82, 108, 63, 0.1);
+}
