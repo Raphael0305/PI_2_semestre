@@ -1,3 +1,8 @@
+<?php
+include_once __DIR__ . '/../../controle/autentica_pagina.php';
+$esconderBotaoCadastro = !Autenticador::verificarAcessoAdministrador();
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -33,18 +38,20 @@
             <a href="./../homepage/home_page.php" class="mb-4">
                 <img src="../../assets/icons/menu.svg" alt="Menu" width="32">
             </a>
-            <a href="../gerenciar_pedidos/gerenciar_pedidos.php" class="mb-3">
-                <img src="../../assets/icons/novo_pedido.svg" alt="gerenciar_pedidos" width="28">
+            <a href="../gerenciarPedidos/gerenciar_pedidos.php" class="mb-3">
+                <img src="../../assets/icons/comanda.svg" alt="Comanda" width="28">
             </a>
             <a href="../estoque/estoque.php" class="mb-3">
                 <img src="../../assets/icons/estoque.svg" alt="Estoque" width="28">
             </a>
-            <a href="../novoUsuario/cadastro.php" class="mb-3">
-                <img src="../../assets/icons/usuario.png" alt="Cadastro" width="28">
-            </a>
             <a href="../marmitas/marmita.php" class="mb-3">
                 <img src="../../assets/icons/icons8-cadastro-100.png" alt="Cadastro" width="28">
             </a>
+            <?php if (!$esconderBotaoCadastro): ?>
+                <a href="../novoUsuario/cadastro.php" class="mb-3">
+                    <img src="../../assets/icons/usuario.png" alt="Cadastro" width="28">
+                </a>
+            <?php endif; ?>
         </div>
 
         <!-- Parte central -->
@@ -58,9 +65,9 @@
                         </a>
                         <span class="ms-2 fs-6 fst-italic">Marmitaria Fit</span>
                     </div>
-                    <form method="post">
-                        <button class="btn btn-danger btn-sm" type="submit" name="sair">Sair</button>
-                    </form>
+                    <div>
+                        <a href="../../controle/logout.php" class="btn btn-danger btn-sm">Sair</a>
+                    </div>
                 </div>
             </nav>
 
