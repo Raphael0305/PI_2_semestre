@@ -81,7 +81,20 @@ do lado direito */
     background-color: rgba(82, 108, 63, 0.1);
 }
 
+.card {
+    border: 3px solid #B1CFA1;
+    border-radius: 10px;
+}
 
+.botaoCadastro {
+    background-color: #5A952D;
+    color: #ffff;
+}
+
+.inputes:focus {
+    border-color: #5A952D;
+    box-shadow: 0 0 5px #5A952D;
+}
 
 
 

@@ -1,3 +1,6 @@
+<?php
+include_once __DIR__ . '/../../controle/autentica_pagina.php';
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -64,9 +67,9 @@
                         </a>
                         <span class="ms-2 fs-6 fst-italic">Marmitaria Fit</span>
                     </div>
-                    <form method="post">
-                        <button class="btn btn-danger btn-sm" type="submit" name="sair">Sair</button>
-                    </form>
+                    <div>
+                        <a href="../../controle/logout.php" class="btn btn-danger btn-sm">Sair</a>
+                    </div>
                 </div>
             </nav>
 
