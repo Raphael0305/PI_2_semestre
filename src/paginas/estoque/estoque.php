@@ -21,7 +21,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
             <a href="./../homepage/home_page.php" class="mb-4">
                 <img src="../../assets/icons/menu.svg" alt="Menu" width="32">
             </a>
-            <a href="../comanda/comanda.php" class="mb-3">
+            <a href="../gerenciarPedidos/gerenciar_pedidos.php" class="mb-3">
                 <img src="../../assets/icons/comanda.svg" alt="Comanda" width="28">
             </a>
             <a href="../estoque/estoque.php" class="mb-3">
