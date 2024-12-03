@@ -7,8 +7,9 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+
         .excluir_item_modal {
-            display: flex;
+            display: none; /* Inicialmente escondido */
             justify-content: center;
             align-items: center;
             position: fixed;
@@ -17,7 +18,12 @@
             right: 0;
             bottom: 0;
             z-index: 1050;
-            overflow: hidden; 
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.5);
+        }   
+
+        .excluir_item_modal.open_excluir_modal {
+            display: flex; 
         }
 
 
@@ -94,7 +100,7 @@
         }
         body {
             overflow: hidden;
-            margin: 0;
+            margin: 0;;
         }
     </style>
 </head>
@@ -117,7 +123,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="closeEcluirModal()">Fechar</button>
-                    <button type="button" class="btn btn-success" onclick="excluirItem()">Excluir</button>
+                    <button type="button" class="btn btn-success" onclick="exluirItem()">Excluir</button>
                 </div>
             </div>
         </div>

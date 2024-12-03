@@ -8,6 +8,25 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+
+        .cadastrar_item_modal {
+            display: none; 
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1050;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.5);
+        }   
+
+        .cadastrar_item_modal.open_cadastrar_modal {
+            display: flex; 
+        }        
+
         .modal-dialog {
             max-width: 600px;
             margin: 30px auto;
@@ -94,12 +113,12 @@
 </head>
 
 <body>
-    <div id="cadastrar_item_modal">
+    <div id="cadastrar_item_modal" class="cadastrar_item_modal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="cadastrarItemModalLabel">Cadastrar Ingrediente</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar" onclick="closeModal()"></button>
                 </div>
                 <div class="modal-body">
                     <form method="POST" class="my_form">

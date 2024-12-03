@@ -136,38 +136,38 @@ class Query
         }
     }
 
-    public function cadastrarUsuario($nome,$email, $senha, $telefone, $nivelAcesso) {
+    // public function cadastrarUsuario($nome,$email, $senha, $telefone, $nivelAcesso) {
 
-        $query = "INSERT INTO usuario (
-            nome, 
-            email, 
-            senha, 
-            telefone, 
-            nivel_acesso
-        ) VALUES (
-            :nome,
-            :email,
-            :senha,
-            :telefone,
-            :nivelAcesso
-        )";
+    //     $query = "INSERT INTO usuario (
+    //         nome, 
+    //         email, 
+    //         senha, 
+    //         telefone, 
+    //         nivel_acesso
+    //     ) VALUES (
+    //         :nome,
+    //         :email,
+    //         :senha,
+    //         :telefone,
+    //         :nivelAcesso
+    //     )";
     
-        $stmt = $this->conectar->prepare($query);
+    //     $stmt = $this->conectar->prepare($query);
     
-        $stmt->bindValue(":nome", $nome);
-        $stmt->bindValue(":email", $email);
-        $stmt->bindValue(":senha", $senha);
-        $stmt->bindValue(":telefone", $telefone);
-        $stmt->bindValue(":nivelAcesso", $nivelAcesso);
+    //     $stmt->bindValue(":nome", $nome);
+    //     $stmt->bindValue(":email", $email);
+    //     $stmt->bindValue(":senha", $senha);
+    //     $stmt->bindValue(":telefone", $telefone);
+    //     $stmt->bindValue(":nivelAcesso", $nivelAcesso);
     
-        try {
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-            echo "Ocorreu um erro ao cadastrar item: " . $e->getMessage();
-            return false;
-        }
-    }
+    //     try {
+    //         $stmt->execute();
+    //         return true;
+    //     } catch (PDOException $e) {
+    //         echo "Ocorreu um erro ao cadastrar item: " . $e->getMessage();
+    //         return false;
+    //     }
+    // }
 
 
     // public function cadastrarMarmita($nomeMarmita, $precoMarmita) {

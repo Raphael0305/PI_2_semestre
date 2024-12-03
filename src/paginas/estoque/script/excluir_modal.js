@@ -1,13 +1,34 @@
-async function openExcluirModal(){
-    const items = await getItems()
-    console.log(items)
-    let modal = getElementByID("excluir_item_modal")
-    let selector = getElementByID("excluir_item_selector")
-    modal.classList.add("open_excluir_modal")
-    console.log(selector.value)
-    items.forEach(element => {
-        selector.innerHTML += `<option value="${element['ID_ingrediente']}">${element["nome"]}</option>`
+async function getItems(){
+    const response = await fetch("../../../controle/buscar_itens.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        }
     })
+    return await response.json()
+}
+
+async function openExcluirModal() {
+    const items = await getItems();
+    const modal = document.getElementById("excluir_item_modal"); 
+    const selector = document.getElementById("excluir_item_selector"); 
+
+    modal.classList.add("open_excluir_modal"); 
+    document.body.style.overflow = "hidden";
+
+    selector.innerHTML = `<option value="">Selecione um item</option>`;
+    items.forEach((item) => {
+        selector.innerHTML += `<option value="${item.ID_ingrediente}">${item.nome}</option>`;
+    });
+}
+
+function closeEcluirModal() {
+    const modal = document.getElementById("excluir_item_modal");
+    const selector = document.getElementById("excluir_item_selector");
+
+    modal.classList.remove("open_excluir_modal");
+    document.body.style.overflow = "";
+    selector.innerHTML = `<option value="">Selecione um item</option>`;
 }
 
 async function exluirItem(){
@@ -22,29 +43,8 @@ async function exluirItem(){
             ID_ingrediente: selector.value
         })
     })
-
-    closeEcluirModal()
     showItemsAtTable()
-}
-
-function closeEcluirModal(){
-    let modal = getElementByID("excluir_item_modal")
-    let selector = getElementByID("excluir_item_selector")
-    selector.innerHTML = `<option>Selecione um item</option>`
-    modal.classList.remove("open_excluir_modal")
-}
-
-
-document.addEventListener("keyup", (event) => {
-    key = event.key
-
-    if (key == "Escape"){
-        closeEcluirModal()
-    }
-})
-
-function getElementByID(elementId){
-    return document.getElementById(elementId)
+    closeEcluirModal()
 }
 
 async function showItemsAtTable(){
@@ -65,18 +65,13 @@ async function showItemsAtTable(){
     })
 }
 
+document.addEventListener("keyup", (event) => {
+    if (event.key === "Escape") {
+        closeEcluirModal();
+    }
+});
+
 function getElementByID(elementId){
     return document.getElementById(elementId)
 }
 
-async function getItems(){
-    const response = await fetch("../../../controle/buscar_itens.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-
-        }
-    })
-
-    return await response.json()
-}
