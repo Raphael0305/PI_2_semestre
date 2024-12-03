@@ -24,8 +24,8 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
             <a href="./../homepage/home_page.php" class="mb-4">
                 <img src="../../assets/icons/menu.svg" alt="Menu" width="32">
             </a>
-            <a href="../comanda/comanda.php" class="mb-3">
-                <img src="../../assets/icons/comanda.svg" alt="Comanda" width="28">
+            <a href="../gerenciar_pedidos/gerenciar_pedidos.php" class="mb-3">
+                <img src="../../assets/icons/novo_pedido.svg" alt="gerenciar_pedidos" width="28">
             </a>
             <a href="../NovoUsuario/cadastro.php" class="mb-3">
                 <img src="../../assets/icons/usuario.png" alt="Cadastro" width="28">
@@ -35,7 +35,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
             </a>
         </div>
         <!-- navbarson -->
-        <div class="flex-grow-1 " >
+        <div class="flex-grow-1 ">
             <nav class="navbar navbar-expand-lg navbar-light  shadow-sm ">
                 <div class="container-fluid d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
@@ -65,8 +65,8 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                 </div>
 
                 <!-- Tabela -->
-                <div class="table-responsive" style="max-height: 500px; overflow-y: auto;" >
-                    <table class="table table-bordered table-striped table-hover" id="table" >
+                <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+                    <table class="table table-bordered table-striped table-hover" id="table">
                         <thead>
                             <tr>
                                 <th>Nome</th>
@@ -79,7 +79,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                         </tbody>
                     </table>
                 </div>

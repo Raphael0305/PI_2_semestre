@@ -1,0 +1,29 @@
+.item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 100%;
+}
+
+.btn_delete {
+    border-radius: 5px;
+    all: unset;
+}
+.btn_delete:hover {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: white;
+    color: aliceblue;
+}
+
+.id-pedido {
+    flex: 0 1 28%;
+}
+.produtos {
+    flex: 1 0 auto;
+}
+.produto-btn {
+    flex: 0 1 15%;
+    text-align: end;
+}
