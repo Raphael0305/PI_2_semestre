@@ -39,7 +39,7 @@
             <a href="./../homepage/home_page.php" class="mb-4">
                 <img src="../../assets/icons/menu.svg" alt="Menu" width="32">
             </a>
-            <a href="../gerenciarPedidos/gerenciarPedidos.php" class="mb-3">
+            <a href="../gerenciarPedidos/gerenciar_pedidos.php" class="mb-3">
                 <img src="../../assets/icons/novo_pedido.svg" alt="Comanda" width="28">
             </a>
             <a href="../estoque/estoque.php" class="mb-3">
