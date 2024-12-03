@@ -1,13 +1,14 @@
 function openPopup(){
-    let modal = getElementByID("cadastrar_item_modal")
-    modal.classList.add("open-modal")
+    const modal = document.getElementById("cadastrar_item_modal")
+    modal.classList.add("open_cadastrar_modal")
 }
+
 function closeModal(){
     let modal = getElementByID("cadastrar_item_modal")
-    modal.classList.remove("open-modal")
+    modal.classList.remove("open_cadastrar_modal")
+
     clearInputs()
     showItemsAtTable()
-    
 }
 
 
@@ -23,36 +24,37 @@ async function cadastraItem() {
     )
     item = await response.json()
     if (item['isRegistered']){
+        console.log('registrado cachorro')
         closeModal()
     }
 
 }
 
+
+
 function getInputsName(){
-    let nome = getElementByID("nome")
-    let categoria = getElementByID("categoria")
-    let fornecedor = getElementByID("fornecedor")
-    let quantidade = getElementByID("quantidade")
-    let valorUn = getElementByID("valorUn")
-    let quantMin = getElementByID("quantMin")
-    let data_validade = getElementByID("data_validade")
+    let nome = document.getElementById("nome_item");
+    let categoria = document.getElementById("categoria");
+    let fornecedor = document.getElementById("fornecedor");
+    let quantidade = document.getElementById("quantidade");
+    let valorUn = document.getElementById("valorUn");
+    let data_validade = document.getElementById("data_validade");
     return JSON.stringify({
         nome: nome.value,
         categoria: categoria.value,
         fornecedor: fornecedor.value,
         quantidade: quantidade.value,
         valorUn: valorUn.value,
-        quantMin: quantMin.value,
         data_validade: data_validade.value
     })
 
 }
 
 function clearInputs(){
-    let nome = getElementByID("nome")
+    let nome = getElementByID("nome_item")
     nome.value = null
     let categoria = getElementByID("categoria")
-    categoria.value = null
+    categoria.value = ""
     let fornecedor = getElementByID("fornecedor")
     fornecedor.value = null
     let quantidade = getElementByID("quantidade")
@@ -61,8 +63,6 @@ function clearInputs(){
     valorUn.value = null
     let data_validade = getElementByID("data_validade")
     data_validade.value = null
-    let quantMin = getElementByID("quantMin")
-    quantMin.value = null
 }
 
 function getElementByID(elementId){
@@ -79,7 +79,7 @@ document.addEventListener("keyup", (event) => {
 })
 
 async function showItemsAtTable(){
-    let table = getElementByID("table_body_display")
+    let table = getElementByID("table")
     let items = await getItems()
     console.log("abri")
     table.querySelector("tbody").innerHTML = `<tr></tr>`

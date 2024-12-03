@@ -8,7 +8,25 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-                
+             
+        .atualizar_item_modal {
+            display: none; 
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1050;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.5);
+        }   
+
+        .atualizar_item_modal.open_atualizar_modal {
+            display: flex; 
+        }               
+
         .modal-dialog {
             max-width: 600px; 
         }
@@ -69,12 +87,12 @@
 </head>
 
 <body>
-    <div id="atualizar_item_modal">
+    <div id="atualizar_item_modal" class="atualizar_item_modal">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="atualizarItemModalLabel">Atualizar Item</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar" onclick="closeAtualizarModal()"></button>
                 </div>
                 <div class="modal-body">
                     <div class="select_item mb-3">
@@ -88,11 +106,11 @@
                         <div class="left_field">
                             <div class="mb-2">
                                 <label for="nome_item" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="nome_item" name="nome" placeholder="Nome do Produto">
+                                <input type="text" class="form-control" id="atualiza_nome" name="nome" placeholder="Nome do Produto" writingsuggestions="true">
                             </div>
                             <div class="mb-2">
                                 <label for="categoria_item" class="form-label">Categoria</label>
-                                <select class="form-select" id="categoria_item" name="categoria" style="cursor: pointer;">
+                                <select class="form-select" id="atualiza_categoria_item" name="categoria" style="cursor: pointer;" writingsuggestions="true">
                                     <option value="">Categoria</option>
                                     <option value="proteina">Proteína</option>
                                     <option value="carboidrato">Carboidrato</option>
@@ -102,28 +120,28 @@
                             </div>
                             <div class="mb-2">
                                 <label for="fornecedor_item" class="form-label">Fornecedor</label>
-                                <input type="text" class="form-control" id="fornecedor_item" name="fornecedor" placeholder="Fornecedor">
+                                <input type="text" class="form-control" id="fornecedor_item" name="fornecedor" placeholder="Fornecedor" writingsuggestions="true">
                             </div>
                         </div>
 
                         <div class="right_field">
                             <div class="mb-2">
                                 <label for="quantidade_item" class="form-label">Quantidade</label>
-                                <input type="text" class="form-control" id="quantidade_item" name="quantidade" placeholder="Quantidade">
+                                <input type="text" class="form-control" id="quantidade_item" name="quantidade" placeholder="Quantidade" writingsuggestions="true">
                             </div>
                             <div class="mb-2">
                                 <label for="valorUn_item" class="form-label">Valor Unitário</label>
-                                <input type="text" class="form-control" id="valorUn_item" name="valorUn" placeholder="Valor Unitário">
+                                <input type="text" class="form-control" id="valorUn_item" name="valorUn" placeholder="Valor Unitário" writingsuggestions="true">
                             </div>
                             <div class="mb-2">
                                 <label for="data_validade_item" class="form-label">Data de Validade</label>
-                                <input type="date" class="form-control" id="data_validade_item" name="data_validade">
+                                <input type="date" class="form-control" id="data_validade_item" name="data_validade" writingsuggestions="true">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeAtualizarModal()">Fechar</button>
                     <button type="button" class="btn btn-success" onclick="atualizarItemDatabase()">Atualizar</button>
                 </div>
             </div>

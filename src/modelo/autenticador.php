@@ -43,4 +43,5 @@ class Autenticador
             exit;
         }
     }
+
 }
