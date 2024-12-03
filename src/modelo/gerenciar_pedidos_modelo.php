@@ -40,12 +40,14 @@ class GerenciarPedidosModelo
         nomeCliente, 
         quantidade, 
         dataEntrega, 
-        id_marmita
+        ID_marmita,
+        completo
         ) VALUES (
         '{$pedido['nomeCliente']}', 
         {$pedido['quantidade']}, 
         '{$pedido['dataEntrega']}', 
-        {$pedido['id_marmita']})";
+        {$pedido['id_marmita']},
+        'nao')";
         $stmt = $this->conn->prepare($query);
 
         try {
@@ -76,7 +78,7 @@ class GerenciarPedidosModelo
     }
     public function buscarTodosOsPedidos(): array
     {
-        $query = "SELECT * FROM pedidos";
+        $query = "SELECT * FROM view_pedido_detalhado";
         $stmt = $this->conn->prepare(query: $query);
 
         try {

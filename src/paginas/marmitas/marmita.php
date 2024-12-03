@@ -39,8 +39,8 @@
             <a href="./../homepage/home_page.php" class="mb-4">
                 <img src="../../assets/icons/menu.svg" alt="Menu" width="32">
             </a>
-            <a href="../comanda/comanda.php" class="mb-3">
-                <img src="../../assets/icons/comanda.svg" alt="Comanda" width="28">
+            <a href="../gerenciarPedidos/gerenciarPedidos.php" class="mb-3">
+                <img src="../../assets/icons/novo_pedido.svg" alt="Comanda" width="28">
             </a>
             <a href="../estoque/estoque.php" class="mb-3">
                 <img src="../../assets/icons/estoque.svg" alt="Estoque" width="28">
@@ -141,4 +141,5 @@
 </body>
 
 <script src="./script/marmita.js"></script>
+
 </html>
