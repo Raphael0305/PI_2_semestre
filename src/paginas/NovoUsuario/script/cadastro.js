@@ -69,6 +69,6 @@ async function validarFormulario() {
         alert(erros.join("\n"));
         return;
     }
-    await cadastrarUsuario();
+    cadastrarUsuario();
 }
 

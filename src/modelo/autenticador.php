@@ -43,4 +43,13 @@ class Autenticador
             exit;
         }
     }
+
+    static public function verificarAcessoAdministrador()
+    {
+        if (isset($_SESSION['userNivelAcesso']) && $_SESSION['userNivelAcesso'] == 'administrador') {
+            return true; 
+        }
+        return false;
+    }
+
 }
