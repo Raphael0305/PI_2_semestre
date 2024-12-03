@@ -38,7 +38,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
         <!-- Parte central -->
         <div class="flex-grow-1">
             <!-- navbar -->
-            <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+            <nav class="topo navbar shadow-sm py-3">
                 <div class="container-fluid d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
                         <a href="./../homepage/home_page.php">
@@ -88,7 +88,7 @@ include_once __DIR__ . '/../../controle/autentica_pagina.php';
         </div>
     </div>
 
-    <!-- Modais -->
+    <!-- Modais eu to cansado chef :/ -->
     <?php
     include_once __DIR__ . '/modais/cadastrar_item_modal.php';
     include_once __DIR__ . '/modais/atualizar_item_modal.php';
