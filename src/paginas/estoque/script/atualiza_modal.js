@@ -19,7 +19,6 @@ async function getItems(){
 
         }
     })
-
     return await response.json()
 }
 
@@ -60,7 +59,6 @@ async function atualizarItemDatabase(){
     limpaCampos()
     closeAtualizarModal()
     showItemsAtTable()
-
 }
 
 
@@ -80,27 +78,27 @@ async function getItemById(id){
 
 }
 
-function preencheCampos(item){
-    let nome = getElementByID("nome_item")
-    let categoria = getElementByID("categoria_item")
-    let fornecedor = getElementByID("fornecedor_item")
-    let quantidade = getElementByID("quantidade_item")
-    let valorUn = getElementByID("valorUn_item")
-    let data_validade = getElementByID("data_validade_item")
-    let quantMin_item = getElementByID("quantMin_item")
-    nome.value = item['nome']
-    categoria.value = item['categoria']
-    fornecedor.value = item['fornecedor']
-    quantidade.value = item['quantidade']
-    valorUn.value = item['valorUn']
-    data_validade.value = item['data_validade']
-    quantMin_item.value = item['quantMin']
+function preencheCampos(item) {
+    let nome = document.getElementById("atualiza_nome");
+    let categoria = document.getElementById("atualiza_categoria_item");
+    let fornecedor = document.getElementById("fornecedor_item");
+    let quantidade = document.getElementById("quantidade_item");
+    let valorUn = document.getElementById("valorUn_item");
+    let data_validade = document.getElementById("data_validade_item");
+
+    nome.value = item['nome'];
+    categoria.value = item['categoria'];
+    fornecedor.value = item['fornecedor'];
+    quantidade.value = item['quantidade'];
+    valorUn.value = item['valorUn'];
+    data_validade.value = item['data_validade'];
 }
 
 
+
 function limpaCampos(){
-    let nome = getElementByID("nome_item")
-    let categoria = getElementByID("categoria_item")
+    let nome = getElementByID("atualiza_nome")
+    let categoria = getElementByID("atualiza_categoria_item")
     let fornecedor = getElementByID("fornecedor_item")
     let quantidade = getElementByID("quantidade_item")
     let valorUn = getElementByID("valorUn_item")
@@ -112,7 +110,6 @@ function limpaCampos(){
     quantidade.value = ""
     valorUn.value = ""
     data_validade.value = ""
-    quantMin_item.value = ""
 }
 
 let selector = getElementByID("item_selector")
@@ -121,16 +118,20 @@ selector.addEventListener("change", async (event) => {
     let itemId = event.target.value
     let item = await getItemById(itemId)
     preencheCampos(item['item'])
-
 })
 
+document.addEventListener("keyup", (event) => {
+    if (event.key === "Escape") {
+        closeAtualizarModal();
+    }
+});
+
 function getInputValues(){
-    let nome = getElementByID("nome_item")
-    let categoria = getElementByID("categoria_item")
+    let nome = getElementByID("atualiza_nome")
+    let categoria = getElementByID("atualiza_categoria_item")
     let fornecedor = getElementByID("fornecedor_item")
     let quantidade = getElementByID("quantidade_item")
     let valorUn = getElementByID("valorUn_item")
-    let quantMin_item = getElementByID("quantMin_item")
     let data_validade = getElementByID("data_validade_item")
     return {
         nome: nome.value,
@@ -139,7 +140,6 @@ function getInputValues(){
         quantidade: quantidade.value,
         valorUn: valorUn.value,
         data_validade: data_validade.value,
-        quantMin: quantMin_item.value
 }
 }
 

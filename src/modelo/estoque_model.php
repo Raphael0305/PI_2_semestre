@@ -5,13 +5,26 @@ class Estoque
     private $conn;
 
     public function cadastrarItem(array $ingrediente): bool
-    {
-        $colunaIngredientes = array_keys($ingrediente);
-        $ingredienteValores = array_map(fn($value) => "'{$value}'", $ingrediente);
-        $colunas = implode(',', $colunaIngredientes);
-        $placeholder = implode(',', $ingredienteValores);
-        $query = "INSERT INTO ingrediente ({$colunas}) VALUES ({$placeholder})";
+    {   
+
+        $nome = $ingrediente['nome'];
+        $categoria = $ingrediente['categoria'];
+        $fornecedor = $ingrediente['fornecedor'];
+        $qtde = $ingrediente['quantidade'];
+        $valor = $ingrediente['valorUn'];
+        $data_validade = $ingrediente['data_validade'];
+
+        $query = "INSERT INTO ingrediente (nome, categoria, fornecedor, quantidade, valorUn, data_validade) 
+        VALUES (:nome, :categoria, :fornecedor, :quantidade, :valorUn, :data_validade)";
+        
         $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':nome', $nome);
+        $stmt->bindValue(':categoria', $categoria);
+        $stmt->bindValue(':fornecedor', $fornecedor);
+        $stmt->bindValue(':quantidade', $qtde, PDO::PARAM_INT); 
+        $stmt->bindValue(':valorUn', $valor);
+        $stmt->bindValue(':data_validade', $data_validade);
+        
         try {
             $stmt->execute();
             return true;
