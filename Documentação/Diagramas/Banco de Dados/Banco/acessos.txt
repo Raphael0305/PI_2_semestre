@@ -1,0 +1,17 @@
+Acessos 
+
+Vitor
+email = Vitor@marmita.com
+senha = Vitoreduardo@123
+
+Rafael
+email = Raphael@marmita.com
+senha = Rafaelreis@123
+
+Isabely 
+email = Isabely@marmita.com
+senha = Isabelynascimento@123
+
+Rayanne
+email = Rayanne@marmita.com
+senha = Rayannegabriela@123

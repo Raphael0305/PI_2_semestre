@@ -9,9 +9,8 @@ class Ingrediente
     private float $quantidade;
     private float $valorUn;
     private String $data_validade;
-    private float $quantMin;
 
-    public function __construct(String $nome, Categoria $categoria, String $fornecedor, float $quantidade, float $valorUn, String $data_validade, float $quantMin, int $id_ingrediente = 0)
+    public function __construct(String $nome, Categoria $categoria, String $fornecedor, float $quantidade, float $valorUn, String $data_validade, int $id_ingrediente = 0)
     {
         $this->id_ingrediente = $id_ingrediente;
         $this->nome = $nome;
@@ -20,7 +19,6 @@ class Ingrediente
         $this->quantidade = (float) $quantidade;
         $this->valorUn = (float) $valorUn;
         $this->data_validade = $data_validade;
-        $this->quantMin = (float) $quantMin;
     }
     public static function factoryIngredienteVazio(): Ingrediente
     {
@@ -31,7 +29,6 @@ class Ingrediente
             quantidade: 0.0,
             valorUn: 0.0,
             data_validade: '',
-            quantMin: 0.0
         );
     }
 
@@ -59,7 +56,6 @@ class Ingrediente
             quantidade: $data['quantidade'],
             valorUn: $data['valorUn'],
             data_validade: $data['data_validade'],
-            quantMin: $data['quantMin']
         );
     }
 
@@ -73,7 +69,6 @@ class Ingrediente
             'quantidade' => $this->quantidade ?? '',
             'valorUn' => $this->valorUn ?? '',
             'data_validade' => $this->data_validade ?? '',
-            'quantMin' => $this->quantMin ?? ''
         ];
     }
 }

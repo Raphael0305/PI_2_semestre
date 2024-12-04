@@ -4,12 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Criar Alerta de Estoque</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-
-        .excluir_item_modal {
-            display: none; /* Inicialmente escondido */
+        .criar_alerta_modal {
+            display: none;
             justify-content: center;
             align-items: center;
             position: fixed;
@@ -20,12 +19,11 @@
             z-index: 1050;
             overflow: hidden;
             background-color: rgba(0, 0, 0, 0.5);
-        }   
-
-        .excluir_item_modal.open_excluir_modal {
-            display: flex; 
         }
 
+        .criar_alerta_modal.open_criar_alerta_modal {
+            display: flex;
+        }
 
         .modal-dialog {
             max-width: 500px;
@@ -91,43 +89,51 @@
             background-color: #81C784;
         }
 
-        .excluir_item_modal .options {
+        .criar_alerta_modal .options {
             margin-bottom: 1rem;
         }
 
-        .excluir_item_modal select {
+        .criar_alerta_modal select {
             width: 100%;
         }
+
         body {
             overflow: hidden;
-            margin: 0;;
+            margin: 0;
         }
     </style>
 </head>
 
 <body>
-    <div id="excluir_item_modal" class="excluir_item_modal">
+    <div id="criar_alerta_baixo_nivel" class="criar_alerta_modal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="excluirItemModalLabel">Excluir Item</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar" onclick="closeEcluirModal()"></button>
+                    <h5 class="modal-title" id="excluirItemModalLabel">Criar Alerta de Baixo Nível</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar" onclick="closeCriarAlertaModal()"></button>
                 </div>
                 <div class="modal-body">
                     <div class="options">
-                        <label for="excluir_item_selector" class="form-label">Selecione um Item</label><br>
-                        <select name="item_selector" id="excluir_item_selector" class="form-select">
+                        <label for="alerta_selector" class="form-label">Selecione um Item</label><br>
+                        <select name="alerta_selector" id="criar_alerta_selector" class="form-select">
                             <option value="">Selecione um item</option>
+                           
                         </select>
+                    </div>
+                    <div>
+                        <label for="quantMinima" class="form-label">Quantidade Mínima</label><br>
+                        <input type="text" name="quantMinima" id="quantMinima" class="form-control" placeholder="Quantidade Mínima">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="closeEcluirModal()">Fechar</button>
-                    <button type="button" class="btn btn-success" onclick="exluirItem()">Excluir</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeCriarAlertaModal()">Fechar</button>
+                    <button type="button" class="btn btn-success" onclick="criarAlertaBtn()">Criar Alerta</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

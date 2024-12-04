@@ -1,18 +1,16 @@
 async function abrirCriarAlertaModal(){
-    let criarAlertaModal = document.getElementById("crir_alerta_baixo_nivel")
-    criarAlertaModal.classList.add('openCriarAlertaModel')
-    await fillSelector()
+    const criarAlertaModal = document.getElementById("criar_alerta_baixo_nivel");
+    criarAlertaModal.classList.add('open_criar_alerta_modal');
+    await fillSelector();
 }
 
 
 function closeCriarAlertaModal(){
-    let criarAlertaModal = document.getElementById("crir_alerta_baixo_nivel")
-    let alerta_selector = document.getElementById("escluir_alerta")
-    alerta_selector.innerHTML = `<option value="">Selecione um item</option>`
-    criarAlertaModal.classList.remove('openCriarAlertaModel')
+    const criarAlertaModal = document.getElementById("criar_alerta_baixo_nivel");
+    const alertaSelector = document.getElementById("criar_alerta_selector");
+    alertaSelector.innerHTML = `<option value="">Selecione um item</option>`
+    criarAlertaModal.classList.remove('open_criar_alerta_modal')
 }
-
-
 
 
 

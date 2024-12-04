@@ -12,29 +12,22 @@ class Query
         $this->conectar = $conexao->getConexao();
     }
 
-    public function beginTransaction() {
+    public function beginTransaction()
+    {
         return $this->conectar->beginTransaction();
     }
 
-    public function commit() {
+    public function commit()
+    {
         return $this->conectar->commit();
     }
 
-
-    public function rollBack() {
+    public function rollBack()
+    {
         return $this->conectar->rollBack();
     }
 
-    // ----------------------------------------------------------------------------------------------------------------------------------------
-    // BUSCAR DE INGREDIENTES**
-    public function buscarIngredientesPesquisa($pesquisa)
-    {
 
-        $query = $this->conectar->prepare("SELECT * FROM ingredientes WHERE nome LIKE :pesquisa");
-        $query->bindValue(':pesquisa', '%' . $pesquisa . '%');
-        $query->execute();
-        return $query->fetchAll();
-    }
 
     public function cadastrarIngrediente(array $ingrediente): bool
     {
@@ -136,54 +129,54 @@ class Query
         }
     }
 
-    public function cadastrarUsuario($nome,$email, $senha, $telefone, $nivelAcesso) {
+    // public function cadastrarUsuario($nome,$email, $senha, $telefone, $nivelAcesso) {
 
-        $query = "INSERT INTO usuario (
-            nome, 
-            email, 
-            senha, 
-            telefone, 
-            nivel_acesso
-        ) VALUES (
-            :nome,
-            :email,
-            :senha,
-            :telefone,
-            :nivelAcesso
-        )";
-    
-        $stmt = $this->conectar->prepare($query);
-    
-        $stmt->bindValue(":nome", $nome);
-        $stmt->bindValue(":email", $email);
-        $stmt->bindValue(":senha", $senha);
-        $stmt->bindValue(":telefone", $telefone);
-        $stmt->bindValue(":nivelAcesso", $nivelAcesso);
-    
-        try {
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-            echo "Ocorreu um erro ao cadastrar item: " . $e->getMessage();
-            return false;
-        }
-    }
+    //     $query = "INSERT INTO usuario (
+    //         nome, 
+    //         email, 
+    //         senha, 
+    //         telefone, 
+    //         nivel_acesso
+    //     ) VALUES (
+    //         :nome,
+    //         :email,
+    //         :senha,
+    //         :telefone,
+    //         :nivelAcesso
+    //     )";
+
+    //     $stmt = $this->conectar->prepare($query);
+
+    //     $stmt->bindValue(":nome", $nome);
+    //     $stmt->bindValue(":email", $email);
+    //     $stmt->bindValue(":senha", $senha);
+    //     $stmt->bindValue(":telefone", $telefone);
+    //     $stmt->bindValue(":nivelAcesso", $nivelAcesso);
+
+    //     try {
+    //         $stmt->execute();
+    //         return true;
+    //     } catch (PDOException $e) {
+    //         echo "Ocorreu um erro ao cadastrar item: " . $e->getMessage();
+    //         return false;
+    //     }
+    // }
 
 
     // public function cadastrarMarmita($nomeMarmita, $precoMarmita) {
     //     try {
-    
+
     //         $consurta = "INSERT INTO marmitas (nomeMarmita, preco) VALUES (:nomeMarmita, :preco)";
     //         $query = $this->conectar->prepare($consurta);
     //         $query->bindParam(':nomeMarmita', $nomeMarmita);
     //         $query->bindParam(':preco', $precoMarmita);
     //         $query->execute();
-    
+
 
     //         $idMarmita = $this->conectar->lastInsertId();
-    
+
     //         return $idMarmita;
-    
+
     //     } catch (Exception $e) {
     //         throw new Exception("Erro ao cadastrar marmita: " . $e->getMessage());
     //     }
@@ -209,50 +202,51 @@ class Query
     // }
 
 
-    public function cadastrarMarmitaComProcedure($nomeMarmita, $precoMarmita, $ingredientes) {
+    public function cadastrarMarmitaComProcedure($nomeMarmita, $precoMarmita, $ingredientes)
+    {
         try {
 
             $this->conectar->beginTransaction();
 
             $sql = "CALL addMarmita(:nomeMarmita, :preco, :qtdeMarmita1, :qtdeMarmita2, :qtdeMarmita3, :P_IDingred1, :P_IDingred2, :P_IDingred3)";
             $query = $this->conectar->prepare($sql);
-    
+
             $query->bindParam(':nomeMarmita', $nomeMarmita);
             $query->bindParam(':preco', $precoMarmita);
-           
+
             $query->bindParam(':qtdeMarmita1', $ingredientes[0]['quantidade']);
             $query->bindParam(':qtdeMarmita2', $ingredientes[1]['quantidade']);
             $query->bindParam(':qtdeMarmita3', $ingredientes[2]['quantidade']);
-            
+
             $query->bindParam(':P_IDingred1', $ingredientes[0]['id']);
             $query->bindParam(':P_IDingred2', $ingredientes[1]['id']);
             $query->bindParam(':P_IDingred3', $ingredientes[2]['id']);
-    
+
 
             $query->execute();
-    
-    
+
+
             $this->conectar->commit();
-    
         } catch (Exception $e) {
 
             $this->conectar->rollback();
             throw new Exception("Erro ao cadastrar marmita: " . $e->getMessage());
         }
     }
-    
-    public function cadastrarUsuarioProcedure($nome,$email, $senha, $telefone, $nivelAcesso) {
+
+    public function cadastrarUsuarioProcedure($nome, $email, $senha, $telefone, $nivelAcesso): bool
+    {
 
         $query = "call addUsuario(:Nomecliente, :Email, :Senha, :Telefone, :nivelAcessso)";
-    
+
         $stmt = $this->conectar->prepare($query);
-    
+
         $stmt->bindValue(":Nomecliente", $nome);
         $stmt->bindValue(":Email", $email);
         $stmt->bindValue(":Senha", $senha);
         $stmt->bindValue(":Telefone", $telefone);
         $stmt->bindValue(":nivelAcessso", $nivelAcesso);
-    
+
         try {
             $stmt->execute();
             return true;
@@ -261,5 +255,4 @@ class Query
             return false;
         }
     }
-
 }
